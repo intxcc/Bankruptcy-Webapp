@@ -5,6 +5,20 @@ import PropTypes from 'prop-types'
 
 // import { observer } from 'mobx-react'
 
+const LandingButton = (props) => (
+  <div className='landing_btn'>
+    <div className="landing_btn_background">
+    </div>
+    <div className="landing_btn_content">
+      {props.text}
+    </div>
+  </div>
+)
+
+LandingButton.propTypes = {
+  text: PropTypes.string
+}
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -24,26 +38,26 @@ class App extends Component {
     window.removeEventListener('scroll', this.handleScroll)
   }
 
-  /* <div id="landing_top">
-        <div id="landing_top_bg">
-
-        </div>
-      </div> */
-
   render () {
     return (
-      <div id='landing_wrapper'>
+      <div id="landing_wrapper">
         <div id="landing_wrapper_background">
         </div>
         <div id="logo_wrapper">
           <div id="logo_caption">
             No, really. You are a good daytrader.
           </div>
-          <div id='logo'>
+          <div id="logo">
             B<span>ankruptcy</span>!
           </div>
         </div>
         <div id="landing_bottom_wrapper">
+          <div id="landing_bottom_wrapper_background">
+          </div>
+          <div id="landing_bottom_content">
+            <LandingButton text="How to play" />
+            <LandingButton text="Start" />
+          </div>
         </div>
       </div>
     )

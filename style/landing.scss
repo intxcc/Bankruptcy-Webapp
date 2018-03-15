@@ -7,6 +7,8 @@ $landing_top_height: 70vh;
 
   width: 100%;
   height: 100%;
+
+  background-color: rgba($color: #fff, $alpha: 0.4);
   
   #landing_wrapper_background {
     position: absolute;
@@ -14,11 +16,13 @@ $landing_top_height: 70vh;
     left: 0;
 
     width: 100%;
-    height: 100%;
+    height: $landing_top_height;
 
     background-image: url('/res/textures/vig2.png');
-    background-size: cover;
     background-position: center center;
+    background-size: cover;
+
+    // box-shadow: 0 0 500px 100px rgba($color: $black-raisin, $alpha: 0.4) inset;
   }
 
   #logo_wrapper {
@@ -33,13 +37,17 @@ $landing_top_height: 70vh;
     align-items: center;
     justify-content: center;
 
+    // box-shadow: $shadow_l_0;
+
+    z-index: 1;
+
     #logo_caption {    
       position: relative;
       top: 4.5rem;
       
-      color: #181818;
+      color: $black-raisin;
       font-family: Love Ya Like A Sister;
-      font-size: 3rem;
+      font-size: 2.5rem;
 
       text-shadow: $shadow_0;
     }
@@ -56,7 +64,8 @@ $landing_top_height: 70vh;
       text-align: center;
       line-height: 17rem;
 
-      text-shadow: $shadow_1;
+      // text-shadow: $shadow_1;
+      text-shadow: $shadow_s_1;
 
       span {
         font-size: 16rem;
@@ -71,8 +80,78 @@ $landing_top_height: 70vh;
 
     width: 100%;
 
-    background-color: $white-snow-d;
+    background-color: $white-snow-d;    
 
-    box-shadow: $shadow_c_0;
+    // box-shadow: $shadow_0;
+
+    #landing_bottom_wrapper_background {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      height: 100%;
+      width: 100%;
+            
+       background-image: url('/res/textures/dark-stripes-light.png');
+      // background-image: url('/res/textures/low-contrast-linen.png');
+
+      opacity: 0.5;
+    }
+
+    #landing_bottom_content {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      height: 100%;
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .landing_btn {
+        position: relative;
+
+        font-family: Love Ya Like A Sister;
+        font-weight: 300;
+        font-size: 3rem;        
+        
+        color: $primary-desaturated;      
+
+        background-color: $white-snow-d;
+
+        padding: 0.4rem 1rem;
+        margin: 1rem;
+
+        box-shadow: $shadow_s_0;
+        
+        cursor: pointer;
+
+        transition: 0.2s box-shadow, 0.2s color, 0.2s background-color;
+
+        .landing_btn_background {
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          width: 100%;
+          height: 100%;
+
+          background-image: url('/res/textures/low-contrast-linen.png');
+          opacity: 1;
+        }
+
+        .landing_btn_content {
+          position: relative;
+        }
+      }
+
+      .landing_btn:hover {
+        box-shadow: $shadow_s_1;
+        color: $white-snow-d;
+        background-color: $primary-desaturated;
+      }
+    }
   }
 }
