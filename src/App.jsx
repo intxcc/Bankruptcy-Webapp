@@ -44,19 +44,17 @@ class App extends Component {
         <div id="landing_wrapper_background">
         </div>
         <div id="logo_wrapper">
-          <div id="logo_caption">
-            No, really. You are a good daytrader.
-          </div>
-          <div id="logo">
-            B<span>ankruptcy</span>!
-          </div>
-        </div>
-        <div id="landing_bottom_wrapper">
-          <div id="landing_bottom_wrapper_background">
-          </div>
-          <div id="landing_bottom_content">
-            <LandingButton text="How to play" />
-            <LandingButton text="Start" />
+          <div id="logo_wrapper_inner">
+            <div id="logo_caption">
+              No, really. You are a good daytrader.
+            </div>
+            <div id="logo">
+              B<span>ankruptcy</span>!
+            </div>
+            <div id="landing_bottom">
+              <LandingButton text="How to play" />
+              <LandingButton text="Start" />
+            </div>
           </div>
         </div>
       </div>
