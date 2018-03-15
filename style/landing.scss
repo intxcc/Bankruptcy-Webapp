@@ -1,0 +1,78 @@
+$landing_top_height: 70vh;
+
+#landing_wrapper {
+  position: relative;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  
+  #landing_wrapper_background {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-image: url('/res/textures/vig2.png');
+    background-size: cover;
+    background-position: center center;
+  }
+
+  #logo_wrapper {
+    position: relative;
+
+    width: 100%;
+    height: $landing_top_height;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    #logo_caption {    
+      position: relative;
+      top: 4.5rem;
+      
+      color: #181818;
+      font-family: Love Ya Like A Sister;
+      font-size: 3rem;
+
+      text-shadow: $shadow_0;
+    }
+
+    #logo {
+      position: relative;
+
+      color: $primary-color;
+  
+      font-family: Impact;
+      font-size: 20rem;
+      font-variant: small-caps;
+  
+      text-align: center;
+      line-height: 17rem;
+
+      text-shadow: $shadow_1;
+
+      span {
+        font-size: 16rem;
+      }
+    }
+  }
+
+  #landing_bottom_wrapper {
+    position: absolute;
+    top: $landing_top_height;
+    bottom: 0;
+
+    width: 100%;
+
+    background-color: $white-snow-d;
+
+    box-shadow: $shadow_c_0;
+  }
+}

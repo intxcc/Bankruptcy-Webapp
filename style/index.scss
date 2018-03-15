@@ -1,5 +1,6 @@
-$primary-color: #f53;
+@import 'variables.scss';
 
-body {
-  background-color: $primary-color;
-}
+@import 'fonts.scss';
+
+@import 'main.scss';
+@import 'landing.scss';

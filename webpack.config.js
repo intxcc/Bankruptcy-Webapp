@@ -4,8 +4,9 @@ var webpack = require('webpack')
 module.exports = {
   entry: [
     'react-hot-loader/patch',
-    './src/index.js'
+    './src/index.jsx'
   ],
+  devtool: 'eval',
   module: {
     rules: [
       {
@@ -39,6 +40,7 @@ module.exports = {
   ],
   devServer: {
     contentBase: './dist',
+    host: '0.0.0.0',
     hot: true
   }
 }

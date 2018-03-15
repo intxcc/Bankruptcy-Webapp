@@ -6,14 +6,11 @@ import ReactDOM from 'react-dom'
 // eslint-disable-next-line
 import style from '../style/index.scss'
 
-const title = 'My test!'
-
-const App = (
-  <span>{title}</span>
-)
+import App from './App'
+import store from './Store'
 
 ReactDOM.render(
-  <App />,
+  <App store={store} />,
   document.getElementById('app')
 )
 
