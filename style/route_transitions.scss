@@ -1,9 +1,48 @@
-.fade-enter {
-  opacity: 0;
-  z-index: 1;
+////////////
+// MIXINS //
+
+@mixin route-transition-before($name) {
+  .#{$name}-enter {
+    @content;
+    z-index: 1;
+  }
 }
 
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 250ms ease-in;
+@mixin route-transition-default($name) {
+  .#{$name}-enter.#{$name}-enter-active { // sass-lint:disable-line force-element-nesting
+    @content;
+    transition: transform $route-transition-time $route-transition-ease-function;
+  }
+
+  .#{$name}-exit {
+    @content;
+    z-index: 1;
+  }
 }
+
+@mixin route-transition-after($name) {
+  .#{$name}-exit.#{$name}-exit-active { // sass-lint:disable-line force-element-nesting
+    @content;
+    transition: transform $route-transition-time $route-transition-ease-function;
+  }
+}
+
+@mixin route-transition($name, $property, $before, $default, $after) {
+  @include route-transition-before($name) {
+    #{$property}: $before;
+  }
+
+  @include route-transition-default($name) {
+    #{$property}: $default;
+  }
+
+  @include route-transition-after($name) {
+    #{$property}: $after;
+  }
+}
+
+/////////////////
+// TRANSITIONS //
+
+// @include route_transition(fade, transform, translateX(95%) scale(0.9), translateX(0) scale(1), translateX(-100%) scale(0.9));
+@include route-transition(fade, transform, translateX(100%), translateX(0), translateX(-100%));

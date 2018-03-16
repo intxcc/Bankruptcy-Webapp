@@ -1,0 +1,8 @@
+$route-transition-ease-function: ease-in-out;
+
+$route-transition-time-ms: 800;
+$route-transition-time: #{$route-transition-time-ms}ms;
+
+:export {
+  routeTransitionTime: $route-transition-time-ms; // sass-lint:disable-line no-misspelled-properties
+}

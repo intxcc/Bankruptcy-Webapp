@@ -3,11 +3,15 @@ html {
   font-family: Roboto;
 }
 
-body {  
+body {
+  height: 100%;
+  width: 100vw;
+  overflow-x: hidden;
+
   margin: 0;
   padding: 0;
 
-  background-color: $white-snow-d;
+  background-color: $white-snow-d;  
 }
 
 a {

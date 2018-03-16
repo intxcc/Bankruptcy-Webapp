@@ -4,146 +4,64 @@
   left: 0;
 
   width: 100%;
-
-  background-color: $white-snow;
-  background-image: url('/res/textures/low-contrast-linen.png');
-
   min-width: 85rem;
-}
-
-#landing_wrapper {
-  position: relative;
-  top: 0;
-  left: 0;
-
-  width: 100%;
+  
   height: 100vh;
 
-  background-color: rgba($color: #fff, $alpha: 0.4);
-  
-  #landing_wrapper_background {
+  overflow: auto;
+
+  #landing_wrapper_outer_background {
     position: absolute;
     top: 0;
     left: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: $white-snow;
+    background-image: url('/res/textures/low-contrast-linen.png');
 
     width: 100%;
-    height: 100%;
-
-    background-image: url('/res/textures/vig2.png');
-    background-position: center center;
-    background-size: cover;
+    height: 100vh;
   }
 
-  #logo_wrapper {
+  #landing_wrapper {
     position: relative;
-
+    top: 0;
+    left: 0;
+  
+    background-color: rgba($color: #fff, $alpha: 0.4);
+    
     width: 100%;
-    height: 100%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    #logo_wrapper_inner {
+    height: 100vh;
+    
+    #landing_wrapper_background {
       display: flex;
-      flex-direction: column;
-
+      position: absolute;
+      top: 0;
+      left: 0;
+  
       align-items: center;
       justify-content: center;
-    }
-
-    #logo_caption {    
-      position: relative;
-
-      margin-bottom: -4.5rem;
       
-      color: $black-raisin;
-      font-family: Love Ya Like A Sister;
-      font-size: 2.5rem;
-
-      text-shadow: $shadow_0;
+      background-image: url('/res/textures/vig2.png');
+      background-position: center center;
+      background-size: cover;
+  
+      width: 100%;
+      height: 100%;
+    }    
+    
+    #landing_bottom {
+      display: flex;
+      align-items: center;
+      // justify-content: space-between;
+      justify-content: space-evenly;
       
-      z-index: 1;
+      width: 100%;
+      
+      @import 'landing/buttons.scss';
     }
-
-    #logo {
-      position: relative;
-
-      color: $primary-color;
-  
-      font-family: Impact;
-      font-size: 20rem;
-      font-variant: small-caps;
-  
-      text-align: center;
-      line-height: 17rem;
-
-      text-shadow: $shadow_s_1;
-
-      span {
-        font-size: 16rem;
-      }
-    }
+    
+    @import 'landing/logo.scss';
   }
 
-  #landing_bottom {
-    display: flex;
-    align-items: center;
-    // justify-content: space-between;
-    justify-content: space-evenly;
-
-    width: 100%;
-
-    .landing_btn {
-      position: relative;
-
-      font-family: Love Ya Like A Sister;
-      font-weight: 300;
-      font-size: 2.8rem;
-
-      color: $primary-color;
-      background-color: $white-snow;
-
-      padding: 0.4rem 1rem;
-      margin: 1rem;
-
-      box-shadow: $shadow_s_0;
-
-      cursor: pointer;
-
-      transition: 0.2s box-shadow, 0.2s color, 0.2s background-color;
-
-      .landing_btn_background {
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        width: 100%;
-        height: 100%;
-
-        background-image: url('/res/textures/dark-stripes-light.png');
-      }
-
-      .landing_btn_content {
-        position: relative;
-
-        transition: 0.2s text-shadow;
-      }
-    }
-
-    .landing_btn:hover {
-      box-shadow: $shadow_s;
-      color: $white-snow-d;
-      background-color: $primary-color;
-
-      .landing_btn_content {
-        text-shadow: $shadow_s_0;
-      }
-    }
-  }
+  @import 'landing/howtoplay.scss';
 }

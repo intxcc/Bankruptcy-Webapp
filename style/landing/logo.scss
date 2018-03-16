@@ -1,0 +1,49 @@
+#logo_wrapper {
+  display: flex;
+  position: relative;
+
+  align-items: center;
+
+  justify-content: center;
+  
+  width: 100%;
+  height: 100%;
+
+  #logo_wrapper_inner {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+  #logo_caption {    
+    position: relative;
+    z-index: 1;
+
+    margin-bottom: -4.5rem;
+    
+    text-shadow: $shadow_0;
+    color: $black-raisin;
+    font-family: Love Ya Like A Sister;
+    font-size: 2.5rem;
+  }
+
+  #logo {
+    position: relative;
+
+    text-align: center;
+    text-shadow: $shadow_s_1;
+    line-height: 17rem;
+    
+    color: $primary-color;
+
+    font-family: Impact;
+    font-size: 20rem;
+    font-variant: small-caps;
+
+    span {
+      font-size: 16rem;
+    }
+  }
+}
