@@ -3,7 +3,6 @@
 // cool blue-green #17e578
 
 $primary-color: #e51725;
-$primary-desaturated: desaturate($color: $primary-color, $amount: 10);
 $primary-dark: #b50916;
 $primary-light: #ef4652;
 
@@ -12,8 +11,9 @@ $secondary-color: #72DB62;
 $white-snow: #fffafa;
 $white-snow-d: #f8f0f0;
 
-$black-raisin: #242124;
+$black-raisin: #222222;
 
+$shadow_s: 0 0 0 rgba(0,0,0,.4);
 $shadow_s_0: 3px 3px 0 rgba(0,0,0,.4);
 $shadow_s_1: 5px 5px 0 rgba(0,0,0,.2);
 
