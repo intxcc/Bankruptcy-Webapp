@@ -1,16 +1,16 @@
 #landing_bottom_info {
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
-  
-  opacity: 0.5;
-  
+
+  opacity: .5;
+
   z-index: 3;
-  
-  $lbi_padding: 0.3rem;
-  padding: $lbi_padding calc(#{$lbi_padding} + 1.5rem);
-  
+
+  $lbi-padding: .3rem;
+  padding: $lbi-padding calc(#{$lbi-padding} + 1.5rem);
+
   color: $black-raisin;
   font-family: Love Ya Like A Sister;
   font-size: 1.1rem;

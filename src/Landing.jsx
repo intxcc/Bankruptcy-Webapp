@@ -6,10 +6,10 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const LandingButton = (props) => (
-  <div className='landing_btn'>
-    <div className="landing_btn_background">
+  <div className='landing-btn'>
+    <div className="landing-btn-background">
     </div>
-    <div className="landing_btn_content">
+    <div className="landing-btn-content">
       {props.text}
     </div>
   </div>
@@ -18,6 +18,14 @@ const LandingButton = (props) => (
 LandingButton.propTypes = {
   text: PropTypes.string
 }
+
+const HowToPlay = (props) => (
+  <div id="howtoplay_wrapper">
+    <div id="howtoplay_headline">
+      How to play?
+    </div>
+  </div>
+)
 
 const Landing = props => (
   <div id="landing_wrapper_outer">
@@ -45,11 +53,7 @@ const Landing = props => (
         </div>
       </div>
     </div>
-    <div id="howtoplay_wrapper">
-      <div id="tttttest">
-        How to play?
-      </div>
-    </div>
+    <HowToPlay />
   </div>
 )
 
