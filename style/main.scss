@@ -4,11 +4,12 @@ html {
 }
 
 body {  
-  background-color: $white-snow;
-  background-image: url('/res/textures/low-contrast-linen.png');
-
-  min-width: 85rem;
-
   margin: 0;
   padding: 0;
+
+  background-color: $white-snow-d;
+}
+
+a {
+  text-decoration: none;
 }

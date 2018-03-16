@@ -1,11 +1,13 @@
 'use strict'
 
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 // import { observer } from 'mobx-react'
 
 import Landing from './Landing'
+import Home from './Home'
 
 class App extends Component {
   constructor (props) {
@@ -28,9 +30,12 @@ class App extends Component {
 
   render () {
     return (
-      <div id="site_wrapper">
-        <Landing />
-      </div>
+      <Router>
+        <div id="site_wrapper">
+          <Route exact path="/" component={Landing} />
+          <Route path="/home" component={Home} />
+        </div>
+      </Router>
     )
   }
 }
