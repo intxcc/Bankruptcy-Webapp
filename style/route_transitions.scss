@@ -11,7 +11,7 @@
 @mixin route-transition-default($name) {
   .#{$name}-enter.#{$name}-enter-active { // sass-lint:disable-line force-element-nesting
     @content;
-    transition: transform $route-transition-time $route-transition-ease-function;
+    transition: all $route-transition-time $route-transition-ease-function;
   }
 
   .#{$name}-exit {
@@ -23,7 +23,7 @@
 @mixin route-transition-after($name) {
   .#{$name}-exit.#{$name}-exit-active { // sass-lint:disable-line force-element-nesting
     @content;
-    transition: transform $route-transition-time $route-transition-ease-function;
+    transition: all $route-transition-time $route-transition-ease-function;
   }
 }
 
@@ -45,4 +45,5 @@
 // TRANSITIONS //
 
 // @include route_transition(fade, transform, translateX(95%) scale(0.9), translateX(0) scale(1), translateX(-100%) scale(0.9));
-@include route-transition(fade, transform, translateX(100%), translateX(0), translateX(-100%));
+// @include route-transition(fade, transform, translateX(100%), translateX(0), translateX(-100%));
+@include route-transition(fade, opacity, 0, 1, 0);

@@ -1,6 +1,9 @@
+$main-header-height: (100vh - (100vh / 1.62));
+$main-header-height-collaped: 10rem;
+
 $route-transition-ease-function: ease;
 
-$route-transition-time-ms: 600;
+$route-transition-time-ms: 400;
 $route-transition-time: #{$route-transition-time-ms}ms;
 
 :export {

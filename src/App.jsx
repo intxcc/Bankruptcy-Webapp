@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // import { observer } from 'mobx-react'
 
 import Landing from './Landing'
-import Home from './Home'
+import Main from './Main'
 
 import StyleVariables from '../style/variables.scss'
 
@@ -22,7 +22,7 @@ const AppTransitionGroup = (props) => (
           render={routeProps => <Landing {...Object.assign({}, routeProps, {store: props.store})} />} />
         <Route
           exact path="/home"
-          render={routeProps => <Home {...Object.assign({}, routeProps, {store: props.store})} />} />
+          render={routeProps => <Main {...Object.assign({}, routeProps, {store: props.store})} />} />
       </Switch>
     </CSSTransition>
   </TransitionGroup>
