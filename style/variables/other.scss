@@ -1,6 +1,6 @@
-$route-transition-ease-function: ease-in-out;
+$route-transition-ease-function: ease;
 
-$route-transition-time-ms: 800;
+$route-transition-time-ms: 600;
 $route-transition-time: #{$route-transition-time-ms}ms;
 
 :export {

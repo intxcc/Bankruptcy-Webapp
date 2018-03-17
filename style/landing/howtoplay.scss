@@ -1,4 +1,6 @@
 #howtoplay_wrapper {
+  position: relative;
+
   background-color: $black-raisin;
   background-image: url('/res/textures/low-contrast-linen.png');
   background-size: 300px;
@@ -16,5 +18,23 @@
     color: $white-snow;
     font-family: Love Ya Like A Sister;
     font-size: 6rem;
+  }
+
+  #back_to_top_link {
+    display: flex;
+    position: absolute;
+    bottom: 10rem;
+    left: 10rem;
+
+    transition: color .2s, text-shadow .2s;
+
+    text-shadow: $shadow-s-0;
+    color: rgba($color: $white-snow, $alpha: .4);
+    font-size: 5rem;
+
+    &:hover {
+      text-shadow: $shadow-s-1;
+      color: rgba($color: $white-snow, $alpha: .6);
+    }
   }
 }

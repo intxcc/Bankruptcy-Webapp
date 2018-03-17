@@ -1,9 +1,10 @@
 'use strict'
 
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 
 const LandingButton = (props) => (
   <div className='landing-btn'>
@@ -21,40 +22,61 @@ LandingButton.propTypes = {
 
 const HowToPlay = (props) => (
   <div id="howtoplay_wrapper">
+    <a name="howto" id="howto"></a>
     <div id="howtoplay_headline">
       How to play?
     </div>
+    <HashLink smooth to="/#start" id="back_to_top_link">
+      &#x1f845;
+    </HashLink>
   </div>
 )
 
-const Landing = props => (
-  <div id="landing_wrapper_outer">
-    <div id="landing_wrapper_outer_background">
-    </div>
-    <div id="landing_wrapper">
-      <div id="landing_wrapper_background">
-      </div>
-      <div id="logo_wrapper">
-        <div id="logo_wrapper_inner">
-          <div id="logo_caption">
-            No, really. You are a good daytrader.
+class Landing extends Component {
+  componentDidMount () {
+    this.node.scrollTop = this.props.store.landingScrollTopSaved
+  }
+
+  componentWillUnmount () {
+    this.props.store.landingScrollTopSaved = this.node.scrollTop
+  }
+
+  render () {
+    return (
+      <div ref={node => { this.node = node }} id="landing_wrapper_outer">
+        <a name="start" id="start"></a>
+        <div id="landing_wrapper_outer_background">
+        </div>
+        <div id="landing_wrapper">
+          <div id="landing_wrapper_background">
           </div>
-          <div id="logo">
-            B<span>ankruptcy</span>!
-          </div>
-          <div id="landing_bottom">
-            <Link to="/home">
-              <LandingButton text="Start Game" />
-            </Link>
-            <Link to="#howto">
-              <LandingButton text="How to play?" />
-            </Link>
+          <div id="logo_wrapper">
+            <div id="logo_wrapper_inner">
+              <div id="logo_caption">
+                No, really. You are a good daytrader.
+              </div>
+              <div id="logo">
+                B<span>ankruptcy</span>!
+              </div>
+              <div id="landing_bottom">
+                <Link to="/home">
+                  <LandingButton text="Start Game" />
+                </Link>
+                <HashLink smooth to="#howto">
+                  <LandingButton text="How to play?" />
+                </HashLink>
+              </div>
+            </div>
           </div>
         </div>
+        <HowToPlay ref={(section) => { this.Violet = section }} />
       </div>
-    </div>
-    <HowToPlay />
-  </div>
-)
+    )
+  }
+}
+
+Landing.propTypes = {
+  store: PropTypes.object
+}
 
 export default Landing

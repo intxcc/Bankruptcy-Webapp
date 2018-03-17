@@ -17,42 +17,29 @@ const AppTransitionGroup = (props) => (
   <TransitionGroup>
     <CSSTransition key={props.location.pathname} classNames="fade" timeout={parseInt(StyleVariables.routeTransitionTime)}>
       <Switch location={props.location}>
-        <Route exact path="/" component={Landing} />
-        <Route path="/home" component={Home} />
+        <Route
+          exact path="/"
+          render={routeProps => <Landing {...Object.assign({}, routeProps, {store: props.store})} />} />
+        <Route
+          exact path="/home"
+          render={routeProps => <Home {...Object.assign({}, routeProps, {store: props.store})} />} />
       </Switch>
     </CSSTransition>
   </TransitionGroup>
 )
 
 AppTransitionGroup.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
+  store: PropTypes.object
 }
 
 class App extends Component {
-  constructor (props) {
-    super(props)
-
-    this.handleScroll = this.handleScroll.bind(this)
-  }
-
-  handleScroll (e) {
-    this.props.store.scrollValue = e.pageY
-  }
-
-  componentWillMount () {
-    window.addEventListener('scroll', this.handleScroll)
-  }
-
-  componentWillUnmount () {
-    window.removeEventListener('scroll', this.handleScroll)
-  }
-
   render () {
     return (
       <Router>
         <div id="site_wrapper">
           <Route render={({ location }) => (
-            <AppTransitionGroup location={location} />
+            <AppTransitionGroup location={location} store={this.props.store} />
           )} />
           <div id="landing_bottom_info">
             <div id="landing_bottom_info_left">

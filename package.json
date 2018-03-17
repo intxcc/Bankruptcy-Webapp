@@ -39,6 +39,7 @@
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-router-hash-link": "^1.2.0",
     "react-transition-group": "^2.2.1",
     "sass-lint": "^1.12.1",
     "typescript": "^2.7.2"

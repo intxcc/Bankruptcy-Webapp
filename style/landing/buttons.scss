@@ -33,15 +33,15 @@
 
     transition: .2s text-shadow;
   }
-}
 
-.landing-btn:hover {
-  box-shadow: $shadow-s;
+  &:hover {
+    box-shadow: $shadow-s;
 
-  background-color: $primary-color;
-  color: $white-snow-d;
+    background-color: $primary-color;
+    color: $white-snow-d;
 
-  .landing-btn-content {
-    text-shadow: $shadow-s-0;
+    .landing-btn-content {
+      text-shadow: $shadow-s-0;
+    }
   }
 }

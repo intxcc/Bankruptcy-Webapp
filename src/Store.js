@@ -1,7 +1,9 @@
 import { observable } from 'mobx'
 
 class Store {
-  @observable scrollValue = 0
+  // Saved scroll tops on unmount
+  @observable landingScrollTopSaved = 0
+  @observable homeScrollTopSaved = 0
 }
 
 let store = new Store()
