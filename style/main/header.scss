@@ -1,5 +1,9 @@
 #main_header {
+  display: flex;
   position: fixed;
+  align-items: flex-end;
+  justify-content: space-evenly;
+
   transition: height .4s;
 
   box-shadow: $shadow-0;
@@ -21,15 +25,13 @@
 
 #main_logo_wrapper {
   display: flex;
-  position: absolute;
-  bottom: 1rem;
-  left: 20vw;
+  // position: absolute;
+  // bottom: 1rem;
+  // left: 20vw;
 
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  padding: 0 1rem;
 
   #main_logo_logo {
     color: $white-snow-d;
@@ -60,4 +62,14 @@
     font-family: Love Ya Like A Sister;
 
   }
+}
+
+#main_profile_peek {
+  margin: .5rem 0;
+
+  text-shadow: $shadow-s-0;
+
+  color: $white-snow-d;
+  font-family: Love Ya Like A Sister;
+  font-size: 3rem;
 }

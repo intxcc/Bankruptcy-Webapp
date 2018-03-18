@@ -8,10 +8,10 @@
   }
 }
 
-@mixin route-transition-default($name) {
+@mixin route-transition-default($name, $property) {
   .#{$name}-enter.#{$name}-enter-active { // sass-lint:disable-line force-element-nesting
     @content;
-    transition: all $route-transition-time $route-transition-ease-function;
+    transition: $property $route-transition-time $route-transition-ease-function;
   }
 
   .#{$name}-exit {
@@ -20,10 +20,10 @@
   }
 }
 
-@mixin route-transition-after($name) {
+@mixin route-transition-after($name, $property) {
   .#{$name}-exit.#{$name}-exit-active { // sass-lint:disable-line force-element-nesting
     @content;
-    transition: all $route-transition-time $route-transition-ease-function;
+    transition: $property $route-transition-time $route-transition-ease-function;
   }
 }
 
@@ -32,11 +32,11 @@
     #{$property}: $before;
   }
 
-  @include route-transition-default($name) {
+  @include route-transition-default($name, $property) {
     #{$property}: $default;
   }
 
-  @include route-transition-after($name) {
+  @include route-transition-after($name, $property) {
     #{$property}: $after;
   }
 }

@@ -50,6 +50,9 @@ class Main extends Component {
               No, really. You are a good daytrader.
             </div>
           </div>
+          <div id="main_profile_peek">
+            You | 100,000 USD
+          </div>
         </header>
         <main id="main_content" onScroll={this.handleScroll} ref={node => { this.node = node }}>
           <Home />
