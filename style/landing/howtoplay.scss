@@ -1,3 +1,5 @@
+$howto-padding: 10vmin;
+
 #howtoplay_wrapper {
   position: relative;
 
@@ -5,14 +7,23 @@
   background-image: url('/res/textures/low-contrast-linen.png');
   background-size: 300px;
 
-  padding: 10rem;
+  padding: $howto-padding;
 
   height: 100vh;
 
   background-blend-mode: overlay;
   box-sizing: border-box;
 
+  #howto {
+    position: absolute;
+    bottom: 0;
+  }
+
   #howtoplay_headline {
+    @include fp(font-size, 3rem, 6rem);
+
+    transition: font-size .2s;
+
     opacity: .9;
 
     color: $white-snow;
@@ -23,18 +34,17 @@
   #back_to_top_link {
     display: flex;
     position: absolute;
-    bottom: 10rem;
-    left: 10rem;
+    bottom: $howto-padding;
+    left: $howto-padding;
 
-    transition: color .2s, text-shadow .2s;
+    transition: font-size .2s, color .2s, text-shadow .2s;
 
-    text-shadow: $shadow-s-0;
-    color: rgba($color: $white-snow, $alpha: .4);
-    font-size: 5rem;
+    color: rgba($color: $white-snow, $alpha: .6);
+    font-family: Impact;
+    font-size: 3rem;
 
     &:hover {
-      text-shadow: $shadow-s-1;
-      color: rgba($color: $white-snow, $alpha: .6);
+      color: rgba($color: $white-snow, $alpha: .9);
     }
   }
 }

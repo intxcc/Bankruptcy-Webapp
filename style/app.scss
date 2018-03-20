@@ -1,26 +1,61 @@
-#landing_bottom_info {
+#request_fullscreen_btn {
+  display: flex;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+
+  align-items: center;
+  justify-content: center;
+
+  transition: .2s color, .2s font-size;
+  z-index: 100;
+
+  cursor: pointer;
+
+  width: 2.2rem;
+  height: 2.2rem;
+
+  text-shadow: $shadow-0;
+  color: rgba($color: $white-snow, $alpha: .8);
+  font-size: 2rem;
+
+  &:hover {
+    color: rgba($color: $white-snow, $alpha: 1);
+    font-size: 1.2rem;
+  }
+}
+
+#bottom_info {
+  @include fp(font-size, .8rem, .9rem);
+
   position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
 
-  opacity: .5;
+  transition: .2s opacity, .2s color;
+  opacity: .6;
 
   z-index: 3;
+  cursor: pointer;
 
   $lbi-padding: .3rem;
-  padding: $lbi-padding calc(#{$lbi-padding} + 1.5rem);
+  padding: $lbi-padding calc(#{$lbi-padding} + .5rem);
 
-  color: $black-raisin;
+  color: #666;
   font-family: Love Ya Like A Sister;
-  font-size: 1.1rem;
   font-variant: small-caps;
 
-  #landing_bottom_info_left {
+  #bottom_info_left {
     float: left;
   }
 
-  #landing_bottom_info_right {
+  #bottom_info_right {
     float: right;
+  }
+
+  &:hover {
+    opacity: .8;
+    color: rgba($color: #666, $alpha: 1);
   }
 }

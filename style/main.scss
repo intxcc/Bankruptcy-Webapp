@@ -1,19 +1,19 @@
 html {
+  background-color: $white-snow-d;
+
   font-family: Roboto;
-  font-size: 14px;
+  font-size: $font-size;
+
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
   margin: 0;
 
-  background-color: $white-snow-d;
-
   padding: 0;
 
   width: 100vw;
-  height: 100%;
-
-  overflow-x: hidden;
 }
 
 a {

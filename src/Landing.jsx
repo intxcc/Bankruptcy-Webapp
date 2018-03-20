@@ -22,13 +22,13 @@ LandingButton.propTypes = {
 
 const HowToPlay = (props) => (
   <div id="howtoplay_wrapper">
-    <a name="howto" id="howto"></a>
     <div id="howtoplay_headline">
       How to play?
     </div>
     <HashLink smooth to="/#start" id="back_to_top_link">
-      &#x1f845;
+      <i className="fas fa-arrow-up"></i>
     </HashLink>
+    <a name="howto" id="howto" />
   </div>
 )
 

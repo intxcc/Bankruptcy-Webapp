@@ -1,3 +1,5 @@
+'use strict'
+
 import { observable } from 'mobx'
 
 class Store {

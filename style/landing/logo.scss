@@ -18,18 +18,28 @@
   }
 
   #logo_caption {
+    @include media-small {
+      text-shadow: unset;
+    }
+
+    @include fp(font-size, .85rem, 2.5rem);
+    @include fp(margin-bottom, -1.2rem, -4.5rem);
+
     position: relative;
+
     z-index: 1;
 
-    margin-bottom: -4.5rem;
-
     text-shadow: $shadow-0;
+
     color: $black-raisin;
     font-family: Love Ya Like A Sister;
     font-size: 2.5rem;
   }
 
   #logo {
+    @include fp(font-size, 5rem, 20rem);
+    @include fp(line-height, 4.3rem, 17rem);
+
     position: relative;
 
     text-align: center;
@@ -43,7 +53,7 @@
     font-variant: small-caps;
 
     span {
-      font-size: 16rem;
+      @include fp(font-size, 5rem, 16rem);
     }
   }
 }

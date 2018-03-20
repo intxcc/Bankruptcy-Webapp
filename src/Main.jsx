@@ -15,23 +15,28 @@ class Main extends Component {
       headerClassName: ''
     }
 
-    this.handleScroll = this.handleScroll.bind(this)
+    this.handleBodyScroll = this.handleBodyScroll.bind(this)
   }
 
   componentDidMount () {
+    document.addEventListener('scroll', this.handleBodyScroll)
+
     this.node.scrollTop = this.props.store.mainScrollTopSaved
   }
 
   componentWillUnmount () {
+    document.removeEventListener('scroll', this.handleBodyScroll)
+
     this.props.store.mainScrollTopSaved = this.node.scrollTop
   }
 
-  handleScroll (e) {
-    if (e.target.scrollTop >= 200 && this.state.headerClassName === '') {
+  handleBodyScroll (e) {
+    let scrollTop = document.body.scrollTop
+    if (scrollTop >= 100 && this.state.headerClassName === '') {
       this.setState({
         headerClassName: 'collapse-main-header'
       })
-    } else if (e.target.scrollTop < 50 && this.state.headerClassName !== '') {
+    } else if (scrollTop < 100 && this.state.headerClassName !== '') {
       this.setState({
         headerClassName: ''
       })
@@ -50,11 +55,10 @@ class Main extends Component {
               No, really. You are a good daytrader.
             </div>
           </div>
-          <div id="main_profile_peek">
-            You | 100,000 USD
-          </div>
         </header>
-        <main id="main_content" onScroll={this.handleScroll} ref={node => { this.node = node }}>
+        <div id="main_top_header_backdrop">
+        </div>
+        <main id="main_content" ref={node => { this.node = node }}>
           <Home />
         </main>
       </div>
