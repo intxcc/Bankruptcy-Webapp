@@ -3,14 +3,14 @@
   top: 0;
   left: 0;
 
-  background-image: url('/res/textures/dark-stripes-light.png');
+  background-image: $url-stripes;
 
   width: 100%;
 
   #main_top_header_backdrop {
     position: absolute;
     background-color: rgba($color: $white-snow, $alpha: .5);
-    background-image: url('/res/textures/dark-stripes-light.png');
+    background-image: $url-stripes;
 
     width: 100%;
     height: $main-header-height;
@@ -19,11 +19,11 @@
   }
 
   #main_content {
-    position: absolute;
-    top: $main-header-height;
+    position: relative;
+    // top: $main-header-height;
 
     background-color: rgba($color: $white-snow, $alpha: .5);
-    background-image: url('/res/textures/dark-stripes-light.png');
+    background-image: $url-stripes;
 
     width: 100%;
 

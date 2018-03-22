@@ -12,7 +12,8 @@ class Main extends Component {
     super(props)
 
     this.state = {
-      headerClassName: ''
+      headerClassName: '',
+      headerLogoHeight: 1000
     }
 
     this.handleBodyScroll = this.handleBodyScroll.bind(this)
@@ -21,24 +22,31 @@ class Main extends Component {
   componentDidMount () {
     document.addEventListener('scroll', this.handleBodyScroll)
 
-    this.node.scrollTop = this.props.store.mainScrollTopSaved
+    this.mainHeader.scrollTop = this.props.store.mainScrollTopSaved
+
+    this.setState({
+      headerClassName: '',
+      headerLogoHeight: this.mainHeaderLogo.clientHeight
+    })
   }
 
   componentWillUnmount () {
     document.removeEventListener('scroll', this.handleBodyScroll)
 
-    this.props.store.mainScrollTopSaved = this.node.scrollTop
+    this.props.store.mainScrollTopSaved = this.mainHeader.scrollTop
   }
 
   handleBodyScroll (e) {
-    let scrollTop = document.body.scrollTop
-    if (scrollTop >= 100 && this.state.headerClassName === '') {
+    let collapse = (this.mainHeader.clientHeight - this.state.headerLogoHeight) - document.body.scrollTop <= 0
+    if (collapse && this.state.headerClassName === '') {
       this.setState({
-        headerClassName: 'collapse-main-header'
+        headerClassName: 'collapse-main-header',
+        headerLogoHeight: this.state.headerLogoHeight
       })
-    } else if (scrollTop < 100 && this.state.headerClassName !== '') {
+    } else if (!collapse && this.state.headerClassName !== '') {
       this.setState({
-        headerClassName: ''
+        headerClassName: '',
+        headerLogoHeight: this.state.headerLogoHeight
       })
     }
   }
@@ -46,8 +54,8 @@ class Main extends Component {
   render () {
     return (
       <div className={this.state.headerClassName} id="main_wrapper">
-        <header id="main_header">
-          <div id="main_logo_wrapper">
+        <header id="main_header" ref={mainHeader => { this.mainHeader = mainHeader }}>
+          <div id="main_logo_wrapper" ref={mainHeaderLogo => { this.mainHeaderLogo = mainHeaderLogo }}>
             <div id="main_logo_logo">
               B<span>ankruptcy</span>!
             </div>
@@ -58,7 +66,7 @@ class Main extends Component {
         </header>
         <div id="main_top_header_backdrop">
         </div>
-        <main id="main_content" ref={node => { this.node = node }}>
+        <main id="main_content">
           <Home />
         </main>
       </div>

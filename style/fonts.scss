@@ -1,13 +1,7 @@
-@import '/fontawesome/fa-regular';
-@import '/fontawesome/fa-solid';
-@import '/fontawesome/fontawesome';
+@import '/fonts/fontawesome/fa-regular';
+@import '/fonts/fontawesome/fa-solid';
+@import '/fonts/fontawesome/fontawesome';
 
-@font-face {
-  font-family: Impact;
-  src: url('/res/fonts/impact.ttf');
-}
+@import '/fonts/impact';
 
-@font-face {
-  font-family: Love Ya Like A Sister;
-  src: url('/res/fonts/LoveYaLikeASister.ttf');
-}
+@import '/fonts/LoveYaLikeASister';

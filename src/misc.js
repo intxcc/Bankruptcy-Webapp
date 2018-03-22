@@ -2,7 +2,7 @@
 
 export function isFullscreen () {
   let doc = window.document
-  return doc.fullscreenElement || doc.mozFullScreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement
+  return typeof (doc.fullscreenElement || doc.mozFullScreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement) === 'object'
 }
 
 export function canFullscreen () {

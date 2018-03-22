@@ -4,7 +4,7 @@ $howto-padding: 10vmin;
   position: relative;
 
   background-color: $black-raisin;
-  background-image: url('/res/textures/low-contrast-linen.png');
+  background-image: $url-linen;
   background-size: 300px;
 
   padding: $howto-padding;
