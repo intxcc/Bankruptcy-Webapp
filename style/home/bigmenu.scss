@@ -1,0 +1,141 @@
+$use-color: $tertiary-color;
+$use-color-light: $tertiary-light;
+$use-color-dark: $tertiary-dark;
+
+#home_big_menu {
+  @include media-small {
+    justify-content: space-evenly;
+  }
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $use-color-light;
+  background-image: $url-linen;
+
+  padding: .8vw 0;
+
+  list-style: none;
+
+  background-blend-mode: color-burn;
+
+  li {
+    @include fp(width, 4.25rem, 15rem);
+    @include fp(height, 4.25rem, 15rem);
+
+    position: relative;
+    transition: .3s box-shadow;
+
+    margin: .8vw;
+
+    background-color: $white-snow-d;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    .big-menu-btn-background {
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      align-items: center;
+      justify-content: center;
+
+      transition: .3s font-size, .3s filter;
+      opacity: .8;
+
+      background-color: rgba($color: $use-color-dark, $alpha: .2);
+      background-image: $url-linen;
+
+      padding: 0 0 1vw;
+
+      width: 100%;
+      height: 100%;
+
+      color: $use-color-light;
+      font-size: 15vw;
+
+      box-sizing: border-box;
+
+      filter: blur(5px);
+    }
+
+    .big-menu-btn-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      box-shadow: 0 0 4vw 3vw rgba($color: $white-snow-d, $alpha: .2) inset;
+
+      background-color: rgba($color: $tertiary-light, $alpha: .4);
+
+      width: 100%;
+      height: 100%;
+
+      box-sizing: border-box;
+
+      .big-menu-overlay-symbol {
+        @include fp(font-size, 2.8rem, 6.5rem);
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        transition: .3s text-shadow;
+
+        width: 100%;
+        height: 100%;
+
+        text-shadow: $shadow-s;
+
+        color: #fff;
+      }
+
+      .big-menu-overlay-name {
+        @include fp(font-size, .6rem, 2rem);
+        @include fp(bottom, 0, 1rem);
+
+        position: absolute;
+
+        transition: .3s text-shadow;
+
+        width: 100%;
+
+        text-align: center;
+
+        text-shadow: $shadow-0;
+
+        color: #fff;
+        font-family: Roboto;
+        font-weight: 900;
+        font-variant: small-caps;
+
+        pointer-events: none;
+      }
+    }
+
+    &:hover {
+      box-shadow: $shadow-s-0;
+
+      .big-menu-btn-background {
+        font-size: 20vw;
+        filter: blur(20px);
+      }
+
+      .big-menu-overlay-symbol {
+        text-shadow: $shadow-s-0;
+      }
+
+      .big-menu-overlay-name {
+        text-shadow: $shadow-s-0;
+      }
+    }
+  }
+}

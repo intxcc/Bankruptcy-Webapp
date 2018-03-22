@@ -7,20 +7,8 @@
 
   width: 100%;
 
-  #main_top_header_backdrop {
-    position: absolute;
-    background-color: rgba($color: $white-snow, $alpha: .5);
-    background-image: $url-stripes;
-
-    width: 100%;
-    height: $main-header-height;
-
-    background-blend-mode: darken;
-  }
-
   #main_content {
     position: relative;
-    // top: $main-header-height;
 
     background-color: rgba($color: $white-snow, $alpha: .5);
     background-image: $url-stripes;

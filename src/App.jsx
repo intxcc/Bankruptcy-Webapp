@@ -23,7 +23,7 @@ const AppTransitionGroup = (props) => (
           exact path="/"
           render={routeProps => <Landing {...Object.assign({}, routeProps, {store: props.store})} />} />
         <Route
-          exact path="/home"
+          exact path="/(home|exchange)"
           render={routeProps => <Main {...Object.assign({}, routeProps, {store: props.store})} />} />
       </Switch>
     </CSSTransition>

@@ -34,6 +34,8 @@
     color: $black-raisin;
     font-family: Love Ya Like A Sister;
     font-size: 2.5rem;
+
+    pointer-events: none;
   }
 
   #logo {
@@ -51,6 +53,8 @@
     font-family: Impact;
     font-size: 20rem;
     font-variant: small-caps;
+
+    pointer-events: none;
 
     span {
       @include fp(font-size, 5rem, 16rem);

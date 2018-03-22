@@ -1,43 +1,7 @@
 #home_wrapper {
   height: 200vh;
 
-  #home_big_menu {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: $primary-light;
-    background-image: $url-linen;
-
-    padding: 2rem 0;
-
-    list-style: none;
-
-    background-blend-mode: color-burn;
-
-    li {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      margin: 2rem;
-
-      border-radius: 2px;
-      box-shadow: $shadow-0;
-
-      background-color: $white-snow;
-      background-image: $url-stripes;
-
-      width: 15vw;
-      height: 15vw;
-
-      color: $secondary-color;
-      font-family: Love Ya Like A Sister;
-      font-size: 3rem;
-
-      box-sizing: border-box;
-    }
-  }
+  @import '/home/bigmenu';
 
   #home_big_menu_post_spacer {
     position: sticky;
@@ -47,6 +11,6 @@
     background-image: $url-stripes;
 
     width: 100%;
-    height: 5rem;
+    height: 20rem;
   }
 }

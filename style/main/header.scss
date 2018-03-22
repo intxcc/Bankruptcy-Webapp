@@ -7,9 +7,8 @@
   align-items: flex-end;
   justify-content: space-evenly;
 
+  transition: .2s box-shadow;
   z-index: 5;
-
-  box-shadow: $shadow-0;
 
   background-color: $black-raisin;
   background-image: $url-stripes;
@@ -21,6 +20,10 @@
 }
 
 .collapse-main-header {
+  #main_header {
+    box-shadow: $shadow-0;
+  }
+
   #main_logo_logo {
     height: $main-header-height-collaped !important;
 
@@ -44,6 +47,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  pointer-events: none;
 
   #main_logo_logo {
     @include fp(font-size, 4rem, 6rem);

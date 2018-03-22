@@ -33,6 +33,8 @@
     position: relative;
 
     transition: .2s text-shadow;
+
+    pointer-events: none;
   }
 
   &:hover {

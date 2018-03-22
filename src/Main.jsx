@@ -3,6 +3,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { HashLink } from 'react-router-hash-link'
+
 import Home from './Home'
 
 // import { Link } from 'react-router-dom'
@@ -54,18 +56,19 @@ class Main extends Component {
   render () {
     return (
       <div className={this.state.headerClassName} id="main_wrapper">
+        <a id="top" name="top"></a>
         <header id="main_header" ref={mainHeader => { this.mainHeader = mainHeader }}>
-          <div id="main_logo_wrapper" ref={mainHeaderLogo => { this.mainHeaderLogo = mainHeaderLogo }}>
-            <div id="main_logo_logo">
-              B<span>ankruptcy</span>!
+          <HashLink smooth to="/home/#top">
+            <div id="main_logo_wrapper" ref={mainHeaderLogo => { this.mainHeaderLogo = mainHeaderLogo }}>
+              <div id="main_logo_logo">
+                B<span>ankruptcy</span>!
+              </div>
+              <div id="main_logo_caption">
+                No, really. You are a good daytrader.
+              </div>
             </div>
-            <div id="main_logo_caption">
-              No, really. You are a good daytrader.
-            </div>
-          </div>
+          </HashLink>
         </header>
-        <div id="main_top_header_backdrop">
-        </div>
         <main id="main_content">
           <Home />
         </main>
