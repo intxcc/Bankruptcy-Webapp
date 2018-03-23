@@ -3,17 +3,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+// eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { HashLink } from 'react-router-hash-link'
 
+import MainSideMenu from './main/MainSideMenu'
+
 import Home from './Home'
 import Exchange from './Exchange'
-
-const SideMenu = (props) => (
-  <nav id="main-side-menu">
-  </nav>
-)
 
 class Main extends Component {
   constructor (props) {
@@ -49,7 +47,7 @@ class Main extends Component {
     let collapse = (this.mainHeader.clientHeight - this.state.headerLogoHeight) - scrollTop <= 0
     if (collapse && this.state.headerClassName === '') {
       this.setState({
-        headerClassName: 'collapse-main-header',
+        headerClassName: 'collapse-main-header open-main-side-menu',
         headerLogoHeight: this.state.headerLogoHeight
       })
     } else if (!collapse && this.state.headerClassName !== '') {
@@ -64,7 +62,6 @@ class Main extends Component {
     return (
       <div className={this.state.headerClassName} id="main_wrapper">
         <a id="top" name="top"></a>
-        <div id="main-side-menu"></div>
         <header id="main_header" ref={mainHeader => { this.mainHeader = mainHeader }}>
           <HashLink smooth to="/home/#top">
             <div id="main_logo_wrapper" ref={mainHeaderLogo => { this.mainHeaderLogo = mainHeaderLogo }}>
@@ -77,7 +74,7 @@ class Main extends Component {
             </div>
           </HashLink>
         </header>
-        <SideMenu />
+        <MainSideMenu />
         <main id="main_content">
           <Route path="/home" component={Home} />
           <Route path="/exchange/" component={Exchange} />

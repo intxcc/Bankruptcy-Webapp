@@ -35,7 +35,6 @@ const Home = (props) => (
       <BigMenuButton name="Groups" symbol="users" />
       <BigMenuButton name="Profile" symbol="user" />
     </ul>
-
   </div>
 )
 

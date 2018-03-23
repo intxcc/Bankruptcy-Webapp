@@ -4,6 +4,8 @@
   right: 0;
   left: 0;
 
+  transition: $main-side-menu-transition-time left;
+
   background-color: $white-snow-d;
   background-image: $url-stripes;
 
@@ -16,5 +18,9 @@
     width: 100%;
 
     background-blend-mode: darken;
+  }
+
+  &.open-main-side-menu {
+    left: $main-side-menu-size;
   }
 }

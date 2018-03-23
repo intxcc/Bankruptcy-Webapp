@@ -1,3 +1,75 @@
-#main-side-menu {
+#main-side-menu-toggle-background {
+  position: fixed;
+  top: 0;
+  left: 0;
 
+  z-index: 5;
+
+  background-color: $black-raisin;
+  background-image: $url-stripes;
+
+  width: $main-side-menu-size;
+  height: $main-side-menu-size;
+
+  background-blend-mode: color-burn;
+}
+
+#main-side-menu-toggle-button {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: 6;
+
+  width: $main-side-menu-size;
+  height: $main-side-menu-size;
+
+  color: #fff;
+
+  background-blend-mode: color-burn;
+}
+
+#main-side-menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  float: left;
+  transform: translate3d(-100%, 0, 0);
+  transition: $main-side-menu-transition-time transform;
+  z-index: 5;
+
+  background-color: #f00;
+
+  width: $main-side-menu-size;
+  // height: calc(#{'100vh' + ' - '  + $main-header-height-collaped});
+
+  #test1 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    background-color: #f0f;
+
+    height: $main-side-menu-size;
+  }
+
+  #test2 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: #0ff;
+
+    height: $main-side-menu-size;
+  }
+}
+
+.open-main-side-menu {
+  #main-side-menu {
+    transform: translate3d(0, 0, 0);
+  }
 }
