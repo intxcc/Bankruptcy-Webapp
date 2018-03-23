@@ -3,11 +3,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
 import { HashLink } from 'react-router-hash-link'
 
 import Home from './Home'
+import Exchange from './Exchange'
 
-// import { Link } from 'react-router-dom'
+const SideMenu = (props) => (
+  <nav id="main-side-menu">
+  </nav>
+)
 
 class Main extends Component {
   constructor (props) {
@@ -39,7 +45,8 @@ class Main extends Component {
   }
 
   handleBodyScroll (e) {
-    let collapse = (this.mainHeader.clientHeight - this.state.headerLogoHeight) - document.body.scrollTop <= 0
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+    let collapse = (this.mainHeader.clientHeight - this.state.headerLogoHeight) - scrollTop <= 0
     if (collapse && this.state.headerClassName === '') {
       this.setState({
         headerClassName: 'collapse-main-header',
@@ -57,6 +64,7 @@ class Main extends Component {
     return (
       <div className={this.state.headerClassName} id="main_wrapper">
         <a id="top" name="top"></a>
+        <div id="main-side-menu"></div>
         <header id="main_header" ref={mainHeader => { this.mainHeader = mainHeader }}>
           <HashLink smooth to="/home/#top">
             <div id="main_logo_wrapper" ref={mainHeaderLogo => { this.mainHeaderLogo = mainHeaderLogo }}>
@@ -69,8 +77,10 @@ class Main extends Component {
             </div>
           </HashLink>
         </header>
+        <SideMenu />
         <main id="main_content">
-          <Home />
+          <Route path="/home" component={Home} />
+          <Route path="/exchange/" component={Exchange} />
         </main>
       </div>
     )

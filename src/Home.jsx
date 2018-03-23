@@ -27,7 +27,7 @@ BigMenuButton.propTypes = {
 const Home = (props) => (
   <div id="home_wrapper">
     <ul id="home_big_menu">
-      <Link to="/exchange">
+      <Link to="/exchange/">
         <BigMenuButton name="Exchange" symbol="chart-line" />
       </Link>
       <BigMenuButton name="Social" symbol="bullhorn" />
@@ -35,8 +35,7 @@ const Home = (props) => (
       <BigMenuButton name="Groups" symbol="users" />
       <BigMenuButton name="Profile" symbol="user" />
     </ul>
-    <div id="home_big_menu_post_spacer">
-    </div>
+
   </div>
 )
 

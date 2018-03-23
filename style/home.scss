@@ -2,15 +2,4 @@
   height: 200vh;
 
   @import '/home/bigmenu';
-
-  #home_big_menu_post_spacer {
-    position: sticky;
-    top: 4.8rem;
-
-    background-color: $white-snow;
-    background-image: $url-stripes;
-
-    width: 100%;
-    height: 20rem;
-  }
 }

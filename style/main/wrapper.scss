@@ -1,11 +1,11 @@
 #main_wrapper {
   position: absolute;
   top: 0;
+  right: 0;
   left: 0;
 
+  background-color: $white-snow-d;
   background-image: $url-stripes;
-
-  width: 100%;
 
   #main_content {
     position: relative;
