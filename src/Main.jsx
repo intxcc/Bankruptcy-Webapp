@@ -9,6 +9,8 @@ import { observer } from 'mobx-react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
 
+import StyleVariables from '../style/variables.scss'
+
 import MainSideMenu from './main/MainSideMenu'
 
 import Dashboard from './Dashboard'
@@ -29,6 +31,9 @@ class Main extends Component {
 
     this.mainHeader.scrollTop = this.props.store.mainScrollTopSaved
     this.props.store.mainHeaderLogoHeight = this.mainHeaderLogo.clientHeight
+
+    // TODO Animate this!
+    setTimeout(() => { document.documentElement.scrollTop = 0 }, parseInt(StyleVariables.routeTransitionTime) + 50)
   }
 
   componentWillUnmount () {
@@ -73,6 +78,8 @@ class Main extends Component {
       headerClassName += 'pin-main-side-menu '
     }
 
+    let dashboardBigMenuClosed = this.props.store.dashboardBigMenuClosed
+
     return (
       <div className={headerClassName} id="main_wrapper">
         <a id="top" name="top"></a>
@@ -92,7 +99,12 @@ class Main extends Component {
           handleToggleSideMenuClick={this.handleToggleSideMenuClick}
           handlePinSideMenuClick={this.handlePinSideMenuClick} />
         <main id="main_content">
-          <Route path="/dashboard" component={Dashboard} />
+          <Route
+            path="/dashboard"
+            render={routeProps => <Dashboard {...Object.assign({}, routeProps, {
+              store: this.props.store,
+              dashboardBigMenuClosed: dashboardBigMenuClosed
+            })} />} />
           <Route path="/exchange/" component={Exchange} />
         </main>
       </div>

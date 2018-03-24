@@ -26,7 +26,10 @@ BigMenuButton.propTypes = {
 
 const Dashboard = (props) => (
   <div id="dashboard_wrapper">
-    <ul id="dashboard_big_menu">
+    <ul id="dashboard_big_menu" className={props.dashboardBigMenuClosed ? 'closed' : ''}>
+      <div id="dashboard_big_menu_close_button" onClick={() => { props.store.closeBigMenu(props.store) }}>
+        <i className="fas fa-times"></i>
+      </div>
       <Link to="/exchange/">
         <BigMenuButton name="Exchange" symbol="chart-line" />
       </Link>
@@ -37,5 +40,10 @@ const Dashboard = (props) => (
     </ul>
   </div>
 )
+
+Dashboard.propTypes = {
+  store: PropTypes.object,
+  dashboardBigMenuClosed: PropTypes.bool
+}
 
 export default Dashboard

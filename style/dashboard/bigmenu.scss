@@ -4,18 +4,60 @@
   }
 
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+
+  transition: .4s max-height, .4s padding;
 
   background-color: $big-menu-color-light;
   background-image: $url-linen;
 
   padding: .8vw 0;
 
-  list-style: none;
+  max-height: 20rem;
 
+  overflow: hidden;
+  list-style: none;
   background-blend-mode: color-burn;
+
+  &.closed {
+    padding: 0;
+    max-height: 0;
+  }
+
+  #dashboard_big_menu_close_button {
+    @include media-small {
+      width: 2rem;
+      height: 2rem;
+
+      font-size: 1.4rem;
+    }
+
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    align-items: center;
+    justify-content: center;
+
+    transition: .2s opacity, .2s text-shadow;
+    z-index: 2;
+    cursor: pointer;
+
+    width: 4rem;
+    height: 4rem;
+
+    color: $white-snow;
+    font-size: 2rem;
+
+    &:hover {
+      opacity: .8;
+      text-shadow: $shadow-0;
+    }
+  }
 
   li {
     @include fp(width, 4.25rem, 15rem);

@@ -115,7 +115,7 @@
 
     margin: .25rem 0;
 
-    background-color: $white-snow-d;
+    background-color: darken($color: $white-snow-d, $amount: 1);
 
     cursor: pointer;
 

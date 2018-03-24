@@ -63,6 +63,10 @@ class App extends Component {
       document.addEventListener('MSFullscreenChange', this.setToggleFullscreenIcon)
       document.addEventListener('fullscreenchange', this.setToggleFullscreenIcon)
     }
+
+    if (window.innerWidth <= 500) {
+      this.props.store.mainShowSideMenu = false
+    }
   }
 
   componentWillUnmount () {

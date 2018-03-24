@@ -15,6 +15,12 @@ class Store {
   @observable mainShowSideMenu = true
   @observable mainSideMenuWasPinned = false
   @observable mainPinSideMenu = false
+
+  @observable dashboardBigMenuClosed = false
+
+  closeBigMenu = (store) => {
+    store.dashboardBigMenuClosed = true
+  }
 }
 
 let store = new Store()
