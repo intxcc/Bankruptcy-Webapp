@@ -28,10 +28,6 @@
 }
 
 #main-side-menu-pin-button {
-  // @include media-small {
-  //   display: none;
-  // }
-
   display: flex;
   position: fixed;
   top: $main-side-menu-size;
@@ -98,7 +94,7 @@
 
   background-color: rgba($color: $main-side-menu-background, $alpha: .8);
 
-  padding-top: $main-side-menu-size * 3;
+  padding-top: $main-side-menu-size * 2;
 
   width: $main-side-menu-size-expanded;
   max-width: 100vw;
@@ -153,12 +149,6 @@
       background-blend-mode: color-burn;
     }
   }
-
-  // &:hover {
-  //   transform: translate3d(0, 0, 0) !important;
-  //   border-color: transparent;
-  //   box-shadow: $shadow-s-0;
-  // }
 }
 
 .main-side-menu-li-active {
@@ -177,10 +167,6 @@
 
 .open-main-side-menu {
   #main-side-menu {
-    // @include media-small {
-    //   @include main-side-menu-wide;
-    // }
-
     transform: translate3d(calc(#{'-100% + ' + $main-side-menu-size}), 0, 0);
   }
 

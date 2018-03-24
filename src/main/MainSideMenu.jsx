@@ -27,12 +27,14 @@ const MainSideMenu = (props) => (
     <div id="main-side-menu-background">
     </div>
     <nav id="main-side-menu">
-      <MainSideMenuLink name="Dashboard" symbol="home" to="/dashboard/" />
-      <MainSideMenuLink name="Exchange" symbol="chart-line" to="/exchange/" />
-      <MainSideMenuLink name="Social" symbol="bullhorn" to="/social/" />
-      <MainSideMenuLink name="Leaderboard" symbol="sort-amount-up" to="/leaderboard/" />
-      <MainSideMenuLink name="Groups" symbol="users" to="/groups/" />
-      <MainSideMenuLink name="Profile" symbol="user" to="/profile/" />
+      <ul>
+        <MainSideMenuLink name="Dashboard" symbol="home" to="/dashboard/" />
+        <MainSideMenuLink name="Exchange" symbol="chart-line" to="/exchange/" />
+        <MainSideMenuLink name="Social" symbol="bullhorn" to="/social/" />
+        <MainSideMenuLink name="Leaderboard" symbol="sort-amount-up" to="/leaderboard/" />
+        <MainSideMenuLink name="Groups" symbol="users" to="/groups/" />
+        <MainSideMenuLink name="Profile" symbol="user" to="/profile/" />
+      </ul>
     </nav>
   </div>
 )
