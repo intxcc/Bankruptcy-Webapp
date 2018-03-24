@@ -4,7 +4,7 @@
   right: 0;
   left: 0;
 
-  transition: $main-side-menu-transition-time left;
+  transition: $main-side-menu-transition-time left, $route-transition-time opacity;
 
   background-color: $white-snow-d;
   background-image: $url-stripes;
@@ -21,6 +21,18 @@
   }
 
   &.open-main-side-menu {
+    @include media-small {
+      left: 0;
+    }
+
     left: $main-side-menu-size;
+  }
+
+  &.pin-main-side-menu {
+    @include media-small {
+      left: 0;
+    }
+
+    left: $main-side-menu-size-expanded;
   }
 }

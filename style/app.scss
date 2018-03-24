@@ -1,13 +1,13 @@
 #request_fullscreen_btn {
   display: flex;
   position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: $main-header-height-collaped / 4;
+  right: $main-header-height-collaped / 4;
 
   align-items: center;
   justify-content: center;
 
-  transition: .2s color, .2s font-size;
+  transition: .2s opacity, .2s font-size;
   z-index: 100;
 
   cursor: pointer;
@@ -16,12 +16,12 @@
   height: 2.2rem;
 
   text-shadow: $shadow-0;
-  color: rgba($color: $white-snow, $alpha: .8);
+  color: $main-header-button-color;
   font-size: 2rem;
 
   &:hover {
-    color: rgba($color: $white-snow, $alpha: 1);
-    font-size: 1.2rem;
+    opacity: .8;
+    font-size: 1.4rem;
   }
 }
 

@@ -3,37 +3,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { observer } from 'mobx-react'
+
 // eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-
 import { HashLink } from 'react-router-hash-link'
 
 import MainSideMenu from './main/MainSideMenu'
 
-import Home from './Home'
+import Dashboard from './Dashboard'
 import Exchange from './Exchange'
 
+@observer
 class Main extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      headerClassName: '',
-      headerLogoHeight: 1000
-    }
-
     this.handleBodyScroll = this.handleBodyScroll.bind(this)
+    this.handleToggleSideMenuClick = this.handleToggleSideMenuClick.bind(this)
+    this.handlePinSideMenuClick = this.handlePinSideMenuClick.bind(this)
   }
 
   componentDidMount () {
     document.addEventListener('scroll', this.handleBodyScroll)
 
     this.mainHeader.scrollTop = this.props.store.mainScrollTopSaved
-
-    this.setState({
-      headerClassName: '',
-      headerLogoHeight: this.mainHeaderLogo.clientHeight
-    })
+    this.props.store.mainHeaderLogoHeight = this.mainHeaderLogo.clientHeight
   }
 
   componentWillUnmount () {
@@ -44,26 +39,45 @@ class Main extends Component {
 
   handleBodyScroll (e) {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-    let collapse = (this.mainHeader.clientHeight - this.state.headerLogoHeight) - scrollTop <= 0
-    if (collapse && this.state.headerClassName === '') {
-      this.setState({
-        headerClassName: 'collapse-main-header open-main-side-menu',
-        headerLogoHeight: this.state.headerLogoHeight
-      })
-    } else if (!collapse && this.state.headerClassName !== '') {
-      this.setState({
-        headerClassName: '',
-        headerLogoHeight: this.state.headerLogoHeight
-      })
+    this.props.store.mainHeaderCollapsed = (this.mainHeader.clientHeight - this.props.store.mainHeaderLogoHeight) - scrollTop <= 0
+  }
+
+  handleToggleSideMenuClick (e) {
+    this.props.store.mainShowSideMenu = !this.props.store.mainShowSideMenu
+
+    if (!this.props.store.mainShowSideMenu) {
+      this.props.store.mainPinSideMenu = false
+    } else {
+      this.props.store.mainPinSideMenu = this.props.store.mainSideMenuWasPinned
     }
   }
 
+  handlePinSideMenuClick (e) {
+    this.props.store.mainPinSideMenu = !this.props.store.mainPinSideMenu
+
+    this.props.store.mainSideMenuWasPinned = this.props.store.mainPinSideMenu
+  }
+
   render () {
+    let headerClassName = ''
+
+    if (this.props.store.mainHeaderCollapsed) {
+      headerClassName += 'collapse-main-header '
+    }
+
+    if (this.props.store.mainShowSideMenu) {
+      headerClassName += 'open-main-side-menu '
+    }
+
+    if (this.props.store.mainPinSideMenu) {
+      headerClassName += 'pin-main-side-menu '
+    }
+
     return (
-      <div className={this.state.headerClassName} id="main_wrapper">
+      <div className={headerClassName} id="main_wrapper">
         <a id="top" name="top"></a>
         <header id="main_header" ref={mainHeader => { this.mainHeader = mainHeader }}>
-          <HashLink smooth to="/home/#top">
+          <HashLink smooth to="/dashboard/#top">
             <div id="main_logo_wrapper" ref={mainHeaderLogo => { this.mainHeaderLogo = mainHeaderLogo }}>
               <div id="main_logo_logo">
                 B<span>ankruptcy</span>!
@@ -74,9 +88,11 @@ class Main extends Component {
             </div>
           </HashLink>
         </header>
-        <MainSideMenu />
+        <MainSideMenu
+          handleToggleSideMenuClick={this.handleToggleSideMenuClick}
+          handlePinSideMenuClick={this.handlePinSideMenuClick} />
         <main id="main_content">
-          <Route path="/home" component={Home} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/exchange/" component={Exchange} />
         </main>
       </div>

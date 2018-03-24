@@ -6,6 +6,15 @@ class Store {
   // Saved scroll tops on unmount
   @observable landingScrollTopSaved = 0
   @observable mainScrollTopSaved = 0
+
+  // Main header state
+  @observable mainHeaderLogoHeight = 1000
+  @observable mainHeaderCollapsed = false
+
+  // Main side menu state
+  @observable mainShowSideMenu = true
+  @observable mainSideMenuWasPinned = false
+  @observable mainPinSideMenu = false
 }
 
 let store = new Store()

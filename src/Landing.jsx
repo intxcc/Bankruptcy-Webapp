@@ -59,7 +59,7 @@ class Landing extends Component {
                 B<span>ankruptcy</span>!
               </div>
               <div id="landing_bottom">
-                <Link to="/home">
+                <Link to="/dashboard">
                   <LandingButton text="Start Game" />
                 </Link>
                 <HashLink smooth to="#howto">

@@ -6,8 +6,6 @@ import PropTypes from 'prop-types'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-// import { observer } from 'mobx-react'
-
 import Landing from './Landing'
 import Main from './Main'
 

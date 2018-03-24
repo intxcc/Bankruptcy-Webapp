@@ -24,9 +24,9 @@ BigMenuButton.propTypes = {
   symbol: PropTypes.string
 }
 
-const Home = (props) => (
-  <div id="home_wrapper">
-    <ul id="home_big_menu">
+const Dashboard = (props) => (
+  <div id="dashboard_wrapper">
+    <ul id="dashboard_big_menu">
       <Link to="/exchange/">
         <BigMenuButton name="Exchange" symbol="chart-line" />
       </Link>
@@ -38,4 +38,4 @@ const Home = (props) => (
   </div>
 )
 
-export default Home
+export default Dashboard
