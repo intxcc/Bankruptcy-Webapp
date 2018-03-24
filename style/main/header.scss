@@ -1,4 +1,8 @@
 #main_header {
+  @include media-small {
+    z-index: 5;
+  }
+
   display: flex;
   position: sticky;
   top: calc(#{-$main-header-height + ' + ' + $main-header-height-collaped});
@@ -7,8 +11,9 @@
   align-items: flex-end;
   justify-content: space-evenly;
 
-  transition: .2s box-shadow;
-  z-index: 5;
+  // transition: .2s box-shadow;
+  transition: .2s background-color;
+  z-index: 6;
 
   background-color: $black-raisin;
   background-image: $url-stripes;
@@ -21,13 +26,25 @@
 
 .collapse-main-header {
   #main_header {
-    box-shadow: $shadow-0;
+    // box-shadow: $shadow-0;
+
+    background-color: $white-snow;
+  }
+
+  #main_logo_wrapper {
+    @include media-small {
+      margin: unset;
+    }
+
+    margin: 0 0 0 calc(#{'-100vw + 20rem'});
+    pointer-events: initial;
   }
 
   #main_logo_logo {
     height: $main-header-height-collaped !important;
 
     line-height: $main-header-height-collaped !important;
+    color: $primary-color !important;
     font-size: 3rem !important;
 
     span {
@@ -48,12 +65,14 @@
   align-items: center;
   justify-content: center;
 
+  transition: $main-header-collapse-duration margin;
+
   pointer-events: none;
 
   #main_logo_logo {
     @include fp(font-size, 4rem, 6rem);
 
-    transition: $main-header-collapse-duration font-size, $main-header-collapse-duration line-height, $main-header-collapse-duration height;
+    transition: $main-header-collapse-duration font-size, $main-header-collapse-duration line-height, $main-header-collapse-duration height, $main-header-collapse-duration color;
 
     height: 6.4rem;
 
