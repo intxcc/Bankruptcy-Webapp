@@ -12,7 +12,8 @@ class Store {
   @observable mainHeaderCollapsed = false
 
   // Main side menu state
-  @observable mainShowSideMenu = true
+  @observable mainShowSideMenu = false
+  @observable mainShowSideMenuTouched = false
   @observable mainSideMenuWasPinned = false
   @observable mainPinSideMenu = false
 

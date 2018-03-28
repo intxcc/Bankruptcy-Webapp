@@ -140,6 +140,8 @@
       align-items: center;
       justify-content: center;
 
+      transition: .2s background-color;
+
       background-color: $gray-middle;
       background-image: $url-stripes;
 
@@ -148,6 +150,12 @@
 
       background-blend-mode: color-burn;
     }
+
+    &:hover {
+      .main-side-menu-li-symbol {
+        background-color: lighten($color: $gray-middle, $amount: 5);
+      }
+    }
   }
 }
 
@@ -155,6 +163,12 @@
   .main-side-menu-li-symbol {
     background-color: $primary-color !important;
     background-blend-mode: color-dodge !important;
+  }
+
+  &:hover {
+    .main-side-menu-li-symbol {
+      background-color: lighten($color: $primary-color, $amount: 5) !important;
+    }
   }
 }
 

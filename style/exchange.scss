@@ -1,5 +1,9 @@
 #exchange_wrapper {
-  padding: 1rem;
+  background-color: rgba($color: $white-snow, $alpha: .5);
 
-  height: 200vh;
+  padding: 2rem;
+
+  height: calc(#{'100vh - ' + $main-header-height-collaped * 1});
+
+  box-sizing: border-box;
 }

@@ -45,9 +45,16 @@ class Main extends Component {
   handleBodyScroll (e) {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
     this.props.store.mainHeaderCollapsed = (this.mainHeader.clientHeight - this.props.store.mainHeaderLogoHeight) - scrollTop <= 0
+
+    if (!this.props.store.mainShowSideMenuTouched) {
+      this.props.store.mainShowSideMenu = this.props.store.mainHeaderCollapsed
+    }
   }
 
   handleToggleSideMenuClick (e) {
+    // Remember that user has touched the menu toggle and don't automatically adjust anymore
+    this.props.store.mainShowSideMenuTouched = true
+
     this.props.store.mainShowSideMenu = !this.props.store.mainShowSideMenu
 
     if (!this.props.store.mainShowSideMenu) {
@@ -58,6 +65,9 @@ class Main extends Component {
   }
 
   handlePinSideMenuClick (e) {
+    // Remember that user has touched the menu toggle and don't automatically adjust anymore
+    this.props.store.mainShowSideMenuTouched = true
+
     this.props.store.mainPinSideMenu = !this.props.store.mainPinSideMenu
 
     this.props.store.mainSideMenuWasPinned = this.props.store.mainPinSideMenu

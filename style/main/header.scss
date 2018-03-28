@@ -11,8 +11,6 @@
   align-items: flex-end;
   justify-content: space-evenly;
 
-  // transition: .2s box-shadow;
-  transition: .2s background-color;
   z-index: 6;
 
   background-color: $black-raisin;
@@ -25,26 +23,10 @@
 }
 
 .collapse-main-header {
-  #main_header {
-    // box-shadow: $shadow-0;
-
-    background-color: $white-snow;
-  }
-
-  #main_logo_wrapper {
-    @include media-small {
-      margin: unset;
-    }
-
-    margin: 0 0 0 calc(#{'-100vw + 20rem'});
-    pointer-events: initial;
-  }
-
   #main_logo_logo {
     height: $main-header-height-collaped !important;
 
     line-height: $main-header-height-collaped !important;
-    // color: $primary-color !important;
     font-size: 3rem !important;
 
     span {
@@ -80,7 +62,7 @@
     height: 6.4rem;
 
     line-height: 6rem;
-    color: $primary-color;
+    color: $white-snow-d;
 
     font-family: Impact;
     font-size: 6rem;
