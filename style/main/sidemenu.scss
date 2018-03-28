@@ -7,9 +7,12 @@
   align-items: center;
   justify-content: center;
 
-  transition: .2s transform, .2s opacity, $main-side-menu-transition-time color;
+  transition: .2s transform, $main-side-menu-transition-time color, .2s border-color;
 
   z-index: 8;
+
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid transparent;
 
   cursor: pointer;
 
@@ -21,9 +24,14 @@
 
   box-sizing: border-box;
 
+  i {
+    transition: .2s opacity;
+  }
+
   &:hover {
-    transform: scaleY(.7);
-    opacity: .8;
+    i {
+      opacity: .6;
+    }
   }
 }
 
@@ -175,6 +183,7 @@
   }
 
   #main-side-menu-toggle-button {
+    border-bottom: 2px solid $black-raisin;
     color: $black-raisin;
   }
 
@@ -189,7 +198,7 @@
   }
 
   #main-side-menu-toggle-button {
-    color: $black-raisin;
+    border-right: 2px $black-raisin solid;
   }
 
   #main-side-menu-pin-button {

@@ -44,6 +44,4 @@
 /////////////////
 // TRANSITIONS //
 
-// @include route_transition(fade, transform, translateX(95%) scale(0.9), translateX(0) scale(1), translateX(-100%) scale(0.9));
-// @include route-transition(fade, transform, translateX(100%), translateX(0), translateX(-100%));
 @include route-transition(fade, opacity, 1, 1, 0);

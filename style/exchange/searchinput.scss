@@ -3,10 +3,10 @@
   top: 5rem;
   left: 5rem;
 
-  // border: .5rem #fff solid;
-  border-radius: 3px;
+  border: 2px $black-raisin solid;
+  // border-radius: 3px;
 
-  box-shadow: $shadow-0;
+  // box-shadow: $shadow-0;
 
   background-color: #fff;
 
@@ -15,7 +15,7 @@
   #exchange-search-input-label {
     padding: 0 1rem;
 
-    color: $gray-middle;
+    color: $black-raisin;
     font-size: 5rem;
     font-weight: 200;
     font-variant: small-caps;
@@ -46,7 +46,7 @@
       width: 2.5rem;
       height: 2.5rem;
 
-      color: $gray-very-light;
+      color: $black-raisin;
 
       font-size: 1.2rem;
 

@@ -9,7 +9,10 @@
   align-items: center;
   justify-content: center;
 
-  transition: .4s max-height, .4s padding;
+  transition: .4s max-height, .4s padding, .4s border-bottom-width;
+
+  // border-top: 2px solid $black-raisin;
+  // border-bottom: 2px solid $black-raisin;
 
   background-color: $big-menu-color-light;
   background-image: $url-linen;
@@ -23,6 +26,7 @@
   background-blend-mode: color-burn;
 
   &.closed {
+    border-bottom-width: 0;
     padding: 0;
     max-height: 0;
   }
@@ -67,6 +71,8 @@
     transition: .3s box-shadow;
 
     margin: .8vw;
+
+    box-shadow: $shadow-s-0;
 
     background-color: $white-snow-d;
 
@@ -160,7 +166,7 @@
     }
 
     &:hover {
-      // box-shadow: $shadow-s-0;
+      box-shadow: $shadow-s;
 
       .big-menu-btn-background {
         font-size: 15vw;
