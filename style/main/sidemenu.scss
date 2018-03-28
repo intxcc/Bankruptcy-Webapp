@@ -9,7 +9,7 @@
 
   transition: .2s transform, .2s opacity, $main-side-menu-transition-time color;
 
-  z-index: 6;
+  z-index: 8;
 
   cursor: pointer;
 
@@ -161,7 +161,7 @@
 
 .main-side-menu-li-active {
   .main-side-menu-li-symbol {
-    background-color: $primary-color !important;
+    background-color: $primary-light !important;
     background-blend-mode: color-dodge !important;
   }
 

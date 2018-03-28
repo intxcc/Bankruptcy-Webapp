@@ -4,8 +4,8 @@
   }
 
   display: flex;
-  position: sticky;
-  top: calc(#{-$main-header-height + ' + ' + $main-header-height-collaped});
+  position: relative;
+  top: 0;//calc(#{-$main-header-height + ' + ' + $main-header-height-collaped});
   left: 0;
 
   align-items: flex-end;
@@ -22,25 +22,8 @@
   background-blend-mode: color-burn;
 }
 
-.collapse-main-header {
-  #main_logo_logo {
-    height: $main-header-height-collaped !important;
-
-    line-height: $main-header-height-collaped !important;
-    font-size: 3rem !important;
-
-    span {
-      font-size: 2.5rem !important;
-    }
-  }
-
-  #main_logo_caption {
-    opacity: 0;
-    margin: 0 !important;
-    border-width: 0 !important;
-    padding: 0 !important;
-    height: 0 !important;
-  }
+#main_logo_wrapper_link {
+  transition: $main-header-collapse-duration opacity;
 }
 
 #main_logo_wrapper {
@@ -99,5 +82,13 @@
     font-family: Love Ya Like A Sister;
 
     box-sizing: border-box;
+  }
+}
+
+.collapse-main-header {
+  #main_logo_wrapper_link {
+    opacity: 0;
+
+    pointer-events: none;
   }
 }

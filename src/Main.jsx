@@ -9,7 +9,7 @@ import { observer } from 'mobx-react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
 
-import StyleVariables from '../style/variables.scss'
+// import StyleVariables from '../style/variables.scss'
 
 import MainSideMenu from './main/MainSideMenu'
 
@@ -33,7 +33,7 @@ class Main extends Component {
     this.props.store.mainHeaderLogoHeight = this.mainHeaderLogo.clientHeight
 
     // TODO Animate this!
-    setTimeout(() => { document.documentElement.scrollTop = 0 }, parseInt(StyleVariables.routeTransitionTime) + 50)
+    // setTimeout(() => { document.documentElement.scrollTop = 0 }, parseInt(StyleVariables.routeTransitionTime) + 50)
   }
 
   componentWillUnmount () {
@@ -94,7 +94,7 @@ class Main extends Component {
       <div className={headerClassName} id="main_wrapper">
         <a id="top" name="top"></a>
         <header id="main_header" ref={mainHeader => { this.mainHeader = mainHeader }}>
-          <HashLink smooth to="/dashboard/#top">
+          <HashLink smooth id="main_logo_wrapper_link" to="/dashboard/#top">
             <div id="main_logo_wrapper" ref={mainHeaderLogo => { this.mainHeaderLogo = mainHeaderLogo }}>
               <div id="main_logo_logo">
                 B<span>ankruptcy</span>!
@@ -105,6 +105,15 @@ class Main extends Component {
             </div>
           </HashLink>
         </header>
+        <div id="permanent_header_wrapper_background">
+        </div>
+        <div id="permanent_header_wrapper">
+          <HashLink smooth to="/dashboard/#top">
+            <div id="permanent_logo">
+              B<span>ankruptcy</span>!
+            </div>
+          </HashLink>
+        </div>
         <MainSideMenu
           handleToggleSideMenuClick={this.handleToggleSideMenuClick}
           handlePinSideMenuClick={this.handlePinSideMenuClick} />
