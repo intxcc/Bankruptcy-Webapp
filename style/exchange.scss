@@ -1,9 +1,11 @@
 #exchange_wrapper {
-  background-color: rgba($color: $white-snow, $alpha: .5);
+  // background-color: rgba($color: $white-snow-d, $alpha: .2);
 
   padding: 2rem;
 
   height: calc(#{'100vh - ' + $main-header-height-collaped * 1});
 
   box-sizing: border-box;
+
+  @import 'exchange/searchinput';
 }

@@ -92,6 +92,8 @@
 
   z-index: 5;
 
+  border-right: 2px $gray-middle solid;
+  
   background-color: rgba($color: $main-side-menu-background, $alpha: .8);
 
   padding-top: $main-side-menu-size * 2;
