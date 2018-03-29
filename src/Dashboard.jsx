@@ -3,7 +3,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import BigMenu from './dashboard/bigmenu'
+import BigMenu from './dashboard/Bigmenu'
 
 const Dashboard = (props) => (
   <div id="dashboard_wrapper">

@@ -2,6 +2,7 @@
 
 import React from 'react'
 
+import Chart from './exchange/Chart'
 import Input from './reusables/input'
 
 const Exchange = (props) => (
@@ -15,6 +16,7 @@ const Exchange = (props) => (
         placeholder="e.g. Ethereum"
         symbol="search" />
     </div>
+    <Chart />
   </div>
 )
 
