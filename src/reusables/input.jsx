@@ -6,17 +6,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Input = (props) => {
-  let symbol = ''
+  const { onclicksymbol, ...otherProps } = props
 
+  let symbol = ''
   if (props.symbol) {
     symbol = (
-      <i className={'r-input-symbol fas fa-' + props.symbol}></i>
+      <i onClick={onclicksymbol} className={'r-input-symbol fas fa-' + props.symbol}></i>
     )
   }
 
   return (
-    <div {...props} className="r-input">
-      <input
+    <div className="r-input">
+      <input {...otherProps}
         name={props.name}
         placeholder={props.placeholder}
         className="r-input-text"
@@ -29,7 +30,8 @@ const Input = (props) => {
 Input.propTypes = {
   placeholder: PropTypes.string,
   symbol: PropTypes.string,
-  name: PropTypes.string
+  name: PropTypes.string,
+  onclicksymbol: PropTypes.func
 }
 
 export default Input
