@@ -23,7 +23,7 @@ const Dashboard = (props) => (
   <div id="dashboard_wrapper">
     <ul id="dashboard_big_menu" className={props.dashboardBigMenuClosed ? 'closed' : ''}>
       <div id="dashboard_big_menu_close_button" onClick={() => { props.store.closeBigMenu(props.store) }}>
-        <i className="fas fa-times"></i>
+        <span>+</span>
       </div>
       <Link to="/exchange/">
         <BigMenuButton name="Exchange" symbol="chart-line" />

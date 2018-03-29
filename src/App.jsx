@@ -3,6 +3,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { observer } from 'mobx-react'
+
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -33,15 +35,26 @@ AppTransitionGroup.propTypes = {
   store: PropTypes.object
 }
 
-const RequestFullscreenButton = (props) => (
-  <div id="request_fullscreen_btn" onClick={props.toggleFullscreen}>
-    <i className={'fas ' + (props.isFullscreen ? 'fa-compress' : 'fa-expand')}></i>
-  </div>
-)
+@observer class RequestFullscreenButton extends React.Component {
+  render () {
+    let className = ''
+
+    if (this.props.store.mainHeaderCollapsed) {
+      className = 'collapse-main-header'
+    }
+
+    return (
+      <div id="request_fullscreen_btn" className={className} onClick={this.props.toggleFullscreen}>
+        <i className={'fas ' + (this.props.isFullscreen ? 'fa-compress' : 'fa-expand')}></i>
+      </div>
+    )
+  }
+}
 
 RequestFullscreenButton.propTypes = {
   isFullscreen: PropTypes.bool,
-  toggleFullscreen: PropTypes.func
+  toggleFullscreen: PropTypes.func,
+  store: PropTypes.object
 }
 
 class App extends Component {
@@ -93,6 +106,7 @@ class App extends Component {
       <Router>
         <div id="site_wrapper">
           <RequestFullscreenButton
+            store={this.props.store}
             toggleFullscreen={this.toggleFullscreen}
             isFullscreen={this.state.isFullscreen} />
           <Route render={({ location }) => (

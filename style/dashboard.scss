@@ -3,3 +3,9 @@
 
   @import '/dashboard/bigmenu';
 }
+
+.collapse-main-header {
+  #dashboard_big_menu {
+    border-top-color: transparent !important;
+  }
+}

@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
 
-  transition: .2s opacity, .2s font-size;
+  transition: .2s opacity, $main-side-menu-transition-time color;
   z-index: 100;
 
   cursor: pointer;
@@ -18,9 +18,12 @@
   color: $main-header-button-color;
   font-size: 2rem;
 
+  &.collapse-main-header {
+    color: $black-raisin;
+  }
+
   &:hover {
-    opacity: .8;
-    font-size: 1.4rem;
+    opacity: .6;
   }
 }
 
