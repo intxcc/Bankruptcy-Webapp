@@ -57,6 +57,17 @@ RequestFullscreenButton.propTypes = {
   store: PropTypes.object
 }
 
+const BottomInfo = (props) => (
+  <div id="bottom_info">
+    <div id="bottom_info_left">
+      Copyright {(new Date()).getFullYear()} &middot; Created with love by intx&middot;cc
+    </div>
+    <div id="bottom_info_right">
+      Bankruptcy on GitHub &middot; Impressum
+    </div>
+  </div>
+)
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -112,14 +123,7 @@ class App extends Component {
           <Route render={({ location }) => (
             <AppTransitionGroup location={location} store={this.props.store} />
           )} />
-          <div id="bottom_info">
-            <div id="bottom_info_left">
-              Copyright {(new Date()).getFullYear()} &middot; Created with love by intx&middot;cc
-            </div>
-            <div id="bottom_info_right">
-              Bankruptcy on GitHub &middot; Impressum
-            </div>
-          </div>
+          <BottomInfo />
         </div>
       </Router>
     )

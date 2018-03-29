@@ -88,8 +88,6 @@ class Main extends Component {
       headerClassName += 'pin-main-side-menu '
     }
 
-    let dashboardBigMenuClosed = this.props.store.dashboardBigMenuClosed
-
     return (
       <div className={headerClassName} id="main_wrapper">
         <a id="top" name="top"></a>
@@ -121,8 +119,7 @@ class Main extends Component {
           <Route
             path="/dashboard"
             render={routeProps => <Dashboard {...Object.assign({}, routeProps, {
-              store: this.props.store,
-              dashboardBigMenuClosed: dashboardBigMenuClosed
+              store: this.props.store
             })} />} />
           <Route path="/exchange/" component={Exchange} />
         </main>
