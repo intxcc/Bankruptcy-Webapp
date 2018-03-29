@@ -70,99 +70,46 @@
     position: relative;
     transition: .3s box-shadow;
 
-    margin: .8vw;
+    margin: .6vw;
 
-    box-shadow: $shadow-s-0;
-
-    background-color: $white-snow-d;
+    background-color: $white-snow;
 
     cursor: pointer;
 
-    overflow: hidden;
+    .big-menu-symbol {
+      @include fp(font-size, 2.8rem, 5rem);
 
-    box-sizing: border-box;
-
-    .big-menu-btn-background {
       display: flex;
-      position: absolute;
-      top: 0;
-      left: 0;
 
       align-items: center;
       justify-content: center;
 
-      transition: .3s font-size, .3s filter;
-      opacity: .8;
-
-      background-color: rgba($color: $big-menu-color, $alpha: .2);
-      background-image: $url-linen;
-
-      padding: 0 0 1vw;
+      transition: .3s text-shadow;
 
       width: 100%;
       height: 100%;
 
       color: $big-menu-color-light;
-      font-size: 13vw;
-
-      box-sizing: border-box;
-
-      filter: blur(5px);
     }
 
-    .big-menu-btn-overlay {
+    .big-menu-name {
+      @include fp(font-size, .6rem, 1.8rem);
+      @include fp(bottom, 0, .8rem);
+
       position: absolute;
-      top: 0;
-      left: 0;
 
-      box-shadow: 0 0 4vw 3vw rgba($color: $white-snow-d, $alpha: .2) inset;
-
-      background-color: rgba($color: $big-menu-color-light, $alpha: .4);
+      transition: .3s text-shadow;
 
       width: 100%;
-      height: 100%;
 
-      box-sizing: border-box;
+      text-align: center;
 
-      .big-menu-overlay-symbol {
-        @include fp(font-size, 2.8rem, 5rem);
+      color: $big-menu-color-light;
+      font-family: Roboto;
+      font-weight: 900;
+      font-variant: small-caps;
 
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        transition: .3s text-shadow;
-
-        width: 100%;
-        height: 100%;
-
-        text-shadow: $shadow-s;
-
-        color: #fff;
-      }
-
-      .big-menu-overlay-name {
-        @include fp(font-size, .6rem, 1.8rem);
-        @include fp(bottom, 0, .8rem);
-
-        position: absolute;
-
-        transition: .3s text-shadow;
-
-        width: 100%;
-
-        text-align: center;
-
-        text-shadow: $shadow-0;
-
-        color: #fff;
-        font-family: Roboto;
-        font-weight: 900;
-        font-variant: small-caps;
-
-        pointer-events: none;
-      }
+      pointer-events: none;
     }
 
     &:hover {
@@ -173,11 +120,11 @@
         filter: blur(15px);
       }
 
-      .big-menu-overlay-symbol {
+      .big-menu-symbol {
         text-shadow: $shadow-s-0;
       }
 
-      .big-menu-overlay-name {
+      .big-menu-name {
         text-shadow: $shadow-s-0;
       }
     }

@@ -7,15 +7,10 @@ import { Link } from 'react-router-dom'
 
 const BigMenuButton = (props) => (
   <li>
-    <div className="big-menu-btn-background">
+    <span className="big-menu-symbol">
       <i className={'fas fa-' + props.symbol}></i>
-    </div>
-    <div className="big-menu-btn-overlay">
-      <span className="big-menu-overlay-symbol">
-        <i className={'fas fa-' + props.symbol}></i>
-      </span>
-      <span className="big-menu-overlay-name">{props.name}</span>
-    </div>
+    </span>
+    <span className="big-menu-name">{props.name}</span>
   </li>
 )
 
