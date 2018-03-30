@@ -4,6 +4,7 @@
     "react",
     "stage-2"
   ], "plugins": [
+    "recharts",
     "transform-decorators-legacy",
     "transform-class-properties"
   ]

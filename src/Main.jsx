@@ -121,7 +121,11 @@ class Main extends Component {
             render={routeProps => <Dashboard {...Object.assign({}, routeProps, {
               store: this.props.store
             })} />} />
-          <Route path="/exchange/" component={Exchange} />
+          <Route
+            path="/exchange"
+            render={routeProps => <Exchange {...Object.assign({}, routeProps, {
+              store: this.props.store
+            })} />} />
         </main>
       </div>
     )

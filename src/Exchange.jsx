@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Chart from './exchange/Chart'
 import Input from './reusables/input'
@@ -16,8 +17,12 @@ const Exchange = (props) => (
         placeholder="e.g. Ethereum"
         symbol="search" />
     </div>
-    <Chart />
+    <Chart store={props.store} />
   </div>
 )
+
+Exchange.propTypes = {
+  store: PropTypes.object
+}
 
 export default Exchange
