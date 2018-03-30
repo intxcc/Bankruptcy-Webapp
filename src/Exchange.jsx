@@ -3,7 +3,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Chart from './exchange/Chart'
+import ExchangeChart from './exchange/ExchangeChart'
 import Input from './reusables/input'
 
 const Exchange = (props) => (
@@ -17,7 +17,7 @@ const Exchange = (props) => (
         placeholder="e.g. Ethereum"
         symbol="search" />
     </div>
-    <Chart store={props.store} />
+    <ExchangeChart store={props.store} />
   </div>
 )
 
