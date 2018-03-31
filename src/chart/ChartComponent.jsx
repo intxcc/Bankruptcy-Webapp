@@ -30,16 +30,22 @@ class ChartComponent extends Component {
   }
 
   handleMouseDown (e) {
+    this.chart.startDrag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+
     this.drag = true
   }
 
   handleMouseUp (e) {
+    this.chart.stopDrag()
+
     this.drag = false
   }
 
   handleMouseMove (e) {
-    let { x, y } = this.chart.mapPixelToCoordinate(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-    console.log(x + ' : ' + y)
+    this.chart.drag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+
+    // let { x, y } = this.chart.mapPixelToCoordinate(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+    // console.log(x + ' : ' + y)
   }
 
   render () {

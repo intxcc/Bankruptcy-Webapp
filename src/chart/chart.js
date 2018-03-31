@@ -53,13 +53,13 @@ class Chart {
     // TEST STUFF //
 
     this.data = [
-      5, 10, 50, 89
+      5, 10, 35, 17, 19
     ]
 
     this.setDomain()
     this.setSelection({
-      top: 100,
-      right: 1.5,
+      top: 50,
+      right: 5,
       bottom: 0,
       left: 0
     })
@@ -81,11 +81,46 @@ class Chart {
   setSelection (selection) {
     this.selection = Object.assign({}, this.selection, selection)
 
-    this.calculateUnitWidth()
+    this.calculateUnitDimensions()
   }
 
-  calculateUnitWidth () {
+  startDrag (x, y) {
+    this.dragActive = true
+
+    this.dragSelection = {}
+    this.dragStart = {
+      x: x,
+      y: y
+    }
+    Object.assign(this.dragSelection, this.selection)
+  }
+
+  stopDrag () {
+    this.dragActive = false
+  }
+
+  drag (x, y) {
+    if (!this.dragActive) {
+      return
+    }
+
+    let dragXPixel = this.dragStart.x - x
+    let dragYPixel = this.dragStart.y - y
+
+    let deltaX = dragXPixel / this.unitWidth
+    let deltaY = dragYPixel / this.unitHeight
+
+    this.setSelection({
+      top: this.dragSelection.top - deltaY,
+      right: this.dragSelection.right + deltaX,
+      bottom: this.dragSelection.bottom - deltaY,
+      left: this.dragSelection.left + deltaX
+    })
+  }
+
+  calculateUnitDimensions () {
     this.unitWidth = this.innerWidth / (this.selection.right - this.selection.left)
+    this.unitHeight = this.innerHeight / (this.selection.top - this.selection.bottom)
   }
 
   mapPixelToCoordinate (x, y) {
@@ -94,7 +129,8 @@ class Chart {
       y: 0
     }
 
-    result.x = ((x - this.config.margin.left) / this.unitWidth) + this.selection.left
+    result.x = ((x - this.config.margin.left - this.config.axisMargin) / this.unitWidth) + this.selection.left
+    result.y = ((this.config.margin.top + this.innerHeight - this.config.axisMargin - y) / this.unitHeight) + this.selection.bottom
 
     return result
   }
@@ -105,8 +141,8 @@ class Chart {
       y: 0
     }
 
-    result.x = this.config.margin.left + (x - this.selection.left) * this.unitWidth
-    result.y = this.config.margin.top + this.innerHeight + y
+    result.x = this.config.margin.left + this.config.axisMargin + (x - this.selection.left) * this.unitWidth
+    result.y = (this.config.margin.top + this.innerHeight - this.config.axisMargin) - (y - this.selection.bottom) * this.unitHeight
 
     return result
   }
@@ -131,7 +167,7 @@ class Chart {
     this.innerHeight = this.height - this.config.margin.top - this.config.margin.bottom
     this.innerWidth = this.width - this.config.margin.right - this.config.margin.left
 
-    this.calculateUnitWidth()
+    this.calculateUnitDimensions()
 
     // Reset timeout, so a new resize can be requested again
     this.resizeTimeout = false
@@ -152,8 +188,15 @@ class Chart {
       return
     }
 
+    // Used to determine how much to animate to stay smooth (movement * timeCoeff) -> (movement per second)
+    let timeCoeff = (currentTime - this.lastFrameTime) / 1000
+    // On first draw set timeCoeff low, so it doesn't jump right away
+    if (this.lastFrameTime === 0) {
+      timeCoeff = 0.001
+    }
+
     // Used to determine time last frame was drawn
-    this.lastFrameTime = (new Date()).getTime()
+    this.lastFrameTime = currentTime
 
     // Periodically resize, as some resizings arent catched with the resize handler
     if (currentTime - this.lastResize > 100) {
@@ -163,7 +206,7 @@ class Chart {
 
     // Actual draw
     this.fpsCounter(currentTime)
-    this.draw()
+    this.draw(timeCoeff)
   }
 
   fpsCounter (currentTime) {
@@ -191,7 +234,7 @@ class Chart {
     }
   }
 
-  draw () {
+  draw (timeCoeff) {
     // Clear rect to allow redrawing
     this.ctx.clearRect(0, 0, this.width, this.height)
 
@@ -200,12 +243,13 @@ class Chart {
       this.axis = new Axis(this)
     }
 
-    this.setSelection({
-      left: this.selection.left + 0.001,
-      right: this.selection.right + 0.001
-    })
+    // this.setSelection({
+    //   left: this.selection.left + timeCoeff * 0.1,
+    //   right: this.selection.right + timeCoeff * 0.1
+    // })
 
     this.axis.bottomAxis()
+    this.axis.leftAxis()
   }
 }
 
