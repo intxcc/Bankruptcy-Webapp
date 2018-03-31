@@ -1,5 +1,5 @@
 'use strict'
 
-import Chart from './Chart'
+import ChartComponent from './ChartComponent'
 
-export { Chart }
+export { ChartComponent }

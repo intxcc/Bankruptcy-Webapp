@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { observer } from 'mobx-react'
 
-import { Chart } from '../chart'
+import { ChartComponent } from '../chart'
 
 @observer
 class ExchangeChart extends Component {
@@ -28,7 +28,7 @@ class ExchangeChart extends Component {
       <div
         id="exchange_chart_wrapper"
         className={className}>
-        <Chart id="exchange-chart" />
+        <ChartComponent id="exchange-chart" />
       </div>
     )
   }
