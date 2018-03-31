@@ -23,7 +23,7 @@
     height: calc(#{'100vh - ' + $main-header-height-collaped + ' - 2rem'});
   }
 
-  #exchange-chart-canvas {
+  #exchange-chart {
     position: absolute;
     top: 0;
     left: 0;

@@ -28,7 +28,7 @@ class ExchangeChart extends Component {
       <div
         id="exchange_chart_wrapper"
         className={className}>
-        <Chart id="exchange-chart-canvas" />
+        <Chart id="exchange-chart" />
       </div>
     )
   }

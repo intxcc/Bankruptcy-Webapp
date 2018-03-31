@@ -3,18 +3,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { observer } from 'mobx-react'
+import Axis from './axis'
 
-@observer
 class Chart extends Component {
   constructor (props) {
     super(props)
 
+    this.handleMouseDown = this.handleMouseDown.bind(this)
+    this.handleMouseUp = this.handleMouseUp.bind(this)
+    this.handleMouseMove = this.handleMouseMove.bind(this)
+
     this.initialize = this.initialize.bind(this)
+
+    this.setDomain = this.setDomain.bind(this)
+    this.setSelection = this.setSelection.bind(this)
+
+    this.calculateUnitWidth = this.calculateUnitWidth.bind(this)
+
+    this.mapPixelToCoordinate = this.mapPixelToCoordinate.bind(this)
+    this.mapCoordinateToPixel = this.mapCoordinateToPixel.bind(this)
+
     this.handleResize = this.handleResize.bind(this)
     this.resize = this.resize.bind(this)
+
     this.forceDraw = this.forceDraw.bind(this)
     this.handleDraw = this.handleDraw.bind(this)
+
     this.fpsCounter = this.fpsCounter.bind(this)
     this.draw = this.draw.bind(this)
   }
@@ -31,14 +45,44 @@ class Chart extends Component {
     window.removeEventListener('resize', this.handleResize)
   }
 
+  handleMouseDown (e) {
+    this.drag = true
+  }
+
+  handleMouseUp (e) {
+    this.drag = false
+  }
+
+  handleMouseMove (e) {
+    let { x, y } = this.mapPixelToCoordinate(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+    console.log(x + ' : ' + y)
+  }
+
   initialize () {
     // Set parameters
     this.fps = 60
 
     // Initialize variables
     this.config = {
-      FPSperiod: 10000,
-      showFPS: true
+      FPSperiod: 10 * 1000, // 10 seconds
+      showFPS: true,
+
+      margin: {
+        top: 10,
+        right: 10,
+        bottom: 10,
+        left: 10
+      },
+
+      axisMargin: 20,
+      axisColor: '#444'
+    }
+
+    this.selection = {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0
     }
 
     this.fpsLastCheck = 0
@@ -46,11 +90,69 @@ class Chart extends Component {
 
     this.lastFrameTime = 0
 
+    // Initialize chart
+    // this.setDomain()
+    // this.setSelection(0, this.data.length - 1) // TODO uncomment again
+
+    // TEST STUFF //
+
+    this.data = [
+      5, 10, 50, 89
+    ]
+
+    this.setDomain()
+    this.setSelection({
+      top: 100,
+      right: 1.5,
+      bottom: 0,
+      left: 0
+    })
+
+    // END TEST STUFF //
+
     // Initialize size
     this.resize()
 
     // Nudge drawing
     this.handleDraw()
+  }
+
+  setDomain () {
+    this.min = Math.min(this.data)
+    this.max = Math.max(this.data)
+  }  
+
+  setSelection (selection) {
+    this.selection = Object.assign({}, this.selection, selection)
+
+    this.calculateUnitWidth()
+  }
+
+  calculateUnitWidth () {
+    this.unitWidth = this.innerWidth / (this.selection.right - this.selection.left)
+  }
+
+  mapPixelToCoordinate (x, y) {
+    let result = {
+      x: 0,
+      y: 0
+    }
+
+    result.x = ((x - this.config.margin.left) / this.unitWidth) + this.selection.left
+
+    return result
+  }
+
+  mapCoordinateToPixel (x, y) {
+    let result = {
+      x: 0,
+      y: 0
+    }
+
+    result.x = this.config.margin.left + (x - this.selection.left) * this.unitWidth
+    result.y = this.config.margin.top + this.innerHeight + y
+
+    return result
   }
 
   handleResize () {
@@ -69,6 +171,11 @@ class Chart extends Component {
     // Adjust height and width to actual pixel size
     this.height = this.canvasNode.height = this.canvasNode.clientHeight
     this.width = this.canvasNode.width = this.canvasNode.clientWidth
+
+    this.innerHeight = this.height - this.config.margin.top - this.config.margin.bottom
+    this.innerWidth = this.width - this.config.margin.right - this.config.margin.left
+
+    this.calculateUnitWidth()
 
     // Reset timeout, so a new resize can be requested again
     this.resizeTimeout = false
@@ -93,7 +200,7 @@ class Chart extends Component {
     this.lastFrameTime = (new Date()).getTime()
 
     // Periodically resize, as some resizings arent catched with the resize handler
-    if (currentTime - this.lastResize > 200) {
+    if (currentTime - this.lastResize > 100) {
       this.lastResize = currentTime
       this.resize()
     }
@@ -132,14 +239,28 @@ class Chart extends Component {
     // Clear rect to allow redrawing
     this.ctx.clearRect(0, 0, this.width, this.height)
 
-    this.ctx.fillStyle = 'black'
-    this.ctx.font = '30px Arial'
-    this.ctx.fillText('Hello World', 10, 50)
+    // Create new axis element
+    if (!this.axis) {
+      this.axis = new Axis(this)
+    }
+
+    this.setSelection({
+      left: this.selection.left + 0.001,
+      right: this.selection.right + 0.001
+    })
+
+    this.axis.bottomAxis()
   }
 
   render () {
     return (
-      <canvas id={this.props.id} ref={(canvasNode) => { this.canvasNode = canvasNode }} />
+      <canvas
+        id={this.props.id}
+        style={{height: '100%', width: '100%'}}
+        ref={(canvasNode) => { this.canvasNode = canvasNode }}
+        onMouseDown={this.handleMouseDown}
+        onMouseMove={this.handleMouseMove}
+        onMouseUp={this.handleMouseUp} />
     )
   }
 }
