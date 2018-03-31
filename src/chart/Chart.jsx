@@ -54,8 +54,11 @@ class Chart extends Component {
   }
 
   handleResize () {
+    // Use this to throttle resizing
     if (!this.resizeTimeout) {
       this.resizeTimeout = setTimeout(this.resize, 100)
+
+      // Force draw to enhance perceived responsiveness and prevent flickering
       this.resizeTimeout = setTimeout(this.forceDraw, 100)
     }
   }
@@ -63,9 +66,11 @@ class Chart extends Component {
   resize () {
     this.lastResize = (new Date()).getTime()
 
+    // Adjust height and width to actual pixel size
     this.height = this.canvasNode.height = this.canvasNode.clientHeight
     this.width = this.canvasNode.width = this.canvasNode.clientWidth
 
+    // Reset timeout, so a new resize can be requested again
     this.resizeTimeout = false
   }
 
@@ -76,19 +81,19 @@ class Chart extends Component {
 
   handleDraw () {
     // Request next frame
-    // this.drawTimeout = setTimeout(this.handleDraw, 100)
     window.requestAnimationFrame(this.handleDraw)
 
-    // Check if we draw new frame (adjust framerate)
     let currentTime = (new Date()).getTime()
+    // Check if we draw new frame (adjust framerate)
     if (currentTime - this.lastFrameTime < 1000 / this.fps) {
       return
     }
 
+    // Used to determine time last frame was drawn
     this.lastFrameTime = (new Date()).getTime()
 
-    // Periodically resize
-    if (currentTime - this.lastResize > 100) {
+    // Periodically resize, as some resizings arent catched with the resize handler
+    if (currentTime - this.lastResize > 200) {
       this.lastResize = currentTime
       this.resize()
     }
@@ -101,14 +106,18 @@ class Chart extends Component {
   fpsCounter (currentTime) {
     this.fpsFrameCount++
 
+    // If this is the first check initialize and return
     if (this.fpsLastCheck === 0) {
       this.fpsLastCheck = currentTime
       return
     }
 
+    // Calculate the fps from the framecount in the time passed since the last FPS calculation
     if (currentTime - this.fpsLastCheck >= this.config.FPSperiod) {
+      // Normalize framecount and passed time to frames per second
       let fps = this.fpsFrameCount / ((currentTime - this.fpsLastCheck) / 1000)
 
+      // Log FPS if enables
       if (this.config.showFPS) {
         console.log('FPS: ' + Math.round(fps) + 'frames/second')
       }
@@ -120,6 +129,7 @@ class Chart extends Component {
   }
 
   draw () {
+    // Clear rect to allow redrawing
     this.ctx.clearRect(0, 0, this.width, this.height)
 
     this.ctx.fillStyle = 'black'
