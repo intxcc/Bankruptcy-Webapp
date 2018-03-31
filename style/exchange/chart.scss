@@ -4,7 +4,7 @@
   bottom: 1rem;
   left: 1rem;
 
-  transition: $main-side-menu-transition-time left, $main-header-collapse-duration height;
+  // transition: $main-side-menu-transition-time left, $main-header-collapse-duration height;
 
   height: calc(#{'100vh - ' + $main-header-height + ' - 2rem'});
 
@@ -21,5 +21,14 @@
 
   &.collapse-main-header {
     height: calc(#{'100vh - ' + $main-header-height-collaped + ' - 2rem'});
+  }
+
+  #exchange-chart-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
   }
 }
