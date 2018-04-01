@@ -34,3 +34,14 @@ export function text (ctx, text, x, y, options) {
   ctx.textBaseline = 'middle'
   ctx.fillText(text, x, y)
 }
+
+export function point (ctx, x, y, r, s = false) {
+  ctx.beginPath()
+  ctx.arc(x, y, r, 0, Math.PI * 2)
+
+  if (s) {
+    ctx.stroke()
+  } else {
+    ctx.fill()
+  }
+}

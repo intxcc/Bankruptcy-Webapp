@@ -31,21 +31,31 @@ class ChartComponent extends Component {
 
   handleMouseDown (e) {
     this.chart.startDrag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+    this.chart.fps = 60
 
     this.drag = true
   }
 
   handleMouseUp (e) {
     this.chart.stopDrag()
+    this.chart.fps = this.chart.defaultFps
 
     this.drag = false
   }
 
   handleMouseMove (e) {
     this.chart.drag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+    this.chart.handleMouseMove(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
 
     // let { x, y } = this.chart.mapPixelToCoordinate(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
     // console.log(x + ' : ' + y)
+  }
+
+  handleScrollWheel (e) {
+    this.chart.zoom(e.deltaY)
+    e.preventDefault()
+
+    return false
   }
 
   render () {
@@ -54,6 +64,7 @@ class ChartComponent extends Component {
         id={this.props.id}
         style={{height: '100%', width: '100%'}}
         ref={(canvasNode) => { this.canvasNode = canvasNode }}
+        onWheel={this.handleScrollWheel}
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove}
         onMouseUp={this.handleMouseUp} />

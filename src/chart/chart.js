@@ -3,6 +3,8 @@
 import autoBind from 'auto-bind'
 
 import Axis from './axis'
+import Plot from './plot'
+import Selection from './selection'
 
 class Chart {
   constructor (props) {
@@ -16,7 +18,8 @@ class Chart {
 
   intialize () {
     // Set parameters
-    this.fps = 60
+    this.defaultFps = 10
+    this.fps = this.defaultFps
 
     // Initialize variables
     this.config = {
@@ -30,8 +33,13 @@ class Chart {
         left: 10
       },
 
+      fixedSelection: {
+        // bottom: 0
+      },
+
       axisMargin: 20,
-      axisColor: '#444'
+      axisColor: '#555',
+      plotColor: '#222'
     }
 
     this.selection = {
@@ -52,14 +60,19 @@ class Chart {
 
     // TEST STUFF //
 
-    this.data = [
-      5, 10, 35, 17, 19
-    ]
+    // this.data = [
+    //   5, 10, 35, 17, 19
+    // ]
+
+    this.data = [0]
+    for (let i = 1; i < 500; i++) {
+      this.data.push(this.data[i - 1] + (Math.random() * 5) - 2.5)
+    }
 
     this.setDomain()
     this.setSelection({
-      top: 50,
-      right: 5,
+      top: 30,
+      right: 30,
       bottom: 0,
       left: 0
     })
@@ -79,7 +92,7 @@ class Chart {
   }
 
   setSelection (selection) {
-    this.selection = Object.assign({}, this.selection, selection)
+    this.selection = Object.assign({}, this.selection, selection, this.config.fixedSelection)
 
     this.calculateUnitDimensions()
   }
@@ -115,6 +128,27 @@ class Chart {
       right: this.dragSelection.right + deltaX,
       bottom: this.dragSelection.bottom - deltaY,
       left: this.dragSelection.left + deltaX
+    })
+  }
+
+  handleMouseMove (x, y) {
+    if (!this.sel) {
+      this.sel = new Selection(this)
+    }
+
+    let point = this.mapPixelToCoordinate(x, y)
+    this.sel.selectX(point.x)
+  }
+
+  zoom (delta) {
+    let deltaCoeff = (this.selection.top - this.selection.bottom) + (this.selection.right - this.selection.left)
+    delta = delta * 0.01 * Math.pow(deltaCoeff * 0.15, 1.05)
+
+    this.setSelection({
+      top: this.selection.top + delta,
+      right: this.selection.right + delta,
+      bottom: this.selection.bottom - delta,
+      left: this.selection.left - delta
     })
   }
 
@@ -250,6 +284,18 @@ class Chart {
 
     this.axis.bottomAxis()
     this.axis.leftAxis()
+
+    if (!this.plot) {
+      this.plot = new Plot(this)
+    }
+
+    this.plot.path(this.data)
+
+    if (!this.sel) {
+      this.sel = new Selection(this)
+    }
+
+    this.sel.drawSelection()
   }
 }
 

@@ -27,6 +27,8 @@ class Axis {
 
     // Draw normal line for every unit
     ctx.lineWidth = 1
+    ctx.strokeStyle = this.chart.config.axisColor
+    ctx.fillStyle = this.chart.config.axisColor
     for (let i = left; i <= right; i++) {
       this.drawXStep(i, 6)
 
@@ -36,10 +38,10 @@ class Axis {
     }
 
     // Draw small line for every tenth of unit
-    ctx.lineWidth = 0.5
-    for (let i = left * 10; i <= right * 10; i++) {
-      this.drawXStep(i / 10, i % 5 === 0 ? 5 : 3)
-    }
+    // ctx.lineWidth = 0.5
+    // for (let i = left * 10; i <= right * 10; i++) {
+    //   this.drawXStep(i / 10, i % 5 === 0 ? 5 : 3)
+    // }
   }
 
   drawYStep (y, length) {
@@ -56,29 +58,23 @@ class Axis {
     let top = Math.ceil(this.chart.selection.top)
     let bottom = Math.floor(this.chart.selection.bottom)
 
-    let step = 1
-    let diff = top - bottom
-    if (diff > 20) {
-      step = 10
-    }
-
     // Draw normal line for every unit
     ctx.lineWidth = 1
+    ctx.strokeStyle = this.chart.config.axisColor
+    ctx.fillStyle = this.chart.config.axisColor
     for (let i = bottom; i <= top; i++) {
-      if (i % step === 0) {
-        this.drawYStep(i, 5)
+      this.drawYStep(i, 5)
 
-        let textPos = this.chart.mapCoordinateToPixel(0, i)
-        let xPos = this.chart.config.margin.left + this.chart.config.axisMargin
-        text(ctx, i, xPos - 15, textPos.y)
-      }
-
-      this.drawYStep(i, 3)
-
-      if (i % (step / 2) === 0) {
-        this.drawYStep(i, 5)
-      }
+      let textPos = this.chart.mapCoordinateToPixel(0, i)
+      let xPos = this.chart.config.margin.left + this.chart.config.axisMargin
+      text(ctx, i, xPos - 15, textPos.y)
     }
+
+    // Draw small line for every tenth of unit
+    // ctx.lineWidth = 0.5
+    // for (let i = bottom * 10; i <= top * 10; i++) {
+    //   this.drawYStep(i / 10, i % 5 === 0 ? 5 : 3)
+    // }
   }
 }
 
