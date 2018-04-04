@@ -21,6 +21,14 @@ export function line (ctx, fromX, fromY, toX, toY) {
   ctx.stroke()
 }
 
+export function lineNoSingle (ctx, fromX, fromY, toX, toY) {
+  fromX += 0.5
+  fromY += 0.5
+
+  ctx.moveTo(fromX, fromY)
+  ctx.lineTo(toX, toY)
+}
+
 export function text (ctx, text, x, y, options) {
   const defaultOptions = {
     fontFamily: 'Roboto ',

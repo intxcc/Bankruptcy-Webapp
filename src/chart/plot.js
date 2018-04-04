@@ -2,8 +2,6 @@
 
 import autobind from 'autobind-decorator'
 
-import { line } from './AtomicDraws'
-
 class Plot {
   constructor (chart) {
     this.chart = chart
@@ -15,14 +13,16 @@ class Plot {
 
     ctx.lineWidth = 1
     ctx.strokeStyle = this.chart.config.plotColor
-    for (let i in data) {
-      i = parseInt(i)
-      if (i + 1 < data.length) {
-        let from = this.chart.matrix.mapCoordinateToPixel(i / 100, data[i])
-        let to = this.chart.matrix.mapCoordinateToPixel((i + 1) / 100, data[i + 1])
-        line(ctx, from.x, from.y, to.x, to.y)
-      }
+
+    ctx.beginPath()
+
+    let pos = this.chart.matrix.mapCoordinateToPixel(0, data[0])
+    ctx.moveTo(pos.x, pos.y)
+    for (let i = 0; i < data.length - 1; i++) {
+      pos = this.chart.matrix.mapCoordinateToPixel(i / 100, data[i])
+      ctx.lineTo(pos.x, pos.y)
     }
+    ctx.stroke()
   }
 }
 

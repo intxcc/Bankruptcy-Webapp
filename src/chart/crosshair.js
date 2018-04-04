@@ -2,7 +2,7 @@
 
 import autobind from 'autobind-decorator'
 
-import { line, point, text } from './AtomicDraws'
+import { line, text } from './AtomicDraws'
 
 /*
 * Crosshair object draws the crosshair over the current mouse position.
@@ -50,7 +50,7 @@ class Crosshair {
 
     ctx.strokeStyle = 'rgba(15, 15, 15, 0.5)'
     ctx.lineWidth = 1
-    point(ctx, this.crosshairPos.x, this.crosshairPos.y, 3, true)
+    // point(ctx, this.crosshairPos.x, this.crosshairPos.y, 3, true)
 
     let leftX = this.chart.config.margin.left + this.chart.config.axisMargin
     let leftY = this.crosshairPos.y

@@ -2,7 +2,7 @@
 
 import autobind from 'autobind-decorator'
 
-import { line, text } from './AtomicDraws'
+import { lineNoSingle, text } from './AtomicDraws'
 
 class Axis {
   constructor (chart) {
@@ -15,7 +15,8 @@ class Axis {
 
     let pos = this.chart.matrix.mapCoordinateToPixel(x, 0)
     let yPos = this.chart.config.margin.top + this.chart.innerHeight - this.chart.config.axisMargin
-    line(ctx, pos.x, yPos, pos.x, yPos + length)
+
+    lineNoSingle(ctx, pos.x, yPos, pos.x, yPos + length)
   }
 
   @autobind
@@ -26,6 +27,9 @@ class Axis {
 
     let left = Math.floor(selection.left)
     let right = Math.ceil(selection.right)
+
+    // Begin path
+    ctx.beginPath()
 
     // Draw normal line for every unit
     ctx.lineWidth = 1
@@ -44,6 +48,9 @@ class Axis {
     for (let i = left * 10; i <= right * 10; i++) {
       this.drawXStep(i / 10, i % 5 === 0 ? 5 : 3)
     }
+
+    // Apply path to canvas
+    ctx.stroke()
   }
 
   @autobind
@@ -52,7 +59,7 @@ class Axis {
 
     let pos = this.chart.matrix.mapCoordinateToPixel(0, y)
     let xPos = this.chart.config.margin.left + this.chart.config.axisMargin
-    line(ctx, xPos, pos.y, xPos - length, pos.y)
+    lineNoSingle(ctx, xPos, pos.y, xPos - length, pos.y)
   }
 
   @autobind
@@ -63,6 +70,9 @@ class Axis {
 
     let top = Math.ceil(selection.top)
     let bottom = Math.floor(selection.bottom)
+
+    // Begin path
+    ctx.beginPath()
 
     // Draw normal line for every unit
     ctx.lineWidth = 1
@@ -81,6 +91,9 @@ class Axis {
     for (let i = bottom * 10; i <= top * 10; i++) {
       this.drawYStep(i / 10, i % 5 === 0 ? 5 : 3)
     }
+
+    // Apply path to canvas
+    ctx.stroke()
   }
 }
 

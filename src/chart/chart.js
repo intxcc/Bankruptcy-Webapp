@@ -5,6 +5,7 @@ import autobind from 'autobind-decorator'
 import Config from './Config'
 
 import Matrix from './Matrix'
+import Grid from './Grid'
 import Axis from './Axis'
 import Selection from './Selection'
 import Plot from './Plot'
@@ -27,6 +28,7 @@ class Chart {
 
     // Initialize objects
     this.matrix = new Matrix(this)
+    this.grid = new Grid(this)
     this.axis = new Axis(this)
     this.selection = new Selection(this)
     this.plot = new Plot(this)
