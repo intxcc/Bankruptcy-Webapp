@@ -11,6 +11,9 @@ class Draw {
   draw (timeCoeff) {
     let chart = this.chart
 
+    // Recalculate some important variables for drawing
+    chart.matrix.calculateMappingCoeffs()
+
     // Clear rect to allow redrawing
     chart.ctx.clearRect(0, 0, chart.width, chart.height)
 

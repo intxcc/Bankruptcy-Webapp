@@ -37,7 +37,7 @@ class Matrix {
 
     let selection = this.chart.selection.getSelection()
 
-    this.marginX = margin.left - config.axisMargin
+    this.marginX = margin.left + config.axisMargin
     this.selectionLeft = selection.left
 
     this.marginY = config.margin.top + this.chart.innerHeight - config.axisMargin
@@ -49,23 +49,10 @@ class Matrix {
     y: ((this.marginY - y) / this.unitHeight) + this.selectionBottom
   })
 
-  @autobind
-  mapCoordinateToPixel (x, y) {
-    let result = {
-      x: 0,
-      y: 0
-    }
-
-    let config = this.chart.config
-    let margin = config.margin
-
-    let selection = this.chart.selection.getSelection()
-
-    result.x = margin.left + config.axisMargin + (x - selection.left) * this.unitWidth
-    result.y = (margin.top + this.chart.innerHeight - config.axisMargin) - (y - selection.bottom) * this.unitHeight
-
-    return result
-  }
+  mapCoordinateToPixel = (x, y) => ({
+    x: this.marginX + (x - this.selectionLeft) * this.unitWidth,
+    y: this.marginY - (y - this.selectionBottom) * this.unitHeight
+  })
 }
 
 export default Matrix

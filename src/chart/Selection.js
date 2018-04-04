@@ -42,7 +42,9 @@ class Selection {
       this.selection.left = boundaries.left
     }
 
+    // Recalculate some variables which are dependend on the selection
     this.chart.matrix.calculateUnitDimensions()
+    this.chart.matrix.calculateMappingCoeffs()
   }
 
   @autobind
