@@ -38,10 +38,10 @@ class Axis {
     }
 
     // Draw small line for every tenth of unit
-    // ctx.lineWidth = 0.5
-    // for (let i = left * 10; i <= right * 10; i++) {
-    //   this.drawXStep(i / 10, i % 5 === 0 ? 5 : 3)
-    // }
+    ctx.lineWidth = 0.5
+    for (let i = left * 10; i <= right * 10; i++) {
+      this.drawXStep(i / 10, i % 5 === 0 ? 5 : 3)
+    }
   }
 
   drawYStep (y, length) {
@@ -71,10 +71,10 @@ class Axis {
     }
 
     // Draw small line for every tenth of unit
-    // ctx.lineWidth = 0.5
-    // for (let i = bottom * 10; i <= top * 10; i++) {
-    //   this.drawYStep(i / 10, i % 5 === 0 ? 5 : 3)
-    // }
+    ctx.lineWidth = 0.5
+    for (let i = bottom * 10; i <= top * 10; i++) {
+      this.drawYStep(i / 10, i % 5 === 0 ? 5 : 3)
+    }
   }
 }
 

@@ -6,7 +6,7 @@ import Axis from './axis'
 import Plot from './plot'
 import Crosshair from './crosshair'
 
-import ChartWorker from './chart.worker'
+import ChartWorker from './worker/Chart.worker'
 
 class Chart {
   constructor (props) {
@@ -20,6 +20,12 @@ class Chart {
 
   intialize () {
     this.worker = new ChartWorker()
+
+    this.worker.addEventListener('message', (e) => {
+      console.log(e.data)
+    })
+
+    this.worker.postMessage([5, 10])
 
     // Set parameters
     this.defaultFps = 60
@@ -93,10 +99,6 @@ class Chart {
 
     // Nudge drawing
     this.handleDraw()
-  }
-
-  marvinsPenisSizeIsTiny () {
-    return true
   }
 
   setDomain () {
