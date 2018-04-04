@@ -46,13 +46,11 @@ class ChartComponent extends Component {
   handleMouseMove (e) {
     this.chart.drag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
     this.chart.handleMouseMove(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-
-    // let { x, y } = this.chart.mapPixelToCoordinate(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-    // console.log(x + ' : ' + y)
   }
 
   handleScrollWheel (e) {
-    this.chart.zoom(e.deltaY)
+    let delta = e.deltaY * (e.deltaMode === 1 ? 1 : 0.03)
+    this.chart.zoom(delta, e.nativeEvent.offsetX, e.nativeEvent.offsetY)
     e.preventDefault()
 
     return false

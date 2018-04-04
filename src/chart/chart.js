@@ -6,6 +6,8 @@ import Axis from './axis'
 import Plot from './plot'
 import Selection from './selection'
 
+import ChartWorker from './chart.worker'
+
 class Chart {
   constructor (props) {
     this.ctx = props.ctx
@@ -17,8 +19,10 @@ class Chart {
   }
 
   intialize () {
+    this.worker = new ChartWorker()
+
     // Set parameters
-    this.defaultFps = 10
+    this.defaultFps = 60
     this.fps = this.defaultFps
 
     // Initialize variables
@@ -35,6 +39,10 @@ class Chart {
 
       fixedSelection: {
         // bottom: 0
+      },
+
+      selectionBoundaries: {
+        bottom: 0
       },
 
       axisMargin: 20,
@@ -64,9 +72,9 @@ class Chart {
     //   5, 10, 35, 17, 19
     // ]
 
-    this.data = [0]
-    for (let i = 1; i < 500; i++) {
-      this.data.push(this.data[i - 1] + (Math.random() * 5) - 2.5)
+    this.data = [1]
+    for (let i = 1; i < 1000; i++) {
+      this.data.push(this.data[i - 1] + (Math.random() * 0.5) - 0.25)
     }
 
     this.setDomain()
@@ -86,13 +94,33 @@ class Chart {
     this.handleDraw()
   }
 
+  marvinsPenisSizeIsTiny () {
+    return true
+  }
+
   setDomain () {
     this.min = Math.min(this.data)
     this.max = Math.max(this.data)
   }
 
   setSelection (selection) {
-    this.selection = Object.assign({}, this.selection, selection, this.config.fixedSelection)
+    this.selection = Object.assign({}, this.selection, selection, this.config.fixedSelection)    
+
+    if (this.selection.top > this.config.selectionBoundaries.top) {
+      this.selection.top = this.config.selectionBoundaries.top
+    }
+
+    if (this.selection.right > this.config.selectionBoundaries.right) {
+      this.selection.right = this.config.selectionBoundaries.right
+    }
+
+    if (this.selection.bottom < this.config.selectionBoundaries.bottom) {
+      this.selection.bottom = this.config.selectionBoundaries.bottom
+    }
+
+    if (this.selection.left > this.config.selectionBoundaries.left) {
+      this.selection.left = this.config.selectionBoundaries.left
+    }
 
     this.calculateUnitDimensions()
   }
@@ -117,21 +145,48 @@ class Chart {
       return
     }
 
+    // If drag is active calculate the dragged distance since dragStart
     let dragXPixel = this.dragStart.x - x
     let dragYPixel = this.dragStart.y - y
 
+    // Convert distance to coordinated as these are the unit of the selection
     let deltaX = dragXPixel / this.unitWidth
     let deltaY = dragYPixel / this.unitHeight
 
+    // Convert the coorinate delta between the new calculated selection and the current active
+    deltaX = (this.dragSelection.left + deltaX) - this.selection.left
+    deltaY = this.selection.bottom - (this.dragSelection.bottom - deltaY)
+
+    // Apply delta while keeping selection ratio
+    this.moveSelectionKeepRatio(deltaX, deltaY)
+  }
+
+  moveSelectionKeepRatio (x, y) {
+    // Save distances within selection
+    let deltaY = this.selection.top - this.selection.bottom
+    let deltaX = this.selection.right - this.selection.left
+
+    // Apply delta given in x and y
     this.setSelection({
-      top: this.dragSelection.top - deltaY,
-      right: this.dragSelection.right + deltaX,
-      bottom: this.dragSelection.bottom - deltaY,
-      left: this.dragSelection.left + deltaX
+      top: this.selection.top - y,
+      right: this.selection.right + x,
+      bottom: this.selection.bottom - y,
+      left: this.selection.left + x
+    })
+
+    // Reapply old distances to selection
+    this.setSelection({
+      top: this.selection.bottom + deltaY,
+      right: this.selection.left + deltaX
     })
   }
 
   handleMouseMove (x, y) {
+    this.mousePos = {
+      x: x,
+      y: y
+    }
+
     if (!this.sel) {
       this.sel = new Selection(this)
     }
@@ -140,16 +195,53 @@ class Chart {
     this.sel.selectX(point.x)
   }
 
-  zoom (delta) {
-    let deltaCoeff = (this.selection.top - this.selection.bottom) + (this.selection.right - this.selection.left)
-    delta = delta * 0.01 * Math.pow(deltaCoeff * 0.15, 1.05)
+  posDelta (pos1, pos2) {
+    return {
+      x: pos2.x - pos1.x,
+      y: pos2.y - pos1.y
+    }
+  }
+
+  /**
+  * Zooms into or out of the graph
+  * @param {float} delta - The delta gives the amount of zoom that will be applied. Direction is given by sign. Usually this will be -3 or 3.
+  * @param {integer} x - X position of mouse within canvas.
+  * @param {integer} y - Y position of mouse within canvas.
+  */
+  zoom (delta, x, y) {
+    // The deltaCoeff is used to calculate the amount of zoom
+    let deltaCoeffX = this.selection.right - this.selection.left
+    let deltaCoeffY = this.selection.top - this.selection.bottom
+
+    // Calculate delta with exponential function, so it gets slower the closer the zoom is to the path
+    let deltaX = delta * 0.03 * Math.pow(deltaCoeffX * 0.15, 1.1)
+    let deltaY = delta * 0.03 * Math.pow(deltaCoeffY * 0.15, 1.1)
+
+    // Used to calculate the right celection position later, to move it again under the mouse cursor
+    let posBefore = this.mapPixelToCoordinate(x, y)
 
     this.setSelection({
-      top: this.selection.top + delta,
-      right: this.selection.right + delta,
-      bottom: this.selection.bottom - delta,
-      left: this.selection.left - delta
+      top: this.selection.top + deltaY,
+      right: this.selection.right + deltaX,
+      bottom: this.selection.bottom - deltaY,
+      left: this.selection.left - deltaX
     })
+
+    // Calculate where the position the cursor was hovering before zooming is now on the canvas
+    let posAfter = this.mapCoordinateToPixel(posBefore.x, posBefore.y)
+
+    // Calculate pixel difference between the old coordinate on the canvas and mouse position
+    let posDelta = this.posDelta({x: x, y: y}, posAfter)
+
+    // Convert pixel difference to coordinate difference and adjust selection
+    let pixelDelta = {
+      x: posDelta.x / this.unitWidth,
+      y: posDelta.y / this.unitHeight
+    }
+    this.moveSelectionKeepRatio(pixelDelta.x, pixelDelta.y)
+
+    // Reselect because otherwise the selection won't adjust to the new zoom without moving the mouse
+    this.handleMouseMove(this.mousePos.x, this.mousePos.y)
   }
 
   calculateUnitDimensions () {
@@ -272,29 +364,24 @@ class Chart {
     // Clear rect to allow redrawing
     this.ctx.clearRect(0, 0, this.width, this.height)
 
-    // Create new axis element
+    // Create new axis object if neccessary and draw
     if (!this.axis) {
       this.axis = new Axis(this)
     }
-
-    // this.setSelection({
-    //   left: this.selection.left + timeCoeff * 0.1,
-    //   right: this.selection.right + timeCoeff * 0.1
-    // })
-
     this.axis.bottomAxis()
     this.axis.leftAxis()
 
+    // Create new plot object if neccessary and draw
     if (!this.plot) {
       this.plot = new Plot(this)
     }
-
     this.plot.path(this.data)
 
+    // Sel object draws the crosshair over the current mouse position.
+    // Create new sel object if neccessary and draw
     if (!this.sel) {
       this.sel = new Selection(this)
     }
-
     this.sel.drawSelection()
   }
 }

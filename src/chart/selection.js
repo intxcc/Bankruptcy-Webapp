@@ -4,6 +4,10 @@ import autoBind from 'auto-bind'
 
 import { line, point } from './atomicDraws'
 
+/*
+* Selection object draws the crosshair over the current mouse position.
+* @constructor
+*/
 class Selection {
   constructor (chart) {
     this.chart = chart
@@ -13,9 +17,9 @@ class Selection {
 
   selectX (x) {
     // TODO this is just test
-    let y = this.chart.data[Math.round(Math.round(x * 10))]
+    let y = this.chart.data[Math.round(Math.round(x * 100))]
 
-    this.selectionPos = this.chart.mapCoordinateToPixel(Math.round(x * 10) / 10, y)
+    this.selectionPos = this.chart.mapCoordinateToPixel(Math.round(x * 100) / 100, y)
   }
 
   drawSelection () {

@@ -19,8 +19,8 @@ class Plot {
     for (let i in data) {
       i = parseInt(i)
       if (i + 1 < data.length) {
-        let from = this.chart.mapCoordinateToPixel(i / 10, data[i])
-        let to = this.chart.mapCoordinateToPixel((i + 1) / 10, data[i + 1])
+        let from = this.chart.mapCoordinateToPixel(i / 100, data[i])
+        let to = this.chart.mapCoordinateToPixel((i + 1) / 100, data[i + 1])
         line(ctx, from.x, from.y, to.x, to.y)
       }
     }

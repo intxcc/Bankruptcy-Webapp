@@ -6,8 +6,8 @@ module.exports = {
     'react-hot-loader/patch',
     './src/index.jsx'
   ],
-  // devtool: 'source-map',
-  devtool: 'eval',
+  devtool: 'source-map',
+  // devtool: 'eval',
   module: {
     rules: [
       {
@@ -25,6 +25,9 @@ module.exports = {
             loader: 'sass-loader'
           }
         ]
+      }, {
+        test: /\.worker\.js$/,
+        use: { loader: 'worker-loader' }
       }
     ]
   },
@@ -34,7 +37,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/dist'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    globalObject: 'this' // temporary workaround for HMR webworker 'window not found'-bug
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
