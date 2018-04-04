@@ -18,14 +18,14 @@ class Draw {
     chart.ctx.clearRect(0, 0, chart.width, chart.height)
 
     // Create new axis object if neccessary and draw
-    chart.axis.bottomAxis()
-    chart.axis.leftAxis()
+    // chart.axis.bottomAxis()
+    // chart.axis.leftAxis()
 
     // Create new plot object if neccessary and draw
     chart.plot.path(chart.data)
 
     // Create new Crosshair object if neccessary and draw
-    chart.crosshair.drawSelection()
+    // chart.crosshair.drawCrosshair()
   }
 }
 

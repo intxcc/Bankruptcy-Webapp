@@ -48,7 +48,6 @@ class ChartComponent extends Component {
   @autobind
   handleScrollWheel (e) {
     let delta = e.deltaY * (e.deltaMode === 1 ? 1 : 0.03)
-
     this.chart.selection.zoom(delta, e.nativeEvent.offsetX, e.nativeEvent.offsetY)
 
     e.preventDefault()

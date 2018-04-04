@@ -27,7 +27,7 @@ let Config = {
     bottom: 0
   },
 
-  clipSelectionToPath: true,
+  clipCrosshairToPath: true,
 
   axisColor: '#555',
   plotColor: '#222'

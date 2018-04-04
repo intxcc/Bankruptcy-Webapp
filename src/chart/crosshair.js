@@ -18,9 +18,9 @@ class Crosshair {
     let coordinatePos = this.chart.matrix.mapPixelToCoordinate(x, y)
 
     // Set the coordinate we want to display the value of
-    this.seletedCoordinate = coordinatePos
+    this.crosshairCoordinate = coordinatePos
 
-    if (this.chart.config.clipSelectionToPath) {
+    if (this.chart.config.clipCrosshairToPath) {
       let x = coordinatePos.x
 
       // Clip to every hundreth datapoint TODO autocalculate this based on selection
@@ -28,15 +28,15 @@ class Crosshair {
       x = Math.round(x * 100) / 100
 
       // After clipping to the path we reset the coordinate we want to show the data of
-      this.seletedCoordinate = {x: x, y: y}
+      this.crosshairCoordinate = {x: x, y: y}
     }
 
-    this.selectionPos = this.chart.matrix.mapCoordinateToPixel(this.seletedCoordinate.x, this.seletedCoordinate.y)
+    this.crosshairPos = this.chart.matrix.mapCoordinateToPixel(this.crosshairCoordinate.x, this.crosshairCoordinate.y)
   }
 
   @autobind
-  drawSelection () {
-    if (!this.selectionPos) {
+  drawCrosshair () {
+    if (!this.crosshairPos) {
       return
     }
 
@@ -45,29 +45,29 @@ class Crosshair {
     ctx.strokeStyle = 'rgba(0, 0, 0, 0.25)'
     ctx.lineWidth = 0.5
 
-    line(ctx, this.chart.config.margin.left + this.chart.config.axisMargin - 1, this.selectionPos.y, this.chart.innerWidth + 2, this.selectionPos.y)
-    line(ctx, this.selectionPos.x, this.chart.config.margin.top + this.chart.config.axisMargin - 1, this.selectionPos.x, this.chart.config.margin.top + this.chart.innerHeight - this.chart.config.axisMargin + 2)
+    line(ctx, this.chart.config.margin.left + this.chart.config.axisMargin - 1, this.crosshairPos.y, this.chart.innerWidth + 2, this.crosshairPos.y)
+    line(ctx, this.crosshairPos.x, this.chart.config.margin.top + this.chart.config.axisMargin - 1, this.crosshairPos.x, this.chart.config.margin.top + this.chart.innerHeight - this.chart.config.axisMargin + 2)
 
     ctx.strokeStyle = 'rgba(15, 15, 15, 0.5)'
     ctx.lineWidth = 1
-    point(ctx, this.selectionPos.x, this.selectionPos.y, 3, true)
+    point(ctx, this.crosshairPos.x, this.crosshairPos.y, 3, true)
 
     let leftX = this.chart.config.margin.left + this.chart.config.axisMargin
-    let leftY = this.selectionPos.y
+    let leftY = this.crosshairPos.y
 
     ctx.clearRect(leftX - 30, leftY - 7, 20, 14)
 
-    text(ctx, Math.round(this.seletedCoordinate.y * 100) / 100, leftX - 12, leftY, {
+    text(ctx, Math.round(this.crosshairCoordinate.y * 100) / 100, leftX - 12, leftY, {
       align: 'right',
       valign: 'middle'
     })
 
-    let bottomX = this.selectionPos.x
+    let bottomX = this.crosshairPos.x
     let bottomY = this.chart.innerHeight + this.chart.config.margin.top - this.chart.config.axisMargin
 
     ctx.clearRect(bottomX - 15, bottomY + 7, 30, 14)
 
-    text(ctx, Math.round(this.seletedCoordinate.x * 100) / 100, bottomX, bottomY + 10, {
+    text(ctx, Math.round(this.crosshairCoordinate.x * 100) / 100, bottomX, bottomY + 10, {
       align: 'center',
       valign: 'top'
     })
