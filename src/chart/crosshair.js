@@ -5,10 +5,10 @@ import autoBind from 'auto-bind'
 import { line, point } from './atomicDraws'
 
 /*
-* Selection object draws the crosshair over the current mouse position.
+* Crosshair object draws the crosshair over the current mouse position.
 * @constructor
 */
-class Selection {
+class Crosshair {
   constructor (chart) {
     this.chart = chart
 
@@ -43,4 +43,4 @@ class Selection {
   }
 }
 
-export default Selection
+export default Crosshair

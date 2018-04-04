@@ -4,7 +4,7 @@ import autoBind from 'auto-bind'
 
 import Axis from './axis'
 import Plot from './plot'
-import Selection from './selection'
+import Crosshair from './crosshair'
 
 import ChartWorker from './chart.worker'
 
@@ -104,7 +104,7 @@ class Chart {
   }
 
   setSelection (selection) {
-    this.selection = Object.assign({}, this.selection, selection, this.config.fixedSelection)    
+    this.selection = Object.assign({}, this.selection, selection, this.config.fixedSelection)
 
     if (this.selection.top > this.config.selectionBoundaries.top) {
       this.selection.top = this.config.selectionBoundaries.top
@@ -187,12 +187,12 @@ class Chart {
       y: y
     }
 
-    if (!this.sel) {
-      this.sel = new Selection(this)
+    if (!this.crosshair) {
+      this.crosshair = new Crosshair(this)
     }
 
     let point = this.mapPixelToCoordinate(x, y)
-    this.sel.selectX(point.x)
+    this.crosshair.selectX(point.x)
   }
 
   posDelta (pos1, pos2) {
@@ -204,9 +204,9 @@ class Chart {
 
   /**
   * Zooms into or out of the graph
-  * @param {float} delta - The delta gives the amount of zoom that will be applied. Direction is given by sign. Usually this will be -3 or 3.
-  * @param {integer} x - X position of mouse within canvas.
-  * @param {integer} y - Y position of mouse within canvas.
+  * @param {float} delta The delta gives the amount of zoom that will be applied. Direction is given by sign. Usually this will be -3 or 3.
+  * @param {integer} x X position of mouse within canvas.
+  * @param {integer} y Y position of mouse within canvas.
   */
   zoom (delta, x, y) {
     // The deltaCoeff is used to calculate the amount of zoom
@@ -377,12 +377,11 @@ class Chart {
     }
     this.plot.path(this.data)
 
-    // Sel object draws the crosshair over the current mouse position.
-    // Create new sel object if neccessary and draw
-    if (!this.sel) {
-      this.sel = new Selection(this)
+    // Create new Crosshair object if neccessary and draw
+    if (!this.crosshair) {
+      this.crosshair = new Crosshair(this)
     }
-    this.sel.drawSelection()
+    this.crosshair.drawSelection()
   }
 }
 
