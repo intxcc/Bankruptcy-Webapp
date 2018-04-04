@@ -1,26 +1,26 @@
 #exchange_chart_wrapper {
   position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  left: 1rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
   // transition: $main-side-menu-transition-time left, $main-header-collapse-duration height;
 
-  height: calc(#{'100vh - ' + $main-header-height + ' - 2rem'});
+  height: calc(#{'100vh - ' + $main-header-height});
 
   // border: 5px solid #f00;
   // box-sizing: border-box;
 
   &.open-main-side-menu {
-    left: $main-side-menu-size + 1rem;
+    left: $main-side-menu-size;
   }
 
   &.pin-main-side-menu {
-    left: $main-side-menu-size-expanded + 1rem;
+    left: $main-side-menu-size-expanded;
   }
 
   &.collapse-main-header {
-    height: calc(#{'100vh - ' + $main-header-height-collaped + ' - 2rem'});
+    height: calc(#{'100vh - ' + $main-header-height-collaped});
   }
 
   #exchange-chart {

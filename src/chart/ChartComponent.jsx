@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import autoBind from 'auto-bind'
 
-import Chart from './chart'
+import Chart from './Chart'
 
 class ChartComponent extends Component {
   constructor (props) {
@@ -31,14 +31,12 @@ class ChartComponent extends Component {
 
   handleMouseDown (e) {
     this.chart.startDrag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-    this.chart.fps = 60
 
     this.drag = true
   }
 
   handleMouseUp (e) {
     this.chart.stopDrag()
-    this.chart.fps = this.chart.defaultFps
 
     this.drag = false
   }
@@ -51,8 +49,8 @@ class ChartComponent extends Component {
   handleScrollWheel (e) {
     let delta = e.deltaY * (e.deltaMode === 1 ? 1 : 0.03)
     this.chart.zoom(delta, e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-    e.preventDefault()
 
+    e.preventDefault()
     return false
   }
 

@@ -2,11 +2,11 @@
 
 import autoBind from 'auto-bind'
 
-import Axis from './axis'
-import Plot from './plot'
-import Crosshair from './crosshair'
+import Config from './Config'
 
-import ChartWorker from './worker/Chart.worker'
+import Axis from './Axis'
+import Plot from './Plot'
+import Crosshair from './Crosshair'
 
 class Chart {
   constructor (props) {
@@ -19,51 +19,15 @@ class Chart {
   }
 
   intialize () {
-    this.worker = new ChartWorker()
-
-    this.worker.addEventListener('message', (e) => {
-      console.log(e.data)
-    })
-
-    this.worker.postMessage([5, 10])
+    // Initialize config
+    this.config = Config
 
     // Set parameters
-    this.defaultFps = 60
-    this.fps = this.defaultFps
+    this.fps = this.config.defaultFPS
 
-    // Initialize variables
-    this.config = {
-      FPSperiod: 10 * 1000, // 10 seconds
-      showFPS: true,
+    this.selection = this.config.defaultSelection
 
-      margin: {
-        top: 10,
-        right: 10,
-        bottom: 10,
-        left: 10
-      },
-
-      fixedSelection: {
-        // bottom: 0
-      },
-
-      selectionBoundaries: {
-        left: 0,
-        bottom: 0
-      },
-
-      axisMargin: 20,
-      axisColor: '#555',
-      plotColor: '#222'
-    }
-
-    this.selection = {
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0
-    }
-
+    // Initialize Variables
     this.fpsLastCheck = 0
     this.fpsFrameCount = 0
 
@@ -75,22 +39,12 @@ class Chart {
 
     // TEST STUFF //
 
-    // this.data = [
-    //   5, 10, 35, 17, 19
-    // ]
-
-    this.data = [1]
-    for (let i = 1; i < 1000; i++) {
+    this.data = [5]
+    for (let i = 1; i < 2000; i++) {
       this.data.push(this.data[i - 1] + (Math.random() * 0.5) - 0.25)
     }
 
     this.setDomain()
-    this.setSelection({
-      top: 30,
-      right: 30,
-      bottom: 0,
-      left: 0
-    })
 
     // END TEST STUFF //
 
@@ -194,8 +148,7 @@ class Chart {
       this.crosshair = new Crosshair(this)
     }
 
-    let point = this.mapPixelToCoordinate(x, y)
-    this.crosshair.selectX(point.x)
+    this.crosshair.setPosition(x, y)
   }
 
   posDelta (pos1, pos2) {
@@ -383,6 +336,9 @@ class Chart {
     // Create new Crosshair object if neccessary and draw
     if (!this.crosshair) {
       this.crosshair = new Crosshair(this)
+      this.crosshair.setOptions({
+        clipSelectionToPath: this.config.clipSelectionToPath
+      })
     }
     this.crosshair.drawSelection()
   }

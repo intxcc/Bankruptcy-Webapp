@@ -24,14 +24,16 @@ export function line (ctx, fromX, fromY, toX, toY) {
 export function text (ctx, text, x, y, options) {
   const defaultOptions = {
     fontFamily: 'Roboto ',
-    size: '10px'
+    size: '10px',
+    align: 'center',
+    valign: 'middle'
   }
 
   options = Object.assign({}, defaultOptions, options)
 
   ctx.font = options.size + ' ' + options.fontFamily
-  ctx.textAlign = 'center'
-  ctx.textBaseline = 'middle'
+  ctx.textAlign = options.align
+  ctx.textBaseline = options.valign
   ctx.fillText(text, x, y)
 }
 

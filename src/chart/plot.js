@@ -2,7 +2,7 @@
 
 import autoBind from 'auto-bind'
 
-import { line } from './atomicDraws'
+import { line } from './AtomicDraws'
 
 class Plot {
   constructor (chart) {

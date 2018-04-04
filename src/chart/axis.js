@@ -2,7 +2,7 @@
 
 import autoBind from 'auto-bind'
 
-import { line, text } from './atomicDraws'
+import { line, text } from './AtomicDraws'
 
 class Axis {
   constructor (chart) {
