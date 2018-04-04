@@ -1,29 +1,31 @@
 'use strict'
 
-import autoBind from 'auto-bind'
+import autobind from 'autobind-decorator'
 
 import { line, text } from './AtomicDraws'
 
 class Axis {
   constructor (chart) {
     this.chart = chart
-
-    autoBind(this)
   }
 
+  @autobind
   drawXStep (x, length) {
     let ctx = this.chart.ctx
 
-    let pos = this.chart.mapCoordinateToPixel(x, 0)
+    let pos = this.chart.matrix.mapCoordinateToPixel(x, 0)
     let yPos = this.chart.config.margin.top + this.chart.innerHeight - this.chart.config.axisMargin
     line(ctx, pos.x, yPos, pos.x, yPos + length)
   }
 
+  @autobind
   bottomAxis () {
     let ctx = this.chart.ctx
 
-    let left = Math.floor(this.chart.selection.left)
-    let right = Math.ceil(this.chart.selection.right)
+    let selection = this.chart.selection.getSelection()
+
+    let left = Math.floor(selection.left)
+    let right = Math.ceil(selection.right)
 
     // Draw normal line for every unit
     ctx.lineWidth = 1
@@ -32,7 +34,7 @@ class Axis {
     for (let i = left; i <= right; i++) {
       this.drawXStep(i, 6)
 
-      let textPos = this.chart.mapCoordinateToPixel(i, 0)
+      let textPos = this.chart.matrix.mapCoordinateToPixel(i, 0)
       let yPos = this.chart.config.margin.top + this.chart.innerHeight - this.chart.config.axisMargin
       text(ctx, i, textPos.x, yPos + 15)
     }
@@ -44,19 +46,23 @@ class Axis {
     }
   }
 
+  @autobind
   drawYStep (y, length) {
     let ctx = this.chart.ctx
 
-    let pos = this.chart.mapCoordinateToPixel(0, y)
+    let pos = this.chart.matrix.mapCoordinateToPixel(0, y)
     let xPos = this.chart.config.margin.left + this.chart.config.axisMargin
     line(ctx, xPos, pos.y, xPos - length, pos.y)
   }
 
+  @autobind
   leftAxis () {
     let ctx = this.chart.ctx
 
-    let top = Math.ceil(this.chart.selection.top)
-    let bottom = Math.floor(this.chart.selection.bottom)
+    let selection = this.chart.selection.getSelection()
+
+    let top = Math.ceil(selection.top)
+    let bottom = Math.floor(selection.bottom)
 
     // Draw normal line for every unit
     ctx.lineWidth = 1
@@ -65,7 +71,7 @@ class Axis {
     for (let i = bottom; i <= top; i++) {
       this.drawYStep(i, 5)
 
-      let textPos = this.chart.mapCoordinateToPixel(0, i)
+      let textPos = this.chart.matrix.mapCoordinateToPixel(0, i)
       let xPos = this.chart.config.margin.left + this.chart.config.axisMargin
       text(ctx, i, xPos - 15, textPos.y)
     }

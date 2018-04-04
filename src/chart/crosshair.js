@@ -1,6 +1,6 @@
 'use strict'
 
-import autoBind from 'auto-bind'
+import autobind from 'autobind-decorator'
 
 import { line, point, text } from './AtomicDraws'
 
@@ -11,29 +11,16 @@ import { line, point, text } from './AtomicDraws'
 class Crosshair {
   constructor (chart) {
     this.chart = chart
-
-    this.defaultOptions = {
-      clipSelectionToPath: true
-    }
-
-    // Initialize
-    this.options = this.defaultOptions
-
-    // Bind all functions to this
-    autoBind(this)
   }
 
-  setOptions (options) {
-    this.options = Object.assign({}, this.options, options)
-  }
-
+  @autobind
   setPosition (x, y) {
-    let coordinatePos = this.chart.mapPixelToCoordinate(x, y)
+    let coordinatePos = this.chart.matrix.mapPixelToCoordinate(x, y)
 
     // Set the coordinate we want to display the value of
     this.seletedCoordinate = coordinatePos
 
-    if (this.options.clipSelectionToPath) {
+    if (this.chart.config.clipSelectionToPath) {
       let x = coordinatePos.x
 
       // Clip to every hundreth datapoint TODO autocalculate this based on selection
@@ -44,9 +31,10 @@ class Crosshair {
       this.seletedCoordinate = {x: x, y: y}
     }
 
-    this.selectionPos = this.chart.mapCoordinateToPixel(this.seletedCoordinate.x, this.seletedCoordinate.y)
+    this.selectionPos = this.chart.matrix.mapCoordinateToPixel(this.seletedCoordinate.x, this.seletedCoordinate.y)
   }
 
+  @autobind
   drawSelection () {
     if (!this.selectionPos) {
       return

@@ -1,16 +1,15 @@
 'use strict'
 
-import autoBind from 'auto-bind'
+import autobind from 'autobind-decorator'
 
 import { line } from './AtomicDraws'
 
 class Plot {
   constructor (chart) {
     this.chart = chart
-
-    autoBind(this)
   }
 
+  @autobind
   path (data) {
     let ctx = this.chart.ctx
 
@@ -19,8 +18,8 @@ class Plot {
     for (let i in data) {
       i = parseInt(i)
       if (i + 1 < data.length) {
-        let from = this.chart.mapCoordinateToPixel(i / 100, data[i])
-        let to = this.chart.mapCoordinateToPixel((i + 1) / 100, data[i + 1])
+        let from = this.chart.matrix.mapCoordinateToPixel(i / 100, data[i])
+        let to = this.chart.matrix.mapCoordinateToPixel((i + 1) / 100, data[i + 1])
         line(ctx, from.x, from.y, to.x, to.y)
       }
     }

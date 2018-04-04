@@ -3,17 +3,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import autoBind from 'auto-bind'
+import autobind from 'autobind-decorator'
 
 import Chart from './Chart'
 
 class ChartComponent extends Component {
-  constructor (props) {
-    super(props)
-
-    autoBind(this)
-  }
-
+  @autobind
   componentDidMount () {
     this.ctx = this.canvasNode.getContext('2d')
 
@@ -25,35 +20,41 @@ class ChartComponent extends Component {
     window.addEventListener('resize', this.chart.handleResize)
   }
 
+  @autobind
   componentWillUnmount () {
     window.removeEventListener('resize', this.chart.handleResize)
   }
 
+  @autobind
   handleMouseDown (e) {
-    this.chart.startDrag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+    this.chart.selection.startDrag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
 
     this.drag = true
   }
 
+  @autobind
   handleMouseUp (e) {
-    this.chart.stopDrag()
+    this.chart.selection.stopDrag()
 
     this.drag = false
   }
 
+  @autobind
   handleMouseMove (e) {
-    this.chart.drag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+    this.chart.selection.drag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
     this.chart.handleMouseMove(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
   }
 
+  @autobind
   handleScrollWheel (e) {
     let delta = e.deltaY * (e.deltaMode === 1 ? 1 : 0.03)
-    this.chart.zoom(delta, e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+    this.chart.selection.zoom(delta, e.nativeEvent.offsetX, e.nativeEvent.offsetY)
 
     e.preventDefault()
     return false
   }
 
+  @autobind
   render () {
     return (
       <canvas
