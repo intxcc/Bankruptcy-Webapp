@@ -42,6 +42,7 @@ class Chart {
       },
 
       selectionBoundaries: {
+        left: 0,
         bottom: 0
       },
 
@@ -118,7 +119,7 @@ class Chart {
       this.selection.bottom = this.config.selectionBoundaries.bottom
     }
 
-    if (this.selection.left > this.config.selectionBoundaries.left) {
+    if (this.selection.left < this.config.selectionBoundaries.left) {
       this.selection.left = this.config.selectionBoundaries.left
     }
 
