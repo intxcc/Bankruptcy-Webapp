@@ -4,9 +4,9 @@
   bottom: 0;
   left: 0;
 
-  // transition: $main-side-menu-transition-time left, $main-header-collapse-duration height;
+  transition: $main-side-menu-transition-time left, $main-header-collapse-duration height;
 
-  height: calc(#{'100vh - ' + $main-header-height});
+  height: calc(#{'100vh - ' + $main-header-height-collaped});
 
   // border: 5px solid #f00;
   // box-sizing: border-box;
@@ -19,16 +19,21 @@
     left: $main-side-menu-size-expanded;
   }
 
-  &.collapse-main-header {
-    height: calc(#{'100vh - ' + $main-header-height-collaped});
-  }
+  // &.collapse-main-header {
+  //   height: calc(#{'100vh - ' + $main-header-height-collaped});
+  // }
 
   #exchange-chart {
     position: absolute;
     top: 0;
     left: 0;
 
+    background-color: $gray-very-light;
+    background-image: $url-stripes;
+
     width: 100%;
     height: 100%;
+
+    background-blend-mode: color-dodge;
   }
 }

@@ -17,12 +17,15 @@ class Draw {
     // Clear rect to allow redrawing
     chart.ctx.clearRect(0, 0, chart.width, chart.height)
 
-    // Create new axis object if neccessary and draw
+    // Draw grid
+    chart.grid.drawGrid()
+
+    // Draw graph
+    chart.plot.path(chart.data)
+
+    // Draw axis
     chart.axis.bottomAxis()
     chart.axis.leftAxis()
-
-    // Create new plot object if neccessary and draw
-    chart.plot.path(chart.data)
 
     // Create new Crosshair object if neccessary and draw
     chart.crosshair.drawCrosshair()

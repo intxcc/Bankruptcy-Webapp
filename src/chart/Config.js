@@ -27,10 +27,23 @@ let Config = {
     bottom: 0
   },
 
-  clipCrosshairToPath: true,
+  showClippedPoint: true,
+  showFreeCrosshair: true,
+
+  pointColor: 'rgba(0, 0, 0, 0.5)',
+  pointFilled: false,
+  pointSize: 3,
+  pointLineWidth: 1,
 
   axisColor: '#555',
-  plotColor: '#222'
+  plotColor: '#222',
+
+  grid: {
+    lineWidth: 1,
+    strokeStyle: 'rgba(255, 255, 255, 0.5)'
+    // subLineWidth: 1,
+    // subStrokeStyle: 'rgba(255, 255, 255, 0.2)'
+  }
 }
 
 export default Config

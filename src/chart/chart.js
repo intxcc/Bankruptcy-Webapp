@@ -90,11 +90,20 @@ class Chart {
     this.lastResize = (new Date()).getTime()
 
     // Adjust height and width to actual pixel size
+    let oldHeight = this.height
+    let oldWidth = this.width
+
     this.height = this.canvasNode.height = this.canvasNode.clientHeight
     this.width = this.canvasNode.width = this.canvasNode.clientWidth
 
     this.innerHeight = this.height - this.config.margin.top - this.config.margin.bottom
     this.innerWidth = this.width - this.config.margin.right - this.config.margin.left
+
+    let hasChanged = oldHeight !== this.height || oldWidth !== this.width
+    if (hasChanged || !this.selection.ratio) {
+      // Start with the same x-y-ratio as the canvas has and reset on resize
+      this.selection.resetRatio()
+    }
 
     this.matrix.calculateUnitDimensions()
 

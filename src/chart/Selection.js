@@ -26,19 +26,21 @@ class Selection {
 
     let boundaries = this.chart.config.selectionBoundaries
 
-    if (this.selection.top > boundaries.top) {
+    if (boundaries.top && this.selection.top > boundaries.top) {
+      this.selection.bottom -= (this.selection.top - boundaries.top)
       this.selection.top = boundaries.top
     }
 
-    if (this.selection.right > boundaries.right) {
+    if (boundaries.right && this.selection.right > boundaries.right) {
+      this.selection.left -= (this.selection.right - boundaries.right)
       this.selection.right = boundaries.right
     }
 
-    if (this.selection.bottom < boundaries.bottom) {
+    if (boundaries.bottom && this.selection.bottom < boundaries.bottom) {
       this.selection.bottom = boundaries.bottom
     }
 
-    if (this.selection.left < boundaries.left) {
+    if (boundaries.left && this.selection.left < boundaries.left) {
       this.selection.left = boundaries.left
     }
 
@@ -66,6 +68,29 @@ class Selection {
       top: this.selection.bottom + deltaY,
       right: this.selection.left + deltaX
     })
+  }
+
+  @autobind
+  resetRatio () {
+    this.ratio = (this.chart.width / this.chart.height)
+    this.balanceRatio()
+  }
+
+  @autobind
+  balanceRatio (coeff = 1) {
+    let deltaX = (this.selection.left + (this.selection.top - this.selection.bottom) * this.ratio) - this.selection.right
+    let deltaY = (this.selection.bottom + (this.selection.right - this.selection.left) / this.ratio) - this.selection.top
+
+    // Balance the coordinate that is more off, so when one is zooming out all the way the complete graph is shown
+    if (deltaX > deltaY) {
+      this.setSelection({
+        right: this.selection.right + deltaX * coeff
+      })
+    } else {
+      this.setSelection({
+        top: this.selection.top + deltaY * coeff
+      })
+    } 
   }
 
   // ---- //
@@ -113,6 +138,11 @@ class Selection {
   // ---- //
   // Zoom //
 
+  // @autobind
+  // getZoomStep () {
+
+  // }
+
   /**
   * Zooms into or out of the graph
   * @param {float} delta The delta gives the amount of zoom that will be applied. Direction is given by sign. Usually this will be -3 or 3.
@@ -138,6 +168,8 @@ class Selection {
       bottom: this.selection.bottom - deltaY,
       left: this.selection.left - deltaX
     })
+
+    this.balanceRatio()
 
     // Calculate where the position the cursor was hovering before zooming is now on the canvas
     let posAfter = this.chart.matrix.mapCoordinateToPixel(posBefore.x, posBefore.y)

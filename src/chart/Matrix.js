@@ -18,8 +18,13 @@ class Matrix {
 
   @autobind
   setDomain () {
-    this.min = Math.min(this.chart.data)
-    this.max = Math.max(this.chart.data)
+    this.min = Math.min(...this.chart.data)
+    this.max = Math.max(...this.chart.data)
+
+    this.chart.config.selectionBoundaries.left = -1
+    this.chart.config.selectionBoundaries.right = this.chart.data.length / 100 + 1
+    this.chart.config.selectionBoundaries.top = this.max + 1
+    this.chart.config.selectionBoundaries.bottom = this.min - 1
   }
 
   @autobind

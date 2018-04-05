@@ -5,10 +5,18 @@ import PropTypes from 'prop-types'
 
 import { observer } from 'mobx-react'
 
+import autobind from 'autobind-decorator'
+
 import { ChartComponent } from '../chart'
 
 @observer
 class ExchangeChart extends Component {
+  @autobind
+  changeBeeingDragged (newValue) {
+    this.props.store.changeExchangeChartIsBeeingDragged(this.props.store, newValue)
+  }
+
+  @autobind
   render () {
     let className = ''
 
@@ -28,7 +36,9 @@ class ExchangeChart extends Component {
       <div
         id="exchange_chart_wrapper"
         className={className}>
-        <ChartComponent id="exchange-chart" />
+        <ChartComponent
+          id="exchange-chart"
+          changeOnDragged={this.changeBeeingDragged} />
       </div>
     )
   }

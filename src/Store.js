@@ -19,6 +19,12 @@ class Store {
 
   @observable dashboardBigMenuClosed = false
 
+  @observable exchangeChartIsBeeingDragged = false
+
+  changeExchangeChartIsBeeingDragged = (store, newValue) => {
+    store.exchangeChartIsBeeingDragged = newValue
+  }
+
   closeBigMenu = (store) => {
     store.dashboardBigMenuClosed = true
   }

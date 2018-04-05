@@ -26,8 +26,14 @@ class ChartComponent extends Component {
   }
 
   @autobind
+  handleMouseLeave (e) {
+    this.chart.crosshair.clear()
+  }
+
+  @autobind
   handleMouseDown (e) {
     this.chart.selection.startDrag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+    this.props.changeOnDragged(true)
 
     this.drag = true
   }
@@ -35,6 +41,7 @@ class ChartComponent extends Component {
   @autobind
   handleMouseUp (e) {
     this.chart.selection.stopDrag()
+    this.props.changeOnDragged(false)
 
     this.drag = false
   }
@@ -62,6 +69,7 @@ class ChartComponent extends Component {
         style={{height: '100%', width: '100%'}}
         ref={(canvasNode) => { this.canvasNode = canvasNode }}
         onWheel={this.handleScrollWheel}
+        onMouseLeave={this.handleMouseLeave}
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove}
         onMouseUp={this.handleMouseUp} />
@@ -70,7 +78,8 @@ class ChartComponent extends Component {
 }
 
 ChartComponent.propTypes = {
-  id: PropTypes.string
+  id: PropTypes.string,
+  changeOnDragged: PropTypes.func
 }
 
 export default ChartComponent
