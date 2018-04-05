@@ -20,6 +20,8 @@ class Store {
   @observable dashboardBigMenuClosed = false
 
   @observable exchangeChartIsBeeingDragged = false
+  @observable exchangeChartSelectionCoordinate = false
+  @observable exchangeChartSelection = false
 
   changeExchangeChartIsBeeingDragged = (store, newValue) => {
     store.exchangeChartIsBeeingDragged = newValue

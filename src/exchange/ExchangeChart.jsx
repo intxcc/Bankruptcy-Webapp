@@ -17,6 +17,12 @@ class ExchangeChart extends Component {
   }
 
   @autobind
+  handleSelectedPointChange (pos, coordinate) {
+    this.props.store.exchangeChartSelectionCoordinate = coordinate
+    this.props.store.exchangeChartSelection = pos
+  }
+
+  @autobind
   render () {
     let className = ''
 
@@ -32,6 +38,18 @@ class ExchangeChart extends Component {
       className += 'collapse-main-header '
     }
 
+    let overlayInfo = ''
+    if (this.props.store.exchangeChartSelection) {
+      overlayInfo = (
+        <div id="overlay-info" style={{
+          top: this.props.store.exchangeChartSelection.y + 'px',
+          left: this.props.store.exchangeChartSelection.x + 'px'
+        }}>
+          ({this.props.store.exchangeChartSelectionCoordinate.x} | {Math.round(this.props.store.exchangeChartSelectionCoordinate.y * 100) / 100})
+        </div>
+      )
+    }
+
     return (
       <div
         id="exchange_chart_wrapper"
@@ -39,7 +57,11 @@ class ExchangeChart extends Component {
         <div id="chart-background"></div>
         <ChartComponent
           id="exchange-chart"
+          onSelectedPointChanged={this.handleSelectedPointChange}
           changeOnDragged={this.changeBeeingDragged} />
+        <div id="chart-foreground">
+          {overlayInfo}
+        </div>
       </div>
     )
   }

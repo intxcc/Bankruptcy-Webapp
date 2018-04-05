@@ -14,7 +14,8 @@ class ChartComponent extends Component {
 
     this.chart = new Chart({
       ctx: this.ctx,
-      canvasNode: this.canvasNode
+      canvasNode: this.canvasNode,
+      onSelectedPointChanged: this.props.onSelectedPointChanged
     })
 
     window.addEventListener('resize', this.chart.handleResize)
@@ -33,7 +34,11 @@ class ChartComponent extends Component {
   @autobind
   handleMouseDown (e) {
     this.chart.selection.startDrag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-    this.props.changeOnDragged(true)
+    this.chart.handleClick(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+
+    if (this.props.changeOnDragged) {
+      this.props.changeOnDragged(true)
+    }
 
     this.drag = true
   }
@@ -41,7 +46,10 @@ class ChartComponent extends Component {
   @autobind
   handleMouseUp (e) {
     this.chart.selection.stopDrag()
-    this.props.changeOnDragged(false)
+
+    if (this.props.changeOnDragged) {
+      this.props.changeOnDragged(false)
+    }
 
     this.drag = false
   }
@@ -79,7 +87,8 @@ class ChartComponent extends Component {
 
 ChartComponent.propTypes = {
   id: PropTypes.string,
-  changeOnDragged: PropTypes.func
+  changeOnDragged: PropTypes.func,
+  onSelectedPointChanged: PropTypes.func
 }
 
 export default ChartComponent

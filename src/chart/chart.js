@@ -17,6 +17,7 @@ class Chart {
   constructor (props) {
     this.ctx = props.ctx
     this.canvasNode = props.canvasNode
+    this.onSelectedPointChanged = props.onSelectedPointChanged
 
     this.initialize()
   }
@@ -59,6 +60,11 @@ class Chart {
 
     // Nudge drawing
     this.draw.handleDraw()
+  }
+
+  @autobind
+  handleClick (x, y) {
+    this.crosshair.fixPosition()
   }
 
   @autobind

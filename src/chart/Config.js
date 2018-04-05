@@ -39,7 +39,7 @@ let Config = {
   plotColor: StyleVariables.plotColor,
 
   grid: {
-    lineWidth: 1.1,
+    lineWidth: 1.2,
     subLineWidth: 0.8,
     strokeStyle: StyleVariables.gridColor
   }

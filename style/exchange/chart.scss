@@ -32,6 +32,25 @@
     #chart-background {
       height: calc(#{'100% - 88px'});
     }
+
+    #chart-foreground {
+      height: calc(#{'100%'});
+    }
+  }
+
+  #overlay-info {
+    position: absolute;
+
+    transform: translate3d(1rem, -50%, 0);
+    transition: .2s top, .2s left;
+
+    background-color: $white-snow;
+
+    padding: .5rem;
+
+    color: $grid-crosshair-color;
+    font-family: Love Ya Like A Sister;
+    font-size: 1.5rem;
   }
 
   #exchange-chart {
@@ -49,12 +68,18 @@
     bottom: 44px;
     left: 44px;
 
-    // border: 1px $grid-color solid;
-
     background-color: $grid-background-color;
 
     height: calc(#{'100% - 88px - ' + $main-header-height + ' + ' + $main-header-height-collaped});
+  }
 
-    // box-shadow: $shadow-s-0;
+  #chart-foreground {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: calc(#{'100% - ' + $main-header-height + ' + ' + $main-header-height-collaped});
+
+    pointer-events: none;
   }
 }

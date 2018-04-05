@@ -68,15 +68,6 @@ class Axis {
     ctx.stroke()
   }
 
-  // @autobind
-  // drawYStep (y, length) {
-  //   let ctx = this.chart.ctx
-
-  //   let pos = this.chart.matrix.mapCoordinateToPixel(0, y)
-  //   let xPos = this.chart.config.margin.left + this.chart.config.axisMargin
-  //   lineNoSingle(ctx, xPos, pos.y, xPos - length, pos.y)
-  // }
-
   @autobind
   drawYStep (x, y, length) {
     lineNoSingle(this.chart.ctx, x, y, x - length, y)

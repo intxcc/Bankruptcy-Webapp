@@ -15,11 +15,14 @@ class Grid {
 
     let selection = this.chart.selection.getSelection()
 
-    let top = Math.ceil(selection.top)
-    let bottom = Math.floor(selection.bottom)
+    let scaleStep = this.chart.selection.getScaleStep()
+    let scale = this.chart.selection.getScale()
 
-    let left = Math.floor(selection.left)
-    let right = Math.ceil(selection.right)
+    let top = Math.ceil(selection.top / scaleStep) * scaleStep
+    let bottom = Math.floor(selection.bottom / scaleStep) * scaleStep
+
+    let left = Math.floor(selection.left / scaleStep) * scaleStep
+    let right = Math.ceil(selection.right / scaleStep) * scaleStep
 
     let topMargin = this.chart.config.margin.top + this.chart.config.axisMargin + this.chart.config.axisPadding
 
@@ -30,9 +33,6 @@ class Grid {
     let bottomMarginY = this.chart.height - bottomMargin
 
     let leftMargin = this.chart.config.margin.left + this.chart.config.axisMargin + this.chart.config.axisPadding
-
-    let scale = this.chart.selection.getScale()
-    let scaleStep = this.chart.selection.getScaleStep()
 
     // ------- //
     // SUBGRID //

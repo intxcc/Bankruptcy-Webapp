@@ -11,11 +11,21 @@ import { line, text, point } from './AtomicDraws'
 class Crosshair {
   constructor (chart) {
     this.chart = chart
+
+    this.pointClippedPos = {x: 0, y: 0}
+    this.lastPointClippedPos = this.pointClippedPos
   }
 
   @autobind
   clear () {
     this.crosshairPos = false
+  }
+
+  @autobind
+  fixPosition () {
+    if (!isNaN(this.pointClippedPos.y) && !isNaN(this.pointClippedPos.x)) {
+      this.fixedPoint = this.pointClippedCoordinate
+    }
   }
 
   @autobind
@@ -51,8 +61,45 @@ class Crosshair {
     ctx.lineWidth = this.chart.config.pointLineWidth
     point(ctx, this.pointClippedPos.x, this.pointClippedPos.y, this.chart.config.pointSize, !this.chart.config.pointFilled)
 
-    // ctx.strokeStyle = '#f00'
-    // line(ctx, this.pointClippedPos.x, this.pointClippedPos.y, this.pointClippedPos.x, this.crosshairFreePos.y)
+    // If the clip position changed fire onSelectedPointChanged event
+    if ((this.lastPointClippedPos.x !== this.pointClippedPos.x || this.lastPointClippedPos.y !== this.pointClippedPos.y)) {
+      if (!isNaN(this.pointClippedPos.y) && !isNaN(this.pointClippedPos.x)) {
+        this.chart.onSelectedPointChanged(this.pointClippedPos, this.pointClippedCoordinate)
+      } else if ((isNaN(this.pointClippedPos.y) || isNaN(this.pointClippedPos.x)) && this.fixedPointPos) {
+        this.chart.onSelectedPointChanged(this.fixedPointPos, this.fixedPoint)
+      }
+    }
+
+    // Remember last clipped position, so we know when it changed
+    this.lastPointClippedPos = this.pointClippedPos
+
+    // Fixed point
+    if (this.fixedPoint) {
+      this.fixedPointPos = this.chart.matrix.mapCoordinateToPixel(this.fixedPoint.x, this.fixedPoint.y)
+      point(ctx, this.fixedPointPos.x, this.fixedPointPos.y, this.chart.config.pointSize, !this.chart.config.pointFilled)
+
+      // Draw difference between fixed point and the point clipped to the graph
+      if (!isNaN(this.pointClippedPos.y) && !isNaN(this.pointClippedPos.x)) {
+        ctx.lineWidth = this.chart.config.pointLineWidth * 0.8
+        line(ctx, this.fixedPointPos.x, this.fixedPointPos.y, this.crosshairFreePos.x, this.fixedPointPos.y)
+
+        let percent = this.pointClippedCoordinate.y / this.fixedPoint.y
+        let fX = this.fixedPoint.x
+        let cX = this.pointClippedCoordinate.x
+
+        if (cX < fX) {
+          percent = this.fixedPoint.y / this.pointClippedCoordinate.y
+        }
+
+        let deltaY = Math.round(((percent) * 100 - 100) * 100) / 100
+        text(ctx, ' ' + deltaY + ' % ', this.crosshairFreePos.x, this.fixedPointPos.y, {
+          align: cX > fX ? 'right' : 'left',
+          valign: 'bottom',
+          fontFamily: 'Love Ya Like A Sister',
+          size: '14px'
+        })
+      }
+    }
   }
 
   @autobind
