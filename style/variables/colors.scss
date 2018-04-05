@@ -4,10 +4,12 @@
 $primary-color: #e51725;
 $primary-dark: #b50916;
 $primary-light: #ef4652;
+$primary-very-light: #fa6f79;
 
 $secondary-color: #a1dd16;
 $secondary-dark: #7daf09;
 $secondary-light: #b6e744;
+$secondary-very-light: #caf26c;
 
 $tertiary-color: #0f9284;
 $tertiary-dark: #067367;
@@ -25,6 +27,19 @@ $gray-very-light: #b8b2b3;
 ///////////////////
 // OBJECT COLORS //
 
+
+// Chart
+
+$grid-color: $tertiary-color;
+$grid-background-color: $white-snow;
+$grid-crosshair-color: $gray-middle;
+
+$axis-color: $grid-color;
+$plot-color: $black-raisin;
+
+$chart-background-color: $white-snow;
+
+// Main
 $main-header-button-color: #ccc;
 
 $main-side-menu-background: $white-snow;
@@ -32,3 +47,12 @@ $main-side-menu-background: $white-snow;
 $big-menu-color-background: $tertiary-light;
 $big-menu-color-inner-background: $white-snow-d;
 $big-menu-color-inner: $tertiary-light;
+
+:export {
+  primaryColorLight: $primary-light; // sass-lint:disable-line no-misspelled-properties
+  plotColor: $plot-color; // sass-lint:disable-line no-misspelled-properties
+  gridColor: $grid-color; // sass-lint:disable-line no-misspelled-properties
+  gridBackgroundColor: $grid-background-color; // sass-lint:disable-line no-misspelled-properties
+  gridCrosshairColor: $grid-crosshair-color; // sass-lint:disable-line no-misspelled-properties
+  axisColor: $axis-color; // sass-lint:disable-line no-misspelled-properties
+}

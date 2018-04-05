@@ -36,6 +36,7 @@ class ExchangeChart extends Component {
       <div
         id="exchange_chart_wrapper"
         className={className}>
+        <div id="chart-background"></div>
         <ChartComponent
           id="exchange-chart"
           changeOnDragged={this.changeBeeingDragged} />

@@ -1,3 +1,5 @@
+import StyleVariables from '../../style/variables.scss'
+
 let Config = {
   FPSperiod: 10 * 1000, // 10 seconds
   defaultFPS: 10,
@@ -26,19 +28,20 @@ let Config = {
   showClippedPoint: true,
   showFreeCrosshair: true,
 
-  crosshairColor: '#777',
-  pointColor: 'rgba(0, 0, 0, 0.5)',
+  crosshairVerticalColor: StyleVariables.gridCrosshairColor,
+  crosshairHorizontalColor: StyleVariables.gridColor,
+  pointColor: StyleVariables.gridCrosshairColor,
   pointFilled: false,
   pointSize: 3,
   pointLineWidth: 1,
 
-  axisColor: '#333',
-  plotColor: '#222',
+  axisColor: StyleVariables.axisColor,
+  plotColor: StyleVariables.plotColor,
 
   grid: {
     lineWidth: 1.1,
     subLineWidth: 0.8,
-    strokeStyle: '#888'
+    strokeStyle: StyleVariables.gridColor
   }
 }
 

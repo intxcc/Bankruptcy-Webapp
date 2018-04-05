@@ -55,7 +55,7 @@ class Chart {
     this.resize()
 
     // Initialize selection
-    this.selection.defaultSelectionToEnd()
+    setTimeout(this.selection.defaultSelectionToEnd, 200)
 
     // Nudge drawing
     this.draw.handleDraw()

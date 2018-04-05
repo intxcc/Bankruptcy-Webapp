@@ -1,8 +1,8 @@
 'use strict'
 
 export function line (ctx, fromX, fromY, toX, toY) {
-  fromX += 0.5
-  fromY += 0.5
+  // fromX += 0.5
+  // fromY += 0.5
   // if (fromX === toX) {
   //   fromX = Math.round(fromX) + 0.5
   //   toX = Math.round(toX) + 0.5
@@ -22,8 +22,8 @@ export function line (ctx, fromX, fromY, toX, toY) {
 }
 
 export function lineNoSingle (ctx, fromX, fromY, toX, toY) {
-  fromX += 0.5
-  fromY += 0.5
+  // fromX += 0.5
+  // fromY += 0.5
 
   ctx.moveTo(fromX, fromY)
   ctx.lineTo(toX, toY)

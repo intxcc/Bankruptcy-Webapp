@@ -11,7 +11,7 @@ class Plot {
   path (data) {
     let ctx = this.chart.ctx
 
-    ctx.lineWidth = 1
+    ctx.lineWidth = 2
     ctx.strokeStyle = this.chart.config.plotColor
 
     ctx.beginPath()

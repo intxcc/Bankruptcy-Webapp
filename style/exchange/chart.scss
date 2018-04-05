@@ -6,15 +6,15 @@
 
   transition: $main-side-menu-transition-time left;
 
-  background-color: $white-snow-d;
-  background-image: $url-stripes;
+  background-color: $chart-background-color;
+  // background-image: $url-stripes;
 
   height: calc(#{'100vh - ' + $main-header-height-collaped});
 
   // border: 5px solid #f00;
   // box-sizing: border-box;
 
-  background-blend-mode: color-dodge;
+  // background-blend-mode: color-burn;
 
   &.open-main-side-menu {
     left: $main-side-menu-size;
@@ -28,6 +28,10 @@
     #exchange-chart {
       height: 100% !important;
     }
+
+    #chart-background {
+      height: calc(#{'100% - 88px'});
+    }
   }
 
   #exchange-chart {
@@ -37,5 +41,20 @@
 
     width: 100%;
     height: calc(#{'100% - ' + $main-header-height + ' + ' + $main-header-height-collaped}) !important;
+  }
+
+  #chart-background {
+    position: absolute;
+    right: 44px;
+    bottom: 44px;
+    left: 44px;
+
+    // border: 1px $grid-color solid;
+
+    background-color: $grid-background-color;
+
+    height: calc(#{'100% - 88px - ' + $main-header-height + ' + ' + $main-header-height-collaped});
+
+    // box-shadow: $shadow-s-0;
   }
 }

@@ -60,7 +60,7 @@ class Grid {
         continue
       }
 
-      lineNoSingle(ctx, xPos, topMargin, xPos, this.chart.height - bottomMargin)
+      lineNoSingle(ctx, xPos, topMargin - 2, xPos, this.chart.height - bottomMargin)
     }
 
     ctx.stroke()
@@ -91,7 +91,7 @@ class Grid {
         continue
       }
 
-      lineNoSingle(ctx, xPos, topMargin, xPos, this.chart.height - bottomMargin)
+      lineNoSingle(ctx, xPos, topMargin - 2, xPos, this.chart.height - bottomMargin)
     }
 
     ctx.stroke()

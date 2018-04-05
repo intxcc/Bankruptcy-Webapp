@@ -59,12 +59,13 @@ class Crosshair {
   drawFreeCrosshair () {
     let ctx = this.chart.ctx
 
-    ctx.strokeStyle = this.chart.config.crosshairColor
-    ctx.lineWidth = 0.5
+    ctx.strokeStyle = this.chart.config.crosshairHorizontalColor
+    ctx.lineWidth = 0.2
 
     line(ctx, this.chart.config.margin.left + this.chart.config.axisMargin - 1, this.crosshairFreePos.y, this.chart.innerWidth + this.chart.config.margin.left - this.chart.config.axisMargin + 2, this.crosshairFreePos.y)
 
-    ctx.strokeStyle = '#777'
+    ctx.lineWidth = 0.8
+    ctx.strokeStyle = this.chart.config.crosshairVerticalColor
     line(ctx, this.crosshairFreePos.x, this.chart.config.margin.top + this.chart.config.axisMargin - 1, this.crosshairFreePos.x, this.chart.config.margin.top + this.chart.innerHeight - this.chart.config.axisMargin + 2)
 
     // ctx.strokeStyle = '#f55' // 'rgba(15, 15, 15, 0.5)'
