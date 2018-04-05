@@ -36,12 +36,6 @@ class Chart {
     this.fpsCounter = new FpsCounter(this)
     this.draw = new Draw(this)
 
-    // Set parameters
-    this.fps = this.config.defaultFPS
-
-    // Initialize Variables
-    this.lastFrameTime = 0
-
     // Initialize chart
     // this.matrix.setDomain()
     // this.selection.setSelection(0, this.data.length - 1) // TODO uncomment again
@@ -61,7 +55,7 @@ class Chart {
     this.resize()
 
     // Nudge drawing
-    this.handleDraw()
+    this.draw.handleDraw()
   }
 
   @autobind
@@ -81,7 +75,7 @@ class Chart {
       this.resizeTimeout = setTimeout(this.resize, 100)
 
       // Force draw to enhance perceived responsiveness and prevent flickering
-      this.resizeTimeout = setTimeout(this.forceDraw, 100)
+      this.resizeTimeout = setTimeout(this.draw.forceDraw, 100)
     }
   }
 
@@ -109,44 +103,6 @@ class Chart {
 
     // Reset timeout, so a new resize can be requested again
     this.resizeTimeout = false
-  }
-
-  @autobind
-  forceDraw () {
-    this.lastFrameTime = 0
-    this.handleDraw()
-  }
-
-  @autobind
-  handleDraw () {
-    // Request next frame
-    window.requestAnimationFrame(this.handleDraw)
-
-    let currentTime = (new Date()).getTime()
-    // Check if we draw new frame (adjust framerate)
-    if (currentTime - this.lastFrameTime < 1000 / this.fps) {
-      return
-    }
-
-    // Used to determine how much to animate to stay smooth (movement * timeCoeff) -> (movement per second)
-    let timeCoeff = (currentTime - this.lastFrameTime) / 1000
-    // On first draw set timeCoeff low, so it doesn't jump right away
-    if (this.lastFrameTime === 0) {
-      timeCoeff = 0.001
-    }
-
-    // Used to determine time last frame was drawn
-    this.lastFrameTime = currentTime
-
-    // Periodically resize, as some resizings arent catched with the resize handler
-    if (currentTime - this.lastResize > 100) {
-      this.lastResize = currentTime
-      this.resize()
-    }
-
-    // Actual draw
-    this.fpsCounter.count(currentTime)
-    this.draw.draw(timeCoeff)
   }
 }
 

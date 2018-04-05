@@ -1,9 +1,10 @@
 let Config = {
   FPSperiod: 10 * 1000, // 10 seconds
-  defaultFPS: 60,
+  defaultFPS: 10,
   showFPS: true,
 
   axisMargin: 30,
+  axisPadding: 4,
   margin: {
     top: 10,
     right: 10,
@@ -27,22 +28,24 @@ let Config = {
     bottom: 0
   },
 
+  maxZoomScale: 0.11,
+
   showClippedPoint: true,
   showFreeCrosshair: true,
 
+  crosshairColor: '#777',
   pointColor: 'rgba(0, 0, 0, 0.5)',
   pointFilled: false,
   pointSize: 3,
   pointLineWidth: 1,
 
-  axisColor: '#555',
+  axisColor: '#333',
   plotColor: '#222',
 
   grid: {
-    lineWidth: 1,
-    strokeStyle: 'rgba(255, 255, 255, 0.5)'
-    // subLineWidth: 1,
-    // subStrokeStyle: 'rgba(255, 255, 255, 0.2)'
+    lineWidth: 1.1,
+    subLineWidth: 0.8,
+    strokeStyle: '#888'
   }
 }
 

@@ -81,8 +81,8 @@ class Selection {
     let deltaX = (this.selection.left + (this.selection.top - this.selection.bottom) * this.ratio) - this.selection.right
     let deltaY = (this.selection.bottom + (this.selection.right - this.selection.left) / this.ratio) - this.selection.top
 
-    // Balance the coordinate that is more off, so when one is zooming out all the way the complete graph is shown
-    if (deltaX > deltaY) {
+    // Balance the coordinate that is less off, so when one is zooming out all the way we keep the ratio instead of altering it
+    if (deltaX < deltaY) {
       this.setSelection({
         right: this.selection.right + deltaX * coeff
       })
@@ -90,7 +90,7 @@ class Selection {
       this.setSelection({
         top: this.selection.top + deltaY * coeff
       })
-    } 
+    }
   }
 
   // ---- //
@@ -133,15 +133,27 @@ class Selection {
 
     // Apply delta while keeping selection ratio
     this.moveSelectionKeepRatio(deltaX, deltaY)
+
+    // To reduce drawn frames but still feel responsive we force a redraw on drag
+    this.chart.draw.forceDraw()
   }
 
   // ---- //
   // Zoom //
 
-  // @autobind
-  // getZoomStep () {
+  @autobind
+  getScale () {
+    let deltaX = this.selection.right - this.selection.left
+    let deltaY = this.selection.top - this.selection.bottom
 
-  // }
+    // Return the smaller axis scale
+    return deltaX < deltaY ? deltaX : deltaY
+  }
+
+  @autobind
+  getScaleStep () {
+    return Math.pow(10, Math.floor(Math.log10(this.getScale())))
+  }
 
   /**
   * Zooms into or out of the graph
@@ -151,6 +163,10 @@ class Selection {
   */
   @autobind
   zoom (delta, x, y) {
+    if (delta < 0 && this.getScale() <= this.chart.config.maxZoomScale) {
+      return
+    }
+
     // The deltaCoeff is used to calculate the amount of zoom
     let deltaCoeffX = this.selection.right - this.selection.left
     let deltaCoeffY = this.selection.top - this.selection.bottom
@@ -186,6 +202,9 @@ class Selection {
 
     // Reselect because otherwise the selection won't adjust to the new zoom without moving the mouse
     this.chart.handleMouseMove(this.chart.mousePos.x, this.chart.mousePos.y)
+
+    // To reduce drawn frames but still feel responsive we force a redraw on drag
+    this.chart.draw.forceDraw()
   }
 }
 
