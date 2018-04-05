@@ -54,6 +54,9 @@ class Chart {
     // Initialize size
     this.resize()
 
+    // Initialize selection
+    this.selection.defaultSelectionToEnd()
+
     // Nudge drawing
     this.draw.handleDraw()
   }

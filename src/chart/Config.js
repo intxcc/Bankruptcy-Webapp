@@ -12,13 +12,6 @@ let Config = {
     left: 10
   },
 
-  defaultSelection: {
-    top: 10,
-    right: 10,
-    bottom: 0,
-    left: 0
-  },
-
   fixedSelection: {
     // bottom: 0
   },

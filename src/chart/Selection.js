@@ -8,12 +8,40 @@ class Selection {
   constructor (chart) {
     this.chart = chart
 
-    let config = this.chart.config
-    this.selection = config.defaultSelection
+    this.selection = {top: 0, right: 0, bottom: 0, left: 0}
   }
 
   // --------- //
   // Selection //
+
+  @autobind
+  defaultSelectionToEnd () {
+    let lastCoordinate = {
+      x: (this.chart.data.length - 1) / 100,
+      y: this.chart.data[this.chart.data.length - 1]
+    }
+    this.centerCoordinate(lastCoordinate.x, lastCoordinate.y)
+  }
+
+  @autobind
+  centerCoordinate (x, y) {
+    if (!this.selectionScale) {
+      let deltaY = this.chart.matrix.maxY - this.chart.matrix.minY
+      let deltaX = this.chart.matrix.maxX - this.chart.matrix.minX
+
+      this.selectionScale = deltaX < deltaY ? deltaX : deltaY
+      this.selectionScale = this.selectionScale / 2
+    }
+
+    this.resetRatio()
+
+    this.setSelection({
+      top: y + this.selectionScale / 2,
+      right: x + (this.selectionScale / 2) * this.ratio,
+      bottom: y - this.selectionScale / 2,
+      left: x - (this.selectionScale / 2) * this.ratio
+    })
+  }
 
   @autobind
   getSelection () {
@@ -143,11 +171,15 @@ class Selection {
 
   @autobind
   getScale () {
+    return this.selectionScale
+  }
+
+  @autobind updateScale () {
     let deltaX = this.selection.right - this.selection.left
     let deltaY = this.selection.top - this.selection.bottom
 
-    // Return the smaller axis scale
-    return deltaX < deltaY ? deltaX : deltaY
+    // Save the smaller axis scale
+    this.selectionScale = deltaX < deltaY ? deltaX : deltaY
   }
 
   @autobind
@@ -202,6 +234,9 @@ class Selection {
 
     // Reselect because otherwise the selection won't adjust to the new zoom without moving the mouse
     this.chart.handleMouseMove(this.chart.mousePos.x, this.chart.mousePos.y)
+
+    // Update the new view scale after zooming
+    this.updateScale()
 
     // To reduce drawn frames but still feel responsive we force a redraw on drag
     this.chart.draw.forceDraw()

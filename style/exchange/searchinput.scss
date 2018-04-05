@@ -5,9 +5,10 @@
 
   z-index: 1;
 
-  border: 1px #fff solid;
+  // border: 2px $black-raisin solid;
+  // box-shadow: $shadow-0;
 
-  background-color: rgba($color: $white-snow, $alpha: .5);
+  background-color: rgba($color: $white-snow, $alpha: 1);
 
   padding: 2rem;
 
@@ -18,7 +19,8 @@
   #exchange-search-input-label {
     padding: 0 1rem;
 
-    color: #fff;
+    color: $black-raisin;
+    font-family: Impact;
     font-size: 5rem;
     font-weight: 300;
     font-variant: small-caps;
