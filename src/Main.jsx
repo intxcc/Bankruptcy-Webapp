@@ -32,7 +32,7 @@ class Main extends Component {
     this.mainHeader.scrollTop = this.props.store.mainScrollTopSaved
     this.props.store.mainHeaderLogoHeight = this.mainHeaderLogo.clientHeight
 
-    // TODO Animate this!
+    // TODO: Animate this!
     // setTimeout(() => { document.documentElement.scrollTop = 0 }, parseInt(StyleVariables.routeTransitionTime) + 50)
   }
 

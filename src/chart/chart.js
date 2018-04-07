@@ -39,7 +39,7 @@ class Chart {
 
     // Initialize chart
     // this.matrix.setDomain()
-    // this.selection.setSelection(0, this.data.length - 1) // TODO uncomment again
+    // this.selection.setSelection(0, this.data.length - 1) // TODO: uncomment again
 
     // TEST STUFF //
 

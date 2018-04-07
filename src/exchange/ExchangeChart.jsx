@@ -40,6 +40,7 @@ class ExchangeChart extends Component {
 
     let overlayInfo = ''
     if (this.props.store.exchangeChartSelection) {
+      // TODO: THIS SHOULD BE PART OF CHARTCOMPONENT
       overlayInfo = (
         <div id="overlay-info" style={{
           top: this.props.store.exchangeChartSelection.y + 'px',

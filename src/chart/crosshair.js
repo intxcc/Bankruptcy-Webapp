@@ -43,7 +43,7 @@ class Crosshair {
     // Clipped position //
     x = coordinatePos.x
 
-    // Clip to every hundreth datapoint TODO autocalculate this based on selection
+    // Clip to every hundreth datapoint TODO: autocalculate this based on selection
     y = this.chart.data[Math.round(Math.round(x * 100))]
     x = Math.round(x * 100) / 100
 
