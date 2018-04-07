@@ -63,7 +63,7 @@ class Chart {
   }
 
   @autobind
-  handleClick (x, y) {
+  handleDoubleClick (x, y) {
     this.crosshair.fixPosition()
   }
 

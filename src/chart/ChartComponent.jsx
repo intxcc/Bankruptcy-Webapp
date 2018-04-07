@@ -32,9 +32,13 @@ class ChartComponent extends Component {
   }
 
   @autobind
+  handleDoubleClick (e) {
+    this.chart.handleDoubleClick(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+  }
+
+  @autobind
   handleMouseDown (e) {
     this.chart.selection.startDrag(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
-    this.chart.handleClick(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
 
     if (this.props.changeOnDragged) {
       this.props.changeOnDragged(true)
@@ -78,6 +82,7 @@ class ChartComponent extends Component {
         ref={(canvasNode) => { this.canvasNode = canvasNode }}
         onWheel={this.handleScrollWheel}
         onMouseLeave={this.handleMouseLeave}
+        onDoubleClick={this.handleDoubleClick}
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove}
         onMouseUp={this.handleMouseUp} />
