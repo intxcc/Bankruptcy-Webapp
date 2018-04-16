@@ -21,6 +21,10 @@ class Crosshair {
     this.crosshairPos = false
   }
 
+  clearFixedPosition () {
+    this.fixedPoint = false
+  }
+
   @autobind
   fixPosition () {
     if (!isNaN(this.pointClippedPos.y) && !isNaN(this.pointClippedPos.x)) {

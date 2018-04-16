@@ -32,6 +32,14 @@ class ChartComponent extends Component {
   }
 
   @autobind
+  handleRightClick (e) {
+    this.chart.handleRightClick()
+
+    e.preventDefault()
+    return false
+  }
+
+  @autobind
   handleDoubleClick (e) {
     this.chart.handleDoubleClick(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
   }
@@ -96,6 +104,7 @@ class ChartComponent extends Component {
           ref={(canvasNode) => { this.canvasNode = canvasNode }}
           onWheel={this.handleScrollWheel}
           onMouseLeave={this.handleMouseLeave}
+          onContextMenu={this.handleRightClick}
           onDoubleClick={this.handleDoubleClick}
           onMouseDown={this.handleMouseDown}
           onMouseMove={this.handleMouseMove}

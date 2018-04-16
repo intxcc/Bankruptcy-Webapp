@@ -63,12 +63,13 @@ class Chart {
   }
 
   @autobind
+  handleRightClick () {
+    this.crosshair.clearFixedPosition()
+  }
+
+  @autobind
   handleDoubleClick (x, y) {
-    if (this.crosshair.fixedPoint) {
-      this.crosshair.fixedPoint = false
-    } else {
-      this.crosshair.fixPosition()
-    }
+    this.crosshair.fixPosition()
   }
 
   @autobind
