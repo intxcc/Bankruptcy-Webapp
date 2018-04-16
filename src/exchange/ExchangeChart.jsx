@@ -17,9 +17,8 @@ class ExchangeChart extends Component {
   }
 
   @autobind
-  handleSelectedPointChange (pos, coordinate) {
-    this.props.store.exchangeChartSelectionCoordinate = coordinate
-    this.props.store.exchangeChartSelection = pos
+  handleSelectedPointChange (selection) {
+    this.props.store.exchangeChartSelection = selection
   }
 
   @autobind
@@ -46,10 +45,7 @@ class ExchangeChart extends Component {
           id="exchange-chart"
           onSelectedPointChanged={this.handleSelectedPointChange}
           changeOnDragged={this.changeBeeingDragged}
-          selection={{
-            pixel: this.props.store.exchangeChartSelection,
-            coordinate: this.props.store.exchangeChartSelectionCoordinate
-          }} />
+          selection={this.props.store.exchangeChartSelection} />
       </div>
     )
   }

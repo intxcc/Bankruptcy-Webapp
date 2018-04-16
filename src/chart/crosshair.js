@@ -24,11 +24,9 @@ class Crosshair {
   @autobind
   fixPosition () {
     if (!isNaN(this.pointClippedPos.y) && !isNaN(this.pointClippedPos.x)) {
-      if (!this.fixedPoint) {
-        this.fixedPoint = this.pointClippedCoordinate
-      } else {
-        this.fixedPoint = false
-      }
+      this.fixedPoint = this.pointClippedCoordinate
+    } else {
+      this.fixedPoint = false
     }
   }
 
@@ -68,11 +66,17 @@ class Crosshair {
     // If the clip position changed fire onSelectedPointChanged event
     if ((this.lastPointClippedPos.x !== this.pointClippedPos.x || this.lastPointClippedPos.y !== this.pointClippedPos.y)) {
       if (!isNaN(this.pointClippedPos.y) && !isNaN(this.pointClippedPos.x)) {
-        this.chart.onSelectedPointChanged(this.pointClippedPos, this.pointClippedCoordinate)
+        this.chart.onSelectedPointChanged({
+          pixel: this.pointClippedPos,
+          coordinate: this.pointClippedCoordinate
+        })
       } else if ((isNaN(this.pointClippedPos.y) || isNaN(this.pointClippedPos.x)) && this.fixedPointPos) {
-        this.chart.onSelectedPointChanged(this.fixedPointPos, this.fixedPoint)
+        this.chart.onSelectedPointChanged({
+          pixel: this.fixedPointPos,
+          coordinate: this.fixedPoint
+        })
       } else {
-        this.chart.onSelectedPointChanged(false, false)
+        this.chart.onSelectedPointChanged(false)
       }
     }
 

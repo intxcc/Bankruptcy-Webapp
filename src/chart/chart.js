@@ -64,7 +64,11 @@ class Chart {
 
   @autobind
   handleDoubleClick (x, y) {
-    this.crosshair.fixPosition()
+    if (this.crosshair.fixedPoint) {
+      this.crosshair.fixedPoint = false
+    } else {
+      this.crosshair.fixPosition()
+    }
   }
 
   @autobind
