@@ -28,29 +28,6 @@
     #exchange-chart {
       height: 100% !important;
     }
-
-    #chart-background {
-      height: calc(#{'100% - 88px'});
-    }
-
-    #chart-foreground {
-      height: calc(#{'100%'});
-    }
-  }
-
-  #overlay-info {
-    position: absolute;
-
-    transform: translate3d(1rem, -50%, 0);
-    transition: .2s top, .2s left;
-
-    background-color: $white-snow;
-
-    padding: .5rem;
-
-    color: $grid-crosshair-color;
-    font-family: Love Ya Like A Sister;
-    font-size: 1.5rem;
   }
 
   #exchange-chart {
@@ -60,26 +37,10 @@
 
     width: 100%;
     height: calc(#{'100% - ' + $main-header-height + ' + ' + $main-header-height-collaped}) !important;
-  }
 
-  #chart-background {
-    position: absolute;
-    right: 44px;
-    bottom: 44px;
-    left: 44px;
-
-    background-color: $grid-background-color;
-
-    height: calc(#{'100% - 88px - ' + $main-header-height + ' + ' + $main-header-height-collaped});
-  }
-
-  #chart-foreground {
-    position: absolute;
-    bottom: 0;
-
-    width: 100%;
-    height: calc(#{'100% - ' + $main-header-height + ' + ' + $main-header-height-collaped});
-
-    pointer-events: none;
+    .chart-overlay-info {
+      background-color: $white-snow;
+      color: $grid-crosshair-color;
+    }
   }
 }

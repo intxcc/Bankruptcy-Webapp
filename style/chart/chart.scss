@@ -1,0 +1,28 @@
+.chart-wrapper {
+
+  .chart-background,
+  .chart-foreground,
+  .chart-canvas {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .chart-foreground {
+    pointer-events: none;
+
+    .chart-overlay-info {
+      position: absolute;
+
+      transform: translate3d(1rem, -50%, 0);
+      transition: .2s top, .2s left;
+
+      padding: .5rem;
+
+      font-family: Love Ya Like A Sister;
+      font-size: 1.5rem;
+    }
+  }
+}

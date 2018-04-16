@@ -71,6 +71,8 @@ class Crosshair {
         this.chart.onSelectedPointChanged(this.pointClippedPos, this.pointClippedCoordinate)
       } else if ((isNaN(this.pointClippedPos.y) || isNaN(this.pointClippedPos.x)) && this.fixedPointPos) {
         this.chart.onSelectedPointChanged(this.fixedPointPos, this.fixedPoint)
+      } else {
+        this.chart.onSelectedPointChanged(false, false)
       }
     }
 
@@ -111,11 +113,11 @@ class Crosshair {
     let ctx = this.chart.ctx
 
     ctx.strokeStyle = this.chart.config.crosshairHorizontalColor
-    ctx.lineWidth = 0.2
+    ctx.lineWidth = 0.4
 
     line(ctx, this.chart.config.margin.left + this.chart.config.axisMargin - 1, this.crosshairFreePos.y, this.chart.innerWidth + this.chart.config.margin.left - this.chart.config.axisMargin + 2, this.crosshairFreePos.y)
 
-    ctx.lineWidth = 0.8
+    ctx.lineWidth = 1
     ctx.strokeStyle = this.chart.config.crosshairVerticalColor
     line(ctx, this.crosshairFreePos.x, this.chart.config.margin.top + this.chart.config.axisMargin - 1, this.crosshairFreePos.x, this.chart.config.margin.top + this.chart.innerHeight - this.chart.config.axisMargin + 2)
 

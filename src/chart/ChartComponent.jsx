@@ -75,17 +75,35 @@ class ChartComponent extends Component {
 
   @autobind
   render () {
+    let overlayInfo = ''
+    if (this.props.selection.pixel && this.props.selection.coordinate) {
+      overlayInfo = (
+        <div className="chart-overlay-info" style={{
+          top: this.props.selection.pixel.y + 'px',
+          left: this.props.selection.pixel.x + 'px'
+        }}>
+          ({Math.round(this.props.selection.coordinate.x * 100) / 100} | {Math.round(this.props.selection.coordinate.y * 100) / 100})
+        </div>
+      )
+    }
+
     return (
-      <canvas
-        id={this.props.id}
-        style={{height: '100%', width: '100%'}}
-        ref={(canvasNode) => { this.canvasNode = canvasNode }}
-        onWheel={this.handleScrollWheel}
-        onMouseLeave={this.handleMouseLeave}
-        onDoubleClick={this.handleDoubleClick}
-        onMouseDown={this.handleMouseDown}
-        onMouseMove={this.handleMouseMove}
-        onMouseUp={this.handleMouseUp} />
+      <div className='chart-wrapper' id={this.props.id}>
+        <div className="chart-background"></div>
+        <canvas
+          className="chart-canvas"
+          style={{height: '100%', width: '100%'}}
+          ref={(canvasNode) => { this.canvasNode = canvasNode }}
+          onWheel={this.handleScrollWheel}
+          onMouseLeave={this.handleMouseLeave}
+          onDoubleClick={this.handleDoubleClick}
+          onMouseDown={this.handleMouseDown}
+          onMouseMove={this.handleMouseMove}
+          onMouseUp={this.handleMouseUp} />
+        <div className="chart-foreground">
+          {overlayInfo}
+        </div>
+      </div>
     )
   }
 }
@@ -93,7 +111,11 @@ class ChartComponent extends Component {
 ChartComponent.propTypes = {
   id: PropTypes.string,
   changeOnDragged: PropTypes.func,
-  onSelectedPointChanged: PropTypes.func
+  onSelectedPointChanged: PropTypes.func,
+  selection: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool
+  ])
 }
 
 export default ChartComponent
