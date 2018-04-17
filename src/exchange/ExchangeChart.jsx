@@ -23,9 +23,17 @@ class ExchangeChart extends Component {
 
   @autobind
   handleNewDataDivClick () {
-    let newData = [5]
-    for (let i = 1; i < 2000; i++) {
-      newData.push(newData[i - 1] + (Math.random() * 0.5) - 0.25)
+    // let newData = [5]
+    // for (let i = 1; i < 2000; i++) {
+    //   newData.push(newData[i - 1] + (Math.random() * 0.5) - 0.25)
+    // }
+
+    let newDataRaw = require('../testdata/BTC_ETH-1800.json')
+
+    let newData = []
+    const tempMaxDataLength = 10
+    for (let i = 0; i < (newDataRaw.length > tempMaxDataLength ? tempMaxDataLength : newDataRaw.length - 1); i++) {
+      newData.push(newDataRaw[i])
     }
 
     this.props.store.exchangeChartData = newData

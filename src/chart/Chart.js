@@ -4,6 +4,7 @@ import autobind from 'autobind-decorator'
 
 import Config from './Config'
 
+import Data from './Data'
 import Matrix from './Matrix'
 import Grid from './Grid'
 import Axis from './Axis'
@@ -28,6 +29,7 @@ class Chart {
     this.config = Config
 
     // Initialize objects
+    this.data = new Data(this)
     this.matrix = new Matrix(this)
     this.grid = new Grid(this)
     this.axis = new Axis(this)
@@ -36,8 +38,6 @@ class Chart {
     this.crosshair = new Crosshair(this)
     this.fpsCounter = new FpsCounter(this)
     this.draw = new Draw(this)
-
-    this.data = []
 
     // Initialize size
     this.resize()
@@ -51,7 +51,7 @@ class Chart {
 
   @autobind
   setData (data) {
-    this.data = data
+    this.data.setData(data)
 
     this.matrix.setDomain()
 

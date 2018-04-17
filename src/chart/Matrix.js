@@ -24,7 +24,7 @@ class Matrix {
     let yDelta = this.maxY - this.minY
 
     this.minX = 0
-    this.maxX = this.chart.data.length / 100 // TODO: the 100 is just for test
+    this.maxX = this.chart.data.length
 
     let xDelta = this.maxX - this.minX
 
