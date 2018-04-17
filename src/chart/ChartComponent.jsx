@@ -22,6 +22,14 @@ class ChartComponent extends Component {
   }
 
   @autobind
+  componentDidUpdate (prevProps, prevState) {
+    if (this.props.dataHasChanged) {
+      this.chart.setData(this.props.data)
+      this.props.unsetHasChanged()
+    }
+  }
+
+  @autobind
   componentWillUnmount () {
     window.removeEventListener('resize', this.chart.handleResize)
   }
@@ -119,6 +127,12 @@ class ChartComponent extends Component {
 
 ChartComponent.propTypes = {
   id: PropTypes.string,
+  data: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool
+  ]),
+  dataHasChanged: PropTypes.bool,
+  unsetHasChanged: PropTypes.func,
   changeOnDragged: PropTypes.func,
   onSelectedPointChanged: PropTypes.func,
   selection: PropTypes.oneOfType([

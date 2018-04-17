@@ -22,6 +22,9 @@ class Store {
   @observable exchangeChartIsBeeingDragged = false
   @observable exchangeChartSelection = false
 
+  @observable exchangeChartData = false
+  @observable exchangeChartDataHasChanged = false
+
   changeExchangeChartIsBeeingDragged = (store, newValue) => {
     store.exchangeChartIsBeeingDragged = newValue
   }

@@ -30,6 +30,23 @@
     }
   }
 
+  // TODO: ONLY FOR TEST PURPOSES. DELETE AFTER!
+  #testNewDataDiv {
+    position: absolute;
+    right: 3rem;
+    bottom: 3rem;
+
+    z-index: 10;
+
+    background-color: #282828;
+
+    cursor: pointer;
+
+    padding: .5rem .25rem;
+
+    color: #eee;
+  }
+
   #exchange-chart {
     position: absolute;
     bottom: 0;

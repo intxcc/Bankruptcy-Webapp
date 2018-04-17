@@ -22,6 +22,22 @@ class ExchangeChart extends Component {
   }
 
   @autobind
+  handleNewDataDivClick () {
+    let newData = [5]
+    for (let i = 1; i < 2000; i++) {
+      newData.push(newData[i - 1] + (Math.random() * 0.5) - 0.25)
+    }
+
+    this.props.store.exchangeChartData = newData
+    this.props.store.exchangeChartDataHasChanged = true
+  }
+
+  @autobind
+  handleUnsetHasChanged () {
+    this.props.store.exchangeChartDataHasChanged = false
+  }
+
+  @autobind
   render () {
     let className = ''
 
@@ -41,8 +57,16 @@ class ExchangeChart extends Component {
       <div
         id="exchange_chart_wrapper"
         className={className}>
+        <div
+          onClick={this.handleNewDataDivClick}
+          id="testNewDataDiv">
+          Generate random data.
+        </div>
         <ChartComponent
           id="exchange-chart"
+          data={this.props.store.exchangeChartData}
+          dataHasChanged={this.props.store.exchangeChartDataHasChanged}
+          unsetHasChanged={this.handleUnsetHasChanged}
           onSelectedPointChanged={this.handleSelectedPointChange}
           changeOnDragged={this.changeBeeingDragged}
           selection={this.props.store.exchangeChartSelection} />

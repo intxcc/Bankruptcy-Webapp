@@ -37,20 +37,7 @@ class Chart {
     this.fpsCounter = new FpsCounter(this)
     this.draw = new Draw(this)
 
-    // Initialize chart
-    // this.matrix.setDomain()
-    // this.selection.setSelection(0, this.data.length - 1) // TODO: uncomment again
-
-    // TEST STUFF //
-
-    this.data = [5]
-    for (let i = 1; i < 2000; i++) {
-      this.data.push(this.data[i - 1] + (Math.random() * 0.5) - 0.25)
-    }
-
-    this.matrix.setDomain()
-
-    // END TEST STUFF //
+    this.data = []
 
     // Initialize size
     this.resize()
@@ -60,6 +47,20 @@ class Chart {
 
     // Nudge drawing
     this.draw.handleDraw()
+  }
+
+  @autobind
+  setData (data) {
+    this.data = data
+
+    this.matrix.setDomain()
+
+    let curSelection = this.selection.getSelection()
+    if (!curSelection || isNaN(curSelection.top) || curSelection.top === curSelection.bottom) {
+      // Initialize selection
+      this.selection.setSelection(0, this.data.length - 1)
+      this.selection.defaultSelectionToEnd()
+    }
   }
 
   @autobind
